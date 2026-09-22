@@ -1,0 +1,257 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ============================================================
+     SEMANTIC SURFACE + INK TOKENS
+     One source of truth for every page background, card, band and
+     text colour. Light and dark mode simply re-point these; no
+     component needs to know which mode is active. This replaced a
+     scatter of 6 different "dark greens" and 4 different "creams"
+     that made each page look like a slightly different website.
+     ============================================================ */
+  :root {
+    --surface: 250 246 240;        /* page background - warm cream   */
+    --surface-raised: 255 255 255; /* cards sitting on the page      */
+    --surface-sunken: 244 239 230; /* alternating quieter band       */
+    --surface-deep: 12 34 28;      /* editorial dark band            */
+    --surface-deepest: 7 21 17;    /* footer / deepest band          */
+    --ink: 17 19 18;               /* primary text                   */
+    --ink-soft: 61 68 65;          /* secondary text                 */
+    --ink-faint: 84 92 88;         /* tertiary / meta text           */
+    --hairline: 229 220 206;       /* borders on light surfaces      */
+    --ink-heading: 7 21 17;        /* display headings               */
+  }
+
+  :root.dark {
+    --surface: 7 21 17;
+    --surface-raised: 12 34 28;
+    --surface-sunken: 9 28 23;
+    --surface-deep: 8 26 21;
+    --surface-deepest: 4 16 13;
+    --ink: 251 247 241;
+    --ink-soft: 237 229 216;
+    --ink-faint: 189 196 192;
+    --hairline: 45 72 62;
+    --ink-heading: 251 247 241;
+  }
+}
+
+
+@layer base {
+  :root {
+    --color-emerald-primary: #12332B;
+    --color-ivory-primary: #FBF7F1;
+    --color-gold-primary: #C79A3D;
+    --color-charcoal-primary: #1C1E1D;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Plus Jakarta Sans', 'Manrope', system-ui, sans-serif;
+    font-feature-settings: "kern", "liga";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Reading rhythm: 1.55 for running text, 1.1 for display headings. */
+  body {
+    line-height: 1.55;
+  }
+  h1,
+  h2,
+  .font-display {
+    line-height: 1.1;
+    letter-spacing: 0.012em; /* Cinzel is already open; keep it engraved, not airy */
+    font-family: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+    text-wrap: balance;
+  }
+  /* Secondary headings are Plus Jakarta Sans and stay below the display scale on
+     tablets so they never out-shout the section title above them. */
+  h3,
+  h4 {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+  }
+  @media (min-width: 640px) and (max-width: 1023px) {
+    h3 { font-size: clamp(1.05rem, 2vw + 0.4rem, 1.3rem) !important; }
+    h4 { font-size: clamp(1rem, 1.6vw + 0.3rem, 1.1rem) !important; }
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', 'Manrope', system-ui, sans-serif;
+    background-color: rgb(var(--surface));
+    color: rgb(var(--ink));
+    transition: background-color .3s ease, color .3s ease;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  /* Re-points the ink/surface tokens for anything sitting on top of a dark
+     photograph or video (the transparent navbar over a banner). Custom
+     properties cascade by proximity, so this beats the :root / :root.dark
+     values for the subtree without touching a single component. */
+  .on-dark {
+    --ink: 251 247 241;
+    --ink-soft: 237 229 216;
+    --ink-faint: 189 196 192;
+    --ink-heading: 251 247 241;
+    --surface-raised: 12 34 28;
+    --hairline: 45 72 62;
+  }
+
+  /* Banner scrims read the surface token, so the same class is an ivory wash
+     in light mode and a deep-emerald wash in dark mode. Photographs stay
+     crisply visible on the right; copy sits on the high-contrast left. */
+  .banner-scrim-x {
+    background-image: linear-gradient(
+      90deg,
+      rgb(var(--surface) / 0.98) 0%,
+      rgb(var(--surface) / 0.95) 32%,
+      rgb(var(--surface) / 0.80) 46%,
+      rgb(var(--surface) / 0.22) 60%,
+      transparent 74%
+    );
+  }
+  .banner-scrim-y {
+    background-image: linear-gradient(
+      180deg,
+      rgb(var(--surface) / 0.45) 0%,
+      rgb(var(--surface) / 0.10) 26%,
+      rgb(var(--surface) / 0.60) 65%,
+      rgb(var(--surface) / 0.96) 100%
+    );
+  }
+  /* Desktop mask: softer fade onset so photos stay sharp and clear. */
+  @media (min-width: 1024px) {
+    .banner-fade-left {
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 18%);
+      mask-image: linear-gradient(to right, transparent 0%, #000 18%);
+    }
+  }
+
+  /* Fine film grain over photography -- ties the photos into the printed, editorial
+     feel of the page. Add `grain` to any positioned image container. */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.09;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Gold lettering for dark grounds (banners, deep bands). */
+  .gold-text {
+    background-image: linear-gradient(95deg, #E6BD65 0%, #F6DFA0 48%, #D4A359 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Gold lettering for light grounds -- darker stops keep contrast on ivory. */
+  .gold-text-deep {
+    background-image: linear-gradient(95deg, #8A6920 0%, #C79A3D 50%, #8A6920 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .gold-underline {
+    position: relative;
+    display: inline-block;
+  }
+  .gold-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 48px;
+    height: 2px;
+    background: linear-gradient(90deg, #C79A3D 0%, rgba(199, 154, 61, 0.2) 100%);
+  }
+
+  .gold-border-glow {
+    box-shadow: 0 0 0 1px rgba(199, 154, 61, 0.2), 0 10px 30px -10px rgba(18, 51, 43, 0.1);
+  }
+
+  .glass-card {
+    background: rgba(251, 247, 241, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(199, 154, 61, 0.2);
+  }
+
+  .glass-dark {
+    background: rgba(18, 51, 43, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(199, 154, 61, 0.25);
+  }
+
+  /* Fine paper grain — gives the ivory canvas a printed, editorial surface
+     instead of a flat digital fill. Kept very low so it reads as texture,
+     never as noise. */
+  .hero-grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
+    opacity: 0.09;
+    mix-blend-mode: multiply;
+  }
+
+  /* Same grain, tuned for dark panels -- "multiply" can only darken, so on a
+     near-black base like #071913 it crushes to invisible. "overlay" reads
+     correctly against both light and dark pixels. */
+  .hero-grain-dark {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+  }
+
+  .hero-mesh {
+    background-image: 
+      radial-gradient(at 100% 0%, rgba(199, 154, 61, 0.08) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(18, 51, 43, 0.06) 0px, transparent 50%);
+  }
+
+  /* Hides the scrollbar on a horizontally-scrollable strip (the
+     collaboration crest row) while keeping it fully scrollable/swipeable
+     -- the visual cue that there's more is the edge-fade gradient, not a
+     visible scrollbar, matching how professional "trusted by" logo
+     strips behave on mobile. */
+  .scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gold-shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(199, 154, 61, 0) 0%,
+      rgba(230, 189, 101, 0.5) 50%,
+      rgba(199, 154, 61, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+}

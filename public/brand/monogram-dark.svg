@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 190" width="300" height="220">
+  <defs>
+    <!-- Multi-stop Realistic Metallic Gold Gradient for 3D Ribbon -->
+    <linearGradient id="darkGoldRibbon" x1="5%" y1="15%" x2="95%" y2="85%">
+      <stop offset="0%" stop-color="#FFF5DC" />
+      <stop offset="12%" stop-color="#F2D68C" />
+      <stop offset="28%" stop-color="#DFB556" />
+      <stop offset="52%" stop-color="#B88726" />
+      <stop offset="74%" stop-color="#DCB253" />
+      <stop offset="88%" stop-color="#9C6F19" />
+      <stop offset="100%" stop-color="#6E4A0C" />
+    </linearGradient>
+
+    <!-- Ribbon Highlight Edge Gradient -->
+    <linearGradient id="darkRibbonHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8" />
+      <stop offset="30%" stop-color="#FFF7E2" stop-opacity="0.6" />
+      <stop offset="70%" stop-color="#E5C16C" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#B88726" stop-opacity="0.0" />
+    </linearGradient>
+
+    <!-- Letterform Gradient: Imperial Sovereign Emerald for Light, Sculpted Gold for Dark -->
+    <linearGradient id="darkLetterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+             <stop offset="0%" stop-color="#FFF3D4" />
+             <stop offset="22%" stop-color="#E5C270" />
+             <stop offset="55%" stop-color="#B8892D" />
+             <stop offset="82%" stop-color="#DEB75D" />
+             <stop offset="100%" stop-color="#7A520E" />
+           </linearGradient>
+
+    <!-- 3D Ribbon Drop Shadow -->
+    <filter id="darkRibbonShadow" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="2" dy="4" stdDeviation="2.5" flood-color="#020C08" flood-opacity="0.6" />
+    </filter>
+
+    <!-- Bevel highlight filter for dark theme letterforms -->
+    <filter id="darkGlow" x="-10%" y="-10%" width="120%" height="120%">
+             <feDropShadow dx="0" dy="1" stdDeviation="1" flood-color="#FFF2CE" flood-opacity="0.25" />
+           </filter>
+  </defs>
+
+  <g transform="translate(16, 15)">
+    <!-- ==================== LETTER Z (Classical Roman Serif) ==================== -->
+    <!-- Top Horizontal Bar + Left Bracket Serif + Right Corner Point -->
+    <path
+      d="M 12 40 
+         C 10 32, 14 24, 24 22 
+         L 98 22 
+         C 104 22, 107 25, 107 30 
+         L 107 36 
+         L 54 36 
+         C 46 36, 42 34, 38 31 
+         C 32 37, 25 41, 16 41 
+         L 12 40 Z"
+      fill="url(#darkLetterGrad)"
+    />
+
+    <!-- Main Diagonal Stem of Z -->
+    <path
+      d="M 98 22 
+         L 105 22 
+         L 105 32 
+         L 44 126 
+         L 98 126 
+         L 98 136 
+         L 8 136 
+         L 8 128 
+         L 72 32 
+         L 54 32 
+         L 98 22 Z"
+      fill="url(#darkLetterGrad)"
+    />
+
+    <!-- Bottom Horizontal Bar + Bottom Right Upright Serif -->
+    <path
+      d="M 8 128 
+         L 8 138 
+         L 104 138 
+         C 106 138, 108 136, 108 132 
+         L 108 116 
+         L 101 116 
+         L 101 128 
+         L 44 128 
+         L 8 128 Z"
+      fill="url(#darkLetterGrad)"
+    />
+
+    <!-- ==================== LETTER K ==================== -->
+    <!-- Vertical Column of K -->
+    <path
+      d="M 116 22 L 132 22 L 132 138 L 116 138 Z"
+      fill="url(#darkLetterGrad)"
+    />
+
+    <!-- Top Bilateral Serif of K Column -->
+    <path
+      d="M 108 22 L 140 22 L 140 28 C 136 28, 132 30, 132 34 L 116 34 C 116 30, 112 28, 108 28 Z"
+      fill="url(#darkLetterGrad)"
+    />
+
+    <!-- Bottom Bilateral Serif of K Column -->
+    <path
+      d="M 108 138 L 140 138 L 140 132 C 136 132, 132 130, 132 126 L 116 126 C 116 130, 112 132, 108 132 Z"
+      fill="url(#darkLetterGrad)"
+    />
+
+    <!-- Upper Diagonal Arm of K -->
+    <path
+      d="M 128 78 L 178 22 L 196 22 L 142 84 Z"
+      fill="url(#darkLetterGrad)"
+    />
+    <!-- Upper Arm Top Serif -->
+    <path
+      d="M 174 22 L 202 22 L 202 28 C 196 28, 192 31, 189 36 L 178 22 Z"
+      fill="url(#darkLetterGrad)"
+    />
+
+    <!-- Lower Leg of K (Base emerald geometry under golden swoosh) -->
+    <path
+      d="M 134 76 
+         C 142 76, 152 86, 162 100 
+         L 186 136 
+         L 204 136 
+         L 174 94 
+         C 164 82, 152 72, 140 72 Z"
+      fill="url(#darkLetterGrad)"
+    />
+
+    <!-- ==================== SIGNATURE 3D GOLDEN RIBBON ==================== -->
+    <!-- Sweeps from lower-left of Z, arches majestically over Z's diagonal,
+         crosses through K, and forms the flourishing calligraphic lower leg of K -->
+    <path
+      d="M -2 108
+         C 12 76, 42 50, 84 52
+         C 118 54, 150 74, 172 102
+         C 190 124, 212 136, 232 134
+         C 210 138, 188 126, 166 102
+         C 140 74, 112 60, 80 58
+         C 46 56, 18 78, -2 108 Z"
+      fill="url(#darkGoldRibbon)"
+      filter="url(#darkRibbonShadow)"
+    />
+
+    <!-- Upper luminous highlight rim along the crest of the ribbon -->
+    <path
+      d="M 4 102
+         C 16 74, 44 52, 84 54
+         C 116 56, 148 76, 170 102
+         C 184 120, 202 130, 224 133
+         C 206 131, 188 122, 172 104
+         C 150 78, 118 59, 84 57
+         C 46 55, 20 74, 4 102 Z"
+      fill="url(#darkRibbonHighlight)"
+    />
+  </g>
+</svg>

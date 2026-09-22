@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete Client Asset, Content & Media Questionnaire — H.E. Zeenat Kureshi Official Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0C221C;
+      --secondary: #12332B;
+      --gold: #A9812A;
+      --gold-light: #D4A359;
+      --gold-bg: #FEFAEF;
+      --bg: #FAF6F0;
+      --card-bg: #FFFFFF;
+      --text: #1C1E1D;
+      --muted: #545C58;
+      --border: #E5DCCE;
+      --accent: #2D7F6B;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Raleway', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #F4EFE6;
+      color: var(--text);
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 12px 48px rgba(12, 34, 28, 0.09);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(145deg, #0C221C 0%, #12332B 100%);
+      color: #FFFFFF;
+      padding: 44px 40px;
+      position: relative;
+      border-bottom: 3px solid var(--gold);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .monogram {
+      font-family: 'Cinzel', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--gold-light);
+      letter-spacing: 2px;
+      border: 1.5px solid rgba(212, 163, 89, 0.5);
+      padding: 6px 16px;
+      border-radius: 8px;
+      background: rgba(12, 34, 28, 0.6);
+    }
+
+    .badge {
+      background: rgba(212, 163, 89, 0.15);
+      color: var(--gold-light);
+      border: 1px solid rgba(212, 163, 89, 0.4);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .header h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .header p {
+      color: #D5F1EA;
+      font-size: 14.5px;
+      font-weight: 400;
+      max-width: 700px;
+    }
+
+    .content {
+      padding: 40px;
+    }
+
+    .intro-box {
+      background: var(--bg);
+      border-left: 4px solid var(--gold);
+      padding: 20px 24px;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 36px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 36px;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1.5px solid var(--border);
+    }
+
+    .section-num {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      shrink: 0;
+    }
+
+    .section-title h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 21px;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: -10px;
+      margin-bottom: 18px;
+    }
+
+    .item-card {
+      background: #FAFAFA;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-bottom: 16px;
+      transition: all 0.2s;
+    }
+
+    .item-card:hover {
+      border-color: var(--gold);
+      background: #FFFFFF;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .item-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .item-tag {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .tag-required {
+      background: #FDE8E8;
+      color: #9B1C1C;
+    }
+
+    .tag-verified {
+      background: #DEF7EC;
+      color: #03543F;
+    }
+
+    .tag-optional {
+      background: #E1EFFE;
+      color: #1E429F;
+    }
+
+    .item-desc {
+      font-size: 13.5px;
+      color: var(--muted);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .data-row {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      font-size: 12.5px;
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 10px;
+    }
+
+    .data-label {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .data-val {
+      color: var(--muted);
+      word-break: break-all;
+    }
+
+    .data-val code {
+      background: var(--bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--primary);
+      font-size: 12px;
+    }
+
+    .item-specs {
+      font-size: 12px;
+      color: var(--gold);
+      font-weight: 600;
+      background: var(--gold-bg);
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: 1px dashed rgba(169, 129, 42, 0.4);
+      margin-top: 8px;
+    }
+
+    .table-container {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 13px;
+    }
+
+    .table-container th {
+      background: var(--primary);
+      color: #FFFFFF;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .table-container td {
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      color: var(--text);
+    }
+
+    .table-container tr:nth-child(even) {
+      background: #FAFAFA;
+    }
+
+    .checkbox {
+      width: 17px;
+      height: 17px;
+      border: 2px solid var(--gold);
+      border-radius: 4px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 8px;
+      position: relative;
+    }
+
+    .footer-actions {
+      margin-top: 48px;
+      padding-top: 28px;
+      border-top: 2px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .print-btn {
+      background: linear-gradient(135deg, #0C221C 0%, #12332B 100%);
+      color: #FFFFFF;
+      border: 1px solid var(--gold);
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 14px rgba(12, 34, 28, 0.2);
+      transition: all 0.2s;
+    }
+
+    .print-btn:hover {
+      background: #1A4A3E;
+      transform: translateY(-1px);
+    }
+
+    .footer-note {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: #FFFFFF;
+      }
+      .container {
+        box-shadow: none;
+        border: none;
+        max-width: 100%;
+      }
+      .footer-actions {
+        display: none;
+      }
+      .item-card {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-top">
+        <div class="monogram">HZK</div>
+        <div class="badge">Production Launch Master Audit</div>
+      </div>
+      <h1>Official Digital Portfolio & Diplomatic Portal</h1>
+      <p>H.E. Zeenat Kureshi • GCC–India Trade Commissioner • Film Producer • National President</p>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+      <div class="intro-box">
+        <strong>Dear Office & Secretariat of H.E. Zeenat Kureshi,</strong><br>
+        The official digital portal has been designed, built, and loaded with verified public records (ANI News, Tribune India, IMDb, BRICS Summit felicitation, and sovereign crests). Below is the complete, section-by-section verification checklist. Please confirm the details or provide updated replacement assets for any item below.
+      </div>
+
+      <!-- SECTION 1: Identity & Official Titles -->
+      <div class="section-title">
+        <div class="section-num">1</div>
+        <h2>Executive Designations & Official Titles</h2>
+      </div>
+      <p class="section-subtitle">Verify the primary titles and credentials displayed in the hero banner and header.</p>
+
+      <div class="item-card">
+        <div class="item-header">
+          <div class="item-title"><span class="checkbox"></span> Primary Name & Official Honorific</div>
+          <span class="item-tag tag-verified">Configured</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Display Name:</span>
+          <span class="data-val"><strong>H.E. ZEENAT KURESHI</strong> (Also styled: <em>Zeennat Kuresshi</em>)</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Official Monogram:</span>
+          <span class="data-val"><strong>HZK</strong> (Rendered in luxury Cinzel serif typography)</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Official Tagline:</span>
+          <span class="data-val"><code>BRIDGING NATIONS • BUILDING OPPORTUNITIES</code></span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Core Designations:</span>
+          <span class="data-val">Trade Commissioner – GCC | Film Producer | National President (All India Jamiatul Quresh Women Cell) | Investor & Global Connector</span>
+        </div>
+      </div>
+
+      <!-- SECTION 2: Official Social Media & Public Portals -->
+      <div class="section-title">
+        <div class="section-num">2</div>
+        <h2>Connected Social Profiles & Public Channels</h2>
+      </div>
+      <p class="section-subtitle">All active links configured across navigation, social bars, and footer.</p>
+
+      <div class="item-card">
+        <div class="item-header">
+          <div class="item-title"><span class="checkbox"></span> Verified Channel URLs</div>
+          <span class="item-tag tag-verified">Connected</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Instagram:</span>
+          <span class="data-val"><a href="https://www.instagram.com/zeennatkuresshi/">instagram.com/zeennatkuresshi/</a> (630K+ Community)</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">YouTube Channel:</span>
+          <span class="data-val"><a href="https://www.youtube.com/@zeenatkureshiofficial">youtube.com/@zeenatkureshiofficial</a></span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">LinkedIn:</span>
+          <span class="data-val"><a href="https://in.linkedin.com/in/zeenat-kureshi-202a62219/">linkedin.com/in/zeenat-kureshi-202a62219/</a></span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Facebook Page:</span>
+          <span class="data-val"><a href="https://www.facebook.com/zeenathkureshe/">facebook.com/zeenathkureshe/</a></span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">IMDb Producer:</span>
+          <span class="data-val"><a href="https://www.imdb.com/name/nm16165017/">imdb.com/name/nm16165017/</a> (Producer Filmography)</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Official Portal:</span>
+          <span class="data-val"><a href="https://sites.google.com/view/zeenatkureshi-official/home">sites.google.com/view/zeenatkureshi-official/home</a></span>
+        </div>
+      </div>
+
+      <!-- SECTION 3: High-Resolution Photography -->
+      <div class="section-title">
+        <div class="section-num">3</div>
+        <h2>High-Resolution Photography Requirements</h2>
+      </div>
+      <p class="section-subtitle">Exact photography slots used across all pages of the digital portal.</p>
+
+      <table class="table-container">
+        <thead>
+          <tr>
+            <th>Slot / Location</th>
+            <th>Required Image Type</th>
+            <th>Dimension / Orientation</th>
+            <th>Priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Hero Banner</strong></td>
+            <td>Executive Portrait (Formal / Diplomatic Attire)</td>
+            <td>Min 2000 × 2400 px • Vertical</td>
+            <td><span class="item-tag tag-verified">Integrated</span></td>
+          </tr>
+          <tr>
+            <td><strong>About Page Sidebar</strong></td>
+            <td>Full Executive Portrait / High-Res Editorial</td>
+            <td>Min 1600 × 2200 px • Vertical (3:4)</td>
+            <td><span class="item-tag tag-required">Required</span></td>
+          </tr>
+          <tr>
+            <td><strong>GCC Summit Gallery (3 Photos)</strong></td>
+            <td>Bilateral meetings, trade signings, Gulf ministerial forums</td>
+            <td>Min 1920 × 1080 px • Landscape (16:9)</td>
+            <td><span class="item-tag tag-required">Required</span></td>
+          </tr>
+          <tr>
+            <td><strong>Women Leadership (2 Photos)</strong></td>
+            <td>All India Jamiatul Quresh Women Cell Congress & awards</td>
+            <td>Min 1920 × 1080 px • Landscape</td>
+            <td><span class="item-tag tag-required">Required</span></td>
+          </tr>
+          <tr>
+            <td><strong>Film & Cinema (2 Photos)</strong></td>
+            <td>Cannes Pavilion, film co-production summits, or festival stages</td>
+            <td>Min 1920 × 1080 px • Landscape</td>
+            <td><span class="item-tag tag-optional">Optional</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- SECTION 4: Video Addresses & Broadcast Players -->
+      <div class="section-title">
+        <div class="section-num">4</div>
+        <h2>Video Keynotes & Media Broadcast Players</h2>
+      </div>
+      <p class="section-subtitle">Configured video addresses embedded into interactive modal players.</p>
+
+      <div class="item-card">
+        <div class="item-header">
+          <div class="item-title"><span class="checkbox"></span> Primary Homepage Keynote Address Video</div>
+          <span class="item-tag tag-verified">Connected</span>
+        </div>
+        <div class="item-desc">Plays inside the homepage "Watch Keynote" high-definition video modal.</div>
+        <div class="data-row">
+          <span class="data-label">Current Video:</span>
+          <span class="data-val"><code>https://youtu.be/ndXivLGTZ6w</code> (H.E. Zeenat Kureshi Bilateral Address)</span>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-header">
+          <div class="item-title"><span class="checkbox"></span> Secondary Summit & Milestone Broadcasts</div>
+          <span class="item-tag tag-verified">Connected</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">National Milestone:</span>
+          <span class="data-val"><code>https://www.youtube.com/watch?v=uZmFW5_KYzM</code> (Trade Commissioner Return Brief)</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Real Estate & FDI:</span>
+          <span class="data-val">Strategic GCC & India capital allocation dialogue</span>
+        </div>
+      </div>
+
+      <!-- SECTION 5: Verified Press Articles & Media Coverage -->
+      <div class="section-title">
+        <div class="section-num">5</div>
+        <h2>Verified Press Features & News Archive</h2>
+      </div>
+      <p class="section-subtitle">National & international coverage currently showcased in the Media Archive.</p>
+
+      <div class="item-card">
+        <div class="item-header">
+          <div class="item-title"><span class="checkbox"></span> Live News Publications Configured</div>
+          <span class="item-tag tag-verified">Live Links</span>
+        </div>
+        <ul style="padding-left: 20px; font-size: 13px; color: var(--muted); line-height: 1.8;">
+          <li><strong>The Tribune India:</strong> <em>"India's first woman to hold prestigious GCC-India Trade Commissioner role in luxury diplomacy"</em></li>
+          <li><strong>ANI News (Asian News International):</strong> <em>"Historic bilateral commerce mandate under international chamber"</em></li>
+          <li><strong>Ahmedabad Mirror:</strong> <em>"Zeenat Kureshi honoured at Jamiatul Quresh 100-Year Celebration for global contributions"</em></li>
+          <li><strong>Hindustan Metro:</strong> <em>"First Indian Woman Trade Commissioner (GCC-India)"</em></li>
+          <li><strong>ThePrint / Business Standard:</strong> <em>"United Diplomatic Council BRICS Summit 2026 Felicitation"</em></li>
+          <li><strong>IMDb Profile:</strong> <em>"Film Producer & Cinema Visionary Credits"</em></li>
+        </ul>
+      </div>
+
+      <!-- SECTION 6: Sovereign Emblems & Bilateral Ties -->
+      <div class="section-title">
+        <div class="section-num">6</div>
+        <h2>Sovereign Collaborations & Emblems</h2>
+      </div>
+      <p class="section-subtitle">All 7 official sovereign crests are loaded in high-definition PNG format.</p>
+
+      <table class="table-container">
+        <thead>
+          <tr>
+            <th>Country / Authority</th>
+            <th>Official Emblem Displayed</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Government of India</strong></td>
+            <td>Lion Capital of Ashoka with <em>Satyameva Jayate</em></td>
+            <td><span class="item-tag tag-verified">Verified</span></td>
+          </tr>
+          <tr>
+            <td><strong>United Arab Emirates (UAE)</strong></td>
+            <td>Golden Falcon with Flag Shield & Arabic Inscription</td>
+            <td><span class="item-tag tag-verified">Verified</span></td>
+          </tr>
+          <tr>
+            <td><strong>Kingdom of Saudi Arabia (KSA)</strong></td>
+            <td>Palm Tree & Crossed Scimitars</td>
+            <td><span class="item-tag tag-verified">Verified</span></td>
+          </tr>
+          <tr>
+            <td><strong>State of Qatar</strong></td>
+            <td>Maroon & Gold Dhow, Palm Tree & Swords Seal</td>
+            <td><span class="item-tag tag-verified">Verified</span></td>
+          </tr>
+          <tr>
+            <td><strong>Kingdom of Bahrain</strong></td>
+            <td>Royal Crown & Red/White Serrated Shield</td>
+            <td><span class="item-tag tag-verified">Verified</span></td>
+          </tr>
+          <tr>
+            <td><strong>Sultanate of Oman</strong></td>
+            <td>Royal Red Khanjar & Crossed Swords</td>
+            <td><span class="item-tag tag-verified">Verified</span></td>
+          </tr>
+          <tr>
+            <td><strong>State of Kuwait</strong></td>
+            <td>Golden Falcon & Traditional Dhow Crest</td>
+            <td><span class="item-tag tag-verified">Verified</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- SECTION 7: Contact Desks & Office Credentials -->
+      <div class="section-title">
+        <div class="section-num">7</div>
+        <h2>Communication Desks & Office Locations</h2>
+      </div>
+      <p class="section-subtitle">Please confirm the official contact info and inquiry routing.</p>
+
+      <div class="item-card">
+        <div class="item-header">
+          <div class="item-title"><span class="checkbox"></span> Official Secretariat Desks</div>
+          <span class="item-tag tag-required">Verify</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">General Secretariat:</span>
+          <span class="data-val"><code>contact@zeenatkureshi.com</code> (Confirm if active)</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Trade & Investment:</span>
+          <span class="data-val"><code>trade.commissioner@zeenatkureshi.com</code></span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Press & Media Desk:</span>
+          <span class="data-val"><code>press@zeenatkureshi.com</code></span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Physical Offices:</span>
+          <span class="data-val">Bandra Kurla Complex (BKC), Mumbai • DIFC, Dubai, UAE</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Contact Numbers:</span>
+          <span class="data-val">Mumbai (+91) • Dubai (+971) • WhatsApp Business Desk</span>
+        </div>
+      </div>
+
+      <!-- SECTION 8: Production Deployment & Domain -->
+      <div class="section-title">
+        <div class="section-num">8</div>
+        <h2>Domain & Production Go-Live</h2>
+      </div>
+
+      <div class="item-card">
+        <div class="item-header">
+          <div class="item-title"><span class="checkbox"></span> Production Domain & Email Routing</div>
+          <span class="item-tag tag-required">Action</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Production Domain:</span>
+          <span class="data-val">Confirm target domain (e.g. <code>zeenatkureshi.com</code> or <code>zeennatkuresshi.com</code>)</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Form Routing:</span>
+          <span class="data-val">Confirm email destination for trade inquiries & meeting requests</span>
+        </div>
+      </div>
+
+      <!-- Footer Actions -->
+      <div class="footer-actions">
+        <div class="footer-note">
+          Official Master Audit Document • Prepared for H.E. Zeenat Kureshi Secretariat
+        </div>
+        <button class="print-btn" onclick="window.print()">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg>
+          Print / Save as PDF
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name": "Zeenat Kureshi Portfolio",
+  "description": "Official website and portfolio of Zeenat Kureshi — Film Producer, GCC–India Trade Commissioner, and National President.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
