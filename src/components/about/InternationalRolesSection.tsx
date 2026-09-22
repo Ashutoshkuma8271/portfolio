@@ -59,17 +59,17 @@ export const InternationalRolesSection: React.FC = () => {
                       <Icon className="h-6 w-6" />
                     </div>
 
-                    <div className="flex items-center gap-1.5 rounded-full border border-gold-500/30 bg-surface-raised px-3 py-1 text-2xs font-semibold text-gold-300">
+                    <div className="flex items-center gap-1.5 rounded-full border border-gold-500/30 bg-surface-raised px-3 py-1 text-2xs font-semibold text-gold-700 dark:text-gold-300">
                       <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                       <span>{role.period}</span>
                     </div>
                   </div>
 
-                  <h3 className="mb-2 font-heading text-xl font-bold text-ink-heading transition-colors group-hover:text-gold-300 leading-snug">
+                  <h3 className="mb-2 font-heading text-xl font-bold text-ink-heading transition-colors group-hover:text-gold-700 dark:group-hover:text-gold-300 leading-snug">
                     {role.title}
                   </h3>
 
-                  <p className="mb-4 font-label text-xs font-semibold text-gold-400/90 flex items-center gap-1.5">
+                  <p className="mb-4 font-label text-xs font-semibold text-gold-700 dark:text-gold-400 flex items-center gap-1.5">
                     <Building className="h-3.5 w-3.5 text-gold-500" />
                     {role.organization}
                   </p>

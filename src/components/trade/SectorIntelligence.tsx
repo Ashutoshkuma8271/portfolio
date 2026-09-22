@@ -543,20 +543,18 @@ export const SectorIntelligence: React.FC = () => {
                 type="button"
                 onClick={() => setActive(s.id)}
                 aria-pressed={isSelected}
-                className={`group relative flex items-center justify-between p-2.5 sm:p-3 rounded-2xl text-left transition-all duration-300 cursor-pointer select-none min-w-0 ${
-                  isSelected
+                className={`group relative flex items-center justify-between p-2.5 sm:p-3 rounded-2xl text-left transition-all duration-300 cursor-pointer select-none min-w-0 ${isSelected
                     ? 'bg-gradient-to-r from-emerald-950 via-[#0a231b] to-emerald-950 text-white border-2 border-gold-400 shadow-[0_12px_28px_rgba(18,51,43,0.35),0_0_16px_rgba(199,154,61,0.25)] scale-[1.015]'
                     : 'bg-surface-raised hover:bg-surface-sunken text-ink-heading border border-gold-600/25 shadow-luxury hover:border-gold-500/60 hover:-translate-y-0.5'
-                }`}
+                  }`}
               >
                 <div className="flex items-center min-w-0 flex-1">
                   {/* Circular Emblem with Gold Rim */}
                   <span
-                    className={`flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-full border-2 p-0.5 shadow-2xs overflow-hidden transition-transform duration-300 group-hover:scale-105 ${
-                      isSelected
+                    className={`flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-full border-2 p-0.5 shadow-2xs overflow-hidden transition-transform duration-300 group-hover:scale-105 ${isSelected
                         ? 'border-gold-400 bg-gold-500/20'
                         : 'border-gold-500/40 bg-surface-sunken group-hover:border-gold-400'
-                    }`}
+                      }`}
                   >
                     {renderSectorBrand(s.id, s.iconType)}
                   </span>
@@ -564,18 +562,16 @@ export const SectorIntelligence: React.FC = () => {
                   {/* Elegant Vertical Gold Divider */}
                   <span
                     aria-hidden
-                    className={`h-7 w-[1.5px] shrink-0 mx-2 sm:mx-2.5 rounded-full ${
-                      isSelected ? 'bg-gold-400/50' : 'bg-gold-600/25'
-                    }`}
+                    className={`h-7 w-[1.5px] shrink-0 mx-2 sm:mx-2.5 rounded-full ${isSelected ? 'bg-gold-400/50' : 'bg-gold-600/25'
+                      }`}
                   />
 
                   {/* Sector Title in Classical Display Style */}
                   <span
-                    className={`font-cormorant sm:font-display text-[0.88rem] sm:text-[0.98rem] font-bold leading-tight truncate transition-colors ${
-                      isSelected
+                    className={`font-cormorant sm:font-display text-[0.88rem] sm:text-[0.98rem] font-bold leading-tight truncate transition-colors ${isSelected
                         ? 'text-white'
                         : 'text-ink-heading group-hover:text-gold-800 dark:group-hover:text-gold-300'
-                    }`}
+                      }`}
                   >
                     {s.label}
                   </span>
@@ -583,9 +579,8 @@ export const SectorIntelligence: React.FC = () => {
 
                 {/* Trailing Gold Chevron */}
                 <ChevronRight
-                  className={`h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 ml-1 ${
-                    isSelected ? 'text-gold-400' : 'text-gold-700 dark:text-gold-400'
-                  }`}
+                  className={`h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 ml-1 ${isSelected ? 'text-gold-400' : 'text-gold-700 dark:text-gold-400'
+                    }`}
                   aria-hidden
                 />
               </button>
@@ -797,7 +792,7 @@ export const SectorIntelligence: React.FC = () => {
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: 'spring', stiffness: 380, damping: 26 }}
-                    className="w-full inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-gold-300/60 bg-gradient-to-b from-gold-400 to-gold-600 px-4 py-2.5 font-label text-xs font-bold uppercase tracking-[0.12em] text-emerald-950 shadow-[0_6px_14px_-6px_rgba(199,154,61,0.55)] hover:shadow-[0_12px_22px_-8px_rgba(199,154,61,0.6)]"
+                    className="w-full inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-gold-300/60 bg-gradient-to-b from-gold-400 to-gold-600 px-4 py-2.5 font-label text-xs font-bold uppercase tracking-[0.12em] text-emerald-950 shadow-[0_6px_14px_-6px_rgba(199,154,61,0.55)] hover:shadow-[0_12px_22px_-8px_rgba(199,154,61,0.6)] cursor-pointer"
                   >
                     <PenLine className="h-4 w-4 text-emerald-950 shrink-0 stroke-[2.2]" />
                     <span className="text-center text-emerald-950 font-bold">{hasCustomTake ? (isOffice ? 'Edit My View' : 'Read My View') : 'My View'}</span>
@@ -826,95 +821,97 @@ export const SectorIntelligence: React.FC = () => {
         </div>
       </Container>
 
-      {/* Interactive "My View" Executive Commentary Composer Modal */}
-      <AnimatePresence>
-        {editing && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-emerald-950/80 p-4 backdrop-blur-sm">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 16 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 16 }}
-              transition={{ duration: 0.3, ease: EASE_OUT }}
-              className="w-full max-w-xl overflow-hidden rounded-3xl border-2 border-gold-500/50 bg-surface-raised text-ink shadow-2xl p-6 sm:p-8 space-y-4"
-            >
-              <div className="flex items-start justify-between border-b border-gold-500/20 pb-3">
-                <div>
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-surface-sunken border border-gold-500/30 text-3xs font-label uppercase font-bold text-gold-700 dark:text-gold-400 mb-1">
-                    <ShieldCheck className="h-3.5 w-3.5 text-gold-600" />
-                    My View &middot; Executive Commentary Desk
-                  </div>
-                  <h3 className="font-heading text-lg font-bold text-ink-heading">
-                    Publish My View on Internet
-                  </h3>
-                </div>
-                <button
-                  onClick={() => setEditing(null)}
-                  className="rounded-full p-1.5 text-ink-faint hover:bg-gold-500/10 hover:text-ink-heading cursor-pointer transition-colors"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
-
-              {/* Source Article Title Reference */}
-              <div className="rounded-xl bg-surface-sunken p-3.5 border border-gold-500/30 text-xs text-ink-soft space-y-1">
-                <span className="font-label text-3xs uppercase font-bold text-ink-faint block">Dispatch Topic:</span>
-                <p className="font-heading font-bold text-ink-heading text-sm leading-snug">{editing.title}</p>
-                <span className="font-label text-3xs text-ink-faint">{editing.publication}</span>
-              </div>
-
-              {/* Textarea */}
-              <div className="space-y-1.5">
-                <label className="block font-label text-2xs font-bold uppercase tracking-wider text-ink-soft">
-                  H.E. Zeenat Kureshi&apos;s Commentary &amp; Policy Reading:
-                </label>
-                <textarea
-                  rows={4}
-                  value={draft}
-                  onChange={(e) => setDraft(e.target.value)}
-                  placeholder="Write your view on this dispatch, economic implications, or diplomatic policy takeaway..."
-                  className="w-full rounded-xl border border-gold-500/30 bg-surface-sunken p-3.5 text-xs sm:text-sm text-ink placeholder:text-ink-faint focus:border-gold-600 focus:bg-surface focus:outline-none focus:ring-1 focus:ring-gold-500/40"
-                />
-              </div>
-
-              {/* Actions */}
-              <div className="flex items-center justify-between pt-2">
-                {notes.some((n) => n.articleId === editing.link) && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      removeView(editing.link);
-                      setEditing(null);
-                    }}
-                    className="text-xs text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 font-medium cursor-pointer underline"
-                  >
-                    Remove My View
-                  </button>
-                )}
-
-                <div className="flex items-center gap-3 ml-auto">
-                  <button
-                    type="button"
-                    onClick={() => setEditing(null)}
-                    className="rounded-full border border-hairline bg-surface px-5 py-2.5 font-sans text-xs font-semibold uppercase tracking-wider text-ink-soft hover:bg-gold-500/10 hover:border-gold-500/40 hover:text-ink-heading transition-colors cursor-pointer"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="button"
-                    onClick={commitView}
-                    disabled={saving || !draft.trim()}
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-700/50 bg-surface-deep px-6 py-2.5 font-sans text-xs font-semibold uppercase tracking-wider text-gold-200 shadow-md transition-all duration-300 hover:bg-gold-500 hover:text-emerald-950 hover:border-gold-600 hover:shadow-gold-glow cursor-pointer disabled:opacity-50 active:scale-[0.98]"
-                  >
-                    <Check className="h-4 w-4 text-gold-400" />
-                    <span>{saving ? 'Publishing...' : 'Publish My View Live'}</span>
-                  </button>
-                </div>
-              </div>
-            </motion.div>
+  {/* Interactive "My View" Executive Commentary Composer Modal */ }
+  <AnimatePresence>
+{
+  editing && (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-emerald-950/80 p-4 backdrop-blur-sm">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 16 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 16 }}
+        transition={{ duration: 0.3, ease: EASE_OUT }}
+        className="w-full max-w-xl overflow-hidden rounded-3xl border-2 border-gold-500/50 bg-surface-raised text-ink shadow-2xl p-6 sm:p-8 space-y-4"
+      >
+        <div className="flex items-start justify-between border-b border-gold-500/20 pb-3">
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-surface-sunken border border-gold-500/30 text-3xs font-label uppercase font-bold text-gold-700 dark:text-gold-400 mb-1">
+              <ShieldCheck className="h-3.5 w-3.5 text-gold-600" />
+              My View &middot; Executive Commentary Desk
+            </div>
+            <h3 className="font-heading text-lg font-bold text-ink-heading">
+              Publish My View on Internet
+            </h3>
           </div>
-        )}
-      </AnimatePresence>
-      <OfficeSignInModal isOpen={signInOpen} onClose={() => setSignInOpen(false)} />
-    </section>
+          <button
+            onClick={() => setEditing(null)}
+            className="rounded-full p-1.5 text-ink-faint hover:bg-gold-500/10 hover:text-ink-heading cursor-pointer transition-colors"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        {/* Source Article Title Reference */}
+        <div className="rounded-xl bg-surface-sunken p-3.5 border border-gold-500/30 text-xs text-ink-soft space-y-1">
+          <span className="font-label text-3xs uppercase font-bold text-ink-faint block">Dispatch Topic:</span>
+          <p className="font-heading font-bold text-ink-heading text-sm leading-snug">{editing.title}</p>
+          <span className="font-label text-3xs text-ink-faint">{editing.publication}</span>
+        </div>
+
+        {/* Textarea */}
+        <div className="space-y-1.5">
+          <label className="block font-label text-2xs font-bold uppercase tracking-wider text-ink-soft">
+            H.E. Zeenat Kureshi&apos;s Commentary &amp; Policy Reading:
+          </label>
+          <textarea
+            rows={4}
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            placeholder="Write your view on this dispatch, economic implications, or diplomatic policy takeaway..."
+            className="w-full rounded-xl border border-gold-500/30 bg-surface-sunken p-3.5 text-xs sm:text-sm text-ink placeholder:text-ink-faint focus:border-gold-600 focus:bg-surface focus:outline-none focus:ring-1 focus:ring-gold-500/40"
+          />
+        </div>
+
+        {/* Actions */}
+        <div className="flex items-center justify-between pt-2">
+          {notes.some((n) => n.articleId === editing.link) && (
+            <button
+              type="button"
+              onClick={() => {
+                removeView(editing.link);
+                setEditing(null);
+              }}
+              className="text-xs text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 font-medium cursor-pointer underline"
+            >
+              Remove My View
+            </button>
+          )}
+
+          <div className="flex items-center gap-3 ml-auto">
+            <button
+              type="button"
+              onClick={() => setEditing(null)}
+              className="rounded-full border border-hairline bg-surface px-5 py-2.5 font-sans text-xs font-semibold uppercase tracking-wider text-ink-soft hover:bg-gold-500/10 hover:border-gold-500/40 hover:text-ink-heading transition-colors cursor-pointer"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={commitView}
+              disabled={saving || !draft.trim()}
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-700/50 bg-surface-deep px-6 py-2.5 font-sans text-xs font-semibold uppercase tracking-wider text-gold-200 shadow-md transition-all duration-300 hover:bg-gold-500 hover:text-emerald-950 hover:border-gold-600 hover:shadow-gold-glow cursor-pointer disabled:opacity-50 active:scale-[0.98]"
+            >
+              <Check className="h-4 w-4 text-gold-400" />
+              <span>{saving ? 'Publishing...' : 'Publish My View Live'}</span>
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  )
+}
+      </AnimatePresence >
+  <OfficeSignInModal isOpen={signInOpen} onClose={() => setSignInOpen(false)} />
+    </section >
   );
 };

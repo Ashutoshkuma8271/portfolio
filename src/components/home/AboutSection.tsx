@@ -19,7 +19,7 @@ const reveal = {
 
 export const AboutSection: React.FC = () => {
   return (
-    <section id="about-intro" className="relative scroll-mt-20 overflow-hidden bg-surface pt-12 sm:pt-16 lg:pt-20 pb-6 sm:pb-8 lg:pb-9">
+    <section id="about-intro" className="relative scroll-mt-20 overflow-hidden bg-surface pt-12 sm:pt-16 lg:pt-20 pb-10 sm:pb-14 lg:pb-16">
       {/* Subtle background ambient warmth */}
       <div
         aria-hidden

@@ -104,6 +104,7 @@ module.exports = {
         // Smallest step on the scale. Exists so eyebrows and micro-labels have
         // a token to use -- they were hardcoded as text-[10px]/text-[10.5px],
         // which silently opted them out of every future scale change.
+        '3xs': ['0.68rem', { lineHeight: '0.95rem' }],    // ~11px – smallest micro-label
         '2xs': ['0.75rem', { lineHeight: '1rem' }],      // 12px
         xs: ['0.8125rem', { lineHeight: '1.125rem' }],   // 13px (was 12)
         sm: ['0.9375rem', { lineHeight: '1.4rem' }],     // 15px (was 14)
@@ -122,10 +123,16 @@ module.exports = {
         '8xl': ['6.25rem', { lineHeight: '1.02' }],      // 100px (was 96)
       },
       boxShadow: {
+        '2xs': '0 1px 2px rgba(0,0,0,0.07)',              // hairline lift
+        'xs':  '0 1px 4px rgba(0,0,0,0.08), 0 0.5px 1px rgba(0,0,0,0.04)', // subtle
+        'sm':  '0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05)',
         'luxury': '0 20px 40px -15px rgba(18, 51, 43, 0.08)',
         'luxury-lg': '0 30px 60px -20px rgba(18, 51, 43, 0.15)',
         'gold-glow': '0 0 25px rgba(199, 154, 61, 0.25)',
         'emerald-glow': '0 10px 30px rgba(18, 51, 43, 0.3)',
+      },
+      borderWidth: {
+        '3': '3px',
       },
       backgroundImage: {
         'gold-gradient': 'linear-gradient(135deg, #C79A3D 0%, #E6BD65 50%, #C79A3D 100%)',

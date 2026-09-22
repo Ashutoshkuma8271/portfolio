@@ -56,7 +56,7 @@ export const Footer: React.FC = () => {
                 <h3 className="font-cinzel text-xl font-bold uppercase tracking-[0.18em] text-ink-heading">
                   Zeenat Kureshi
                 </h3>
-                <p className="font-label text-2xs uppercase tracking-[0.2em] text-gold-400 font-semibold">
+                <p className="font-label text-2xs uppercase tracking-[0.2em] text-gold-600 dark:text-gold-400 font-semibold">
                   Trade Commissioner • Producer • Leader
                 </p>
               </div>
@@ -71,7 +71,7 @@ export const Footer: React.FC = () => {
               <span>Progress</span>
             </p>
 
-            <p className="text-base sm:text-lg text-ink-soft leading-relaxed mb-6 font-light">
+            <p className="text-base sm:text-lg text-ink-soft leading-relaxed mb-6">
               Advancing India–GCC trade, investment and strategic partnerships, cultural cinema, and nationwide women empowerment.
             </p>
 
@@ -94,9 +94,10 @@ export const Footer: React.FC = () => {
 
           {/* Column 2: Navigation & Verticals (3 cols) */}
           <div className="lg:col-span-3">
-            <h4 className="text-xs uppercase tracking-[0.2em] font-semibold text-gold-400 mb-4">
+            <h4 className="text-xs uppercase tracking-[0.2em] font-semibold text-gold-700 dark:text-gold-400 mb-4">
               Explore
             </h4>
+
             <GoldDivider className="mb-5" />
             <ul className="space-y-2.5 text-xs tracking-wider uppercase">
               <li>
@@ -139,7 +140,7 @@ export const Footer: React.FC = () => {
 
           {/* Column 3: Contact & Diplomatic Desks (2 cols) */}
           <div className="lg:col-span-2">
-            <h4 className="text-xs uppercase tracking-[0.2em] font-semibold text-gold-400 mb-4">
+            <h4 className="text-xs uppercase tracking-[0.2em] font-semibold text-gold-700 dark:text-gold-400 mb-4">
               Offices
             </h4>
             <GoldDivider className="mb-5" />
@@ -163,7 +164,7 @@ export const Footer: React.FC = () => {
 
           {/* Column 4: Newsletter & Dispatch (3 cols) */}
           <div className="lg:col-span-3">
-            <h4 className="text-xs uppercase tracking-[0.2em] font-semibold text-gold-400 mb-4">
+            <h4 className="text-xs uppercase tracking-[0.2em] font-semibold text-gold-700 dark:text-gold-400 mb-4">
               Executive Dispatch
             </h4>
             <GoldDivider className="mb-5" />
@@ -175,9 +176,11 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-hairline flex items-center gap-2 text-xs text-ink-faint">
-          <ShieldCheck className="w-4 h-4 text-gold-500" />
+        <div className="pt-8 border-t border-hairline flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-ink-faint">
+          <ShieldCheck className="w-4 h-4 text-gold-500 shrink-0" />
           <span>© {new Date().getFullYear()} Zeenat Kureshi. All Rights Reserved.</span>
+          <span className="hidden sm:inline text-hairline">•</span>
+          <span className="hidden sm:inline">Diplomatic Portal — India &amp; GCC</span>
         </div>
       </Container>
     </footer>

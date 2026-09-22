@@ -82,7 +82,7 @@ export const ContactPage: React.FC = () => {
                   Diplomatic & Commercial Secretariat
                 </h2>
                 <GoldDivider className="mb-4" />
-                <p className="text-base sm:text-lg text-ink-soft leading-relaxed font-light">
+                <p className="text-base sm:text-lg text-ink-soft leading-relaxed">
                   For sovereign trade briefings, ministerial invitations, and high-impact media syndication, please direct correspondence through our designated office desks.
                 </p>
               </div>

@@ -87,7 +87,7 @@ export const InsightsPage: React.FC = () => {
                 <span className="font-label text-2xs font-bold uppercase tracking-[0.22em] text-gold-800 dark:text-gold-300">
                   Featured essay &middot; {lead.category}
                 </span>
-                <h2 className="mt-4 font-display text-2xl font-semibold leading-snug text-ink-heading transition-colors group-hover:text-gold-300 sm:text-3xl">
+                <h2 className="mt-4 font-display text-2xl font-semibold leading-snug text-ink-heading transition-colors group-hover:text-gold-700 dark:group-hover:text-gold-300 sm:text-3xl">
                   {lead.title}
                 </h2>
                 <p className="mt-4 text-base leading-relaxed text-ink sm:text-lg">

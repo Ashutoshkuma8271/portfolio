@@ -37,7 +37,7 @@ const reveal = {
  * devices (no hover) always show the description.
  */
 export const FocusAreasSection: React.FC = () => (
-  <section className="bg-surface pt-4 sm:pt-6 lg:pt-8 pb-16 sm:pb-20 lg:pb-24">
+  <section className="bg-surface pt-10 sm:pt-12 lg:pt-14 pb-16 sm:pb-20 lg:pb-24">
     <Container>
       <SectionHeading
         center
