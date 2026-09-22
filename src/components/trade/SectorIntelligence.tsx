@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowUpRight,
+  ChevronRight,
   PenLine,
   Check,
   X,
@@ -15,7 +16,7 @@ import {
   Award,
   LogOut,
   AlertTriangle,
-  RefreshCw
+  Radio
 } from 'lucide-react';
 import { Container } from '../layout/Container';
 import { SECTORS, useSectorIntel, type SectorId, type IntelItem } from '../../hooks/useSectorIntel';
@@ -532,8 +533,8 @@ export const SectorIntelligence: React.FC = () => {
           </p>
         </div>
 
-        {/* 6 Luxury Sector Terminal Switcher Cards */}
-        <div className="mb-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+        {/* 6 Luxury Horizontal Sector Switcher Cards */}
+        <div className="mb-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3.5">
           {SECTORS.map((s) => {
             const isSelected = active === s.id;
             return (
@@ -542,128 +543,135 @@ export const SectorIntelligence: React.FC = () => {
                 type="button"
                 onClick={() => setActive(s.id)}
                 aria-pressed={isSelected}
-                className={`relative flex flex-col justify-between p-3.5 sm:p-4 rounded-2xl text-left transition-all duration-300 cursor-pointer select-none group overflow-hidden ${
+                className={`group relative flex items-center justify-between p-2.5 sm:p-3 rounded-2xl text-left transition-all duration-300 cursor-pointer select-none min-w-0 ${
                   isSelected
-                    ? 'bg-gradient-to-b from-[#0a231b] via-[#051610] to-[#020b08] text-white border-2 border-gold-400 shadow-[0_10px_24px_rgba(18,51,43,0.35),0_0_16px_rgba(199,154,61,0.25)] scale-[1.02]'
-                    : 'bg-surface-raised hover:bg-surface-sunken text-ink-heading border border-gold-500/30 shadow-2xs hover:border-gold-500/70 hover:-translate-y-0.5'
+                    ? 'bg-gradient-to-r from-emerald-950 via-[#0a231b] to-emerald-950 text-white border-2 border-gold-400 shadow-[0_12px_28px_rgba(18,51,43,0.35),0_0_16px_rgba(199,154,61,0.25)] scale-[1.015]'
+                    : 'bg-surface-raised hover:bg-surface-sunken text-ink-heading border border-gold-600/25 shadow-luxury hover:border-gold-500/60 hover:-translate-y-0.5'
                 }`}
               >
-                {/* Active Gold Indicator Bar */}
-                {isSelected && (
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500" />
-                )}
-
-                {/* Top Row: Brand Graphic / Avatar + Live Pill */}
-                <div className="flex items-center justify-between mb-2.5">
+                <div className="flex items-center min-w-0 flex-1">
+                  {/* Circular Emblem with Gold Rim */}
                   <span
-                    className={`flex h-8 w-8 items-center justify-center rounded-lg overflow-hidden border p-0.5 transition-all ${
+                    className={`flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-full border-2 p-0.5 shadow-2xs overflow-hidden transition-transform duration-300 group-hover:scale-105 ${
                       isSelected
-                        ? 'border-gold-400/80 bg-gold-500/20 shadow-xs'
-                        : 'border-gold-500/20 bg-gold-500/10 group-hover:border-gold-500/40 group-hover:bg-gold-500/20'
+                        ? 'border-gold-400 bg-gold-500/20'
+                        : 'border-gold-500/40 bg-surface-sunken group-hover:border-gold-400'
                     }`}
                   >
                     {renderSectorBrand(s.id, s.iconType)}
                   </span>
 
+                  {/* Elegant Vertical Gold Divider */}
                   <span
-                    className={`font-label text-[0.6rem] uppercase tracking-wider px-1.5 py-0.5 rounded font-bold ${
-                      isSelected
-                        ? 'bg-gold-400 text-emerald-950 shadow-xs'
-                        : 'bg-surface-sunken text-ink-soft border border-gold-600/15'
+                    aria-hidden
+                    className={`h-7 w-[1.5px] shrink-0 mx-2 sm:mx-2.5 rounded-full ${
+                      isSelected ? 'bg-gold-400/50' : 'bg-gold-600/25'
                     }`}
-                  >
-                    {s.liveTag}
-                  </span>
-                </div>
+                  />
 
-                {/* Card Title & Metric */}
-                <div>
-                  <h4
-                    className={`font-heading text-xs sm:text-sm font-bold leading-snug mb-0.5 transition-colors ${
-                      isSelected ? 'text-white' : 'text-ink-heading group-hover:text-gold-700 dark:group-hover:text-gold-400'
+                  {/* Sector Title in Classical Display Style */}
+                  <span
+                    className={`font-cormorant sm:font-display text-[0.88rem] sm:text-[0.98rem] font-bold leading-tight truncate transition-colors ${
+                      isSelected
+                        ? 'text-white'
+                        : 'text-ink-heading group-hover:text-gold-800 dark:group-hover:text-gold-300'
                     }`}
                   >
                     {s.label}
-                  </h4>
-                  <span
-                    className={`font-label text-[0.68rem] block truncate font-medium ${
-                      isSelected ? 'text-gold-300/90' : 'text-ink-faint'
-                    }`}
-                  >
-                    {s.badge}
                   </span>
                 </div>
+
+                {/* Trailing Gold Chevron */}
+                <ChevronRight
+                  className={`h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 ml-1 ${
+                    isSelected ? 'text-gold-400' : 'text-gold-700 dark:text-gold-400'
+                  }`}
+                  aria-hidden
+                />
               </button>
             );
           })}
         </div>
 
         {/* Sector Metadata & Live Refresh Banner - Luxury Editorial Desk Layout */}
-        <div className="relative mb-8 overflow-hidden rounded-2xl border border-gold-500/35 bg-surface-raised p-5 sm:p-6 shadow-luxury backdrop-blur-xs">
+        <div className="relative mb-8 w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-gold-500/40 bg-surface-raised p-4 sm:p-5 lg:px-7 lg:py-4.5 shadow-luxury backdrop-blur-xs">
           <div
             aria-hidden
             className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-gold-400/10 blur-3xl"
           />
 
-          <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
-            {/* Left: Sector Brand Mark & Description */}
-            <div className="flex items-start sm:items-center gap-3.5">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl overflow-hidden border border-gold-400/50 bg-gradient-to-br from-gold-500/20 to-gold-600/10 p-1.5 shadow-xs shrink-0">
+          <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 lg:gap-6">
+            {/* Left: Prominent Sector Logo, Divider & Description */}
+            <div className="flex items-center min-w-0 flex-1">
+              {/* Prominent Square Logo Card */}
+              <div className="flex h-16 w-16 sm:h-[72px] sm:w-[72px] shrink-0 items-center justify-center rounded-2xl border border-gold-500/50 bg-[#FAF7F0] dark:bg-[#151C18] p-1.5 sm:p-2 shadow-xs">
                 {renderSectorBrand(activeSector.id, activeSector.iconType)}
-              </span>
-              <div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-label text-2xs font-bold uppercase tracking-[0.16em] text-gold-700 dark:text-gold-400">
+              </div>
+
+              {/* Vertical Gold Divider */}
+              <span
+                aria-hidden
+                className="hidden sm:block h-12 w-[1.5px] bg-gold-600/35 shrink-0 mx-4 sm:mx-5 rounded-full"
+              />
+
+              {/* Title & Live Feed Status */}
+              <div className="ml-3 sm:ml-0 min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+                  <h3 className="font-cinzel text-base sm:text-lg md:text-[1.22rem] font-bold uppercase tracking-[0.08em] text-gold-800 dark:text-gold-300 leading-tight">
                     {activeSector.badge}
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-3xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 shadow-2xs whitespace-nowrap">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                    </span>
+                  </h3>
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-600/30 bg-[#E2EFE8] dark:bg-emerald-950/70 px-2.5 py-0.5 text-[0.65rem] sm:text-[0.68rem] font-bold uppercase tracking-wider text-[#185D3B] dark:text-emerald-300 shadow-2xs whitespace-nowrap">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-600 animate-pulse" />
                     <span>Live Web Feed</span>
                   </span>
                 </div>
-                <p className="mt-1 font-sans text-xs sm:text-sm text-ink-soft leading-relaxed max-w-xl">
+                <p className="mt-1 font-sans text-xs sm:text-[0.84rem] text-ink-soft leading-relaxed max-w-2xl">
                   {activeSector.blurb}
                 </p>
               </div>
             </div>
 
             {/* Right: Timestamp & Action Controls */}
-            <div className="flex flex-wrap items-center justify-between sm:justify-end gap-3 pt-3 lg:pt-0 border-t border-hairline lg:border-t-0">
-              <span className="font-label text-2xs font-semibold uppercase tracking-[0.12em] text-ink-faint" aria-live="polite">
-                {fetchedAt ? `Updated ${new Date(fetchedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` : 'Connecting…'}
-                <span className="mx-1.5 text-gold-600">&middot;</span>5 min sync
-              </span>
+            <div className="flex flex-col sm:flex-row lg:flex-row items-center justify-center lg:justify-end gap-3 sm:gap-4 shrink-0 pt-3.5 lg:pt-0 border-t border-hairline lg:border-t-0 w-full lg:w-auto">
+              {/* Divider & Timestamp */}
+              <div className="flex items-center justify-center gap-2 sm:gap-3 w-full sm:w-auto">
+                <span aria-hidden className="hidden xl:block h-7 w-[1px] bg-gold-600/30 mr-1" />
+                <div className="flex items-center justify-center gap-1.5 text-2xs sm:text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-ink-faint text-center">
+                  <ClockIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-gold-600 dark:text-gold-400 shrink-0" />
+                  <span>
+                    {fetchedAt
+                      ? `UPDATED ${new Date(fetchedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
+                      : 'CONNECTING…'}
+                  </span>
+                  <span className="text-gold-600">&bull;</span>
+                  <span>5 MIN SYNC</span>
+                </div>
+              </div>
 
-              <div className="flex items-center gap-2.5">
+              {/* Action Buttons with Identical Proportion and Mobile Centering */}
+              <div className="flex items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto">
                 {/* Sync Live Feed Button */}
                 <button
                   type="button"
                   onClick={refresh}
-                  className="group inline-flex h-9 sm:h-10 cursor-pointer items-center justify-center gap-2 rounded-full border border-gold-400/80 bg-gradient-to-r from-[#0d2a20] via-[#091f18] to-[#04120e] px-4 py-1.5 font-label text-xs font-bold uppercase tracking-[0.14em] text-gold-300 shadow-luxury transition-all duration-300 hover:border-gold-300 hover:text-white hover:shadow-luxury-lg hover:-translate-y-0.5 active:scale-[0.98] whitespace-nowrap"
+                  className="group inline-flex h-10 sm:h-11 flex-1 sm:flex-initial min-w-[140px] sm:min-w-[150px] cursor-pointer items-center justify-center gap-2 rounded-full border border-gold-400/80 bg-gradient-to-r from-[#0C241B] via-[#081E16] to-[#04100C] px-4.5 sm:px-5 py-2 font-label text-xs font-bold uppercase tracking-[0.14em] text-gold-300 shadow-luxury transition-all duration-300 hover:border-gold-300 hover:text-white hover:shadow-luxury-lg hover:-translate-y-0.5 active:scale-[0.98] whitespace-nowrap text-center"
                 >
-                  <RefreshCw
-                    className={`h-3.5 w-3.5 shrink-0 text-gold-400 transition-transform duration-500 ${
-                      status === 'loading' ? 'animate-spin' : 'group-hover:rotate-180'
-                    }`}
-                  />
-                  <span>Sync Feed</span>
+                  <Radio className={`h-4 w-4 text-gold-400 shrink-0 ${status === 'loading' ? 'animate-spin' : ''}`} />
+                  <span>SYNC FEED</span>
+                  <ChevronRight className="h-3.5 w-3.5 text-gold-400 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" />
                 </button>
 
                 {/* Office Access Button */}
                 <button
                   type="button"
                   onClick={() => (isOffice ? signOut() : setSignInOpen(true))}
-                  className="group inline-flex h-9 sm:h-10 cursor-pointer items-center justify-center gap-2 rounded-full border border-gold-600/40 bg-surface-raised hover:bg-surface-sunken px-4 py-1.5 font-label text-xs font-bold uppercase tracking-[0.14em] text-ink-heading transition-all duration-300 hover:border-gold-500/80 hover:shadow-luxury hover:-translate-y-0.5 active:scale-[0.98] whitespace-nowrap"
+                  className="group inline-flex h-10 sm:h-11 flex-1 sm:flex-initial min-w-[140px] sm:min-w-[150px] cursor-pointer items-center justify-center gap-2 rounded-full border border-gold-600/40 bg-[#FAF7F0] dark:bg-surface-raised hover:bg-surface-sunken px-4.5 sm:px-5 py-2 font-label text-xs font-bold uppercase tracking-[0.14em] text-ink-heading transition-all duration-300 hover:border-gold-500 hover:shadow-luxury hover:-translate-y-0.5 active:scale-[0.98] whitespace-nowrap text-center"
                 >
-                  {isOffice ? (
-                    <LogOut className="h-3.5 w-3.5 text-gold-600 shrink-0" />
-                  ) : (
-                    <ShieldCheck className="h-3.5 w-3.5 text-gold-600 dark:text-gold-400 shrink-0 transition-transform duration-300 group-hover:scale-110" />
-                  )}
-                  <span>{isOffice ? 'Sign out' : 'Office Access'}</span>
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold-500/20 text-gold-700 dark:text-gold-400">
+                    {isOffice ? <LogOut className="h-3.5 w-3.5" /> : <ShieldCheck className="h-3.5 w-3.5" />}
+                  </span>
+                  <span>{isOffice ? 'SIGN OUT' : 'OFFICE ACCESS'}</span>
+                  <ChevronRight className="h-3.5 w-3.5 text-gold-600 dark:text-gold-400 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" />
                 </button>
               </div>
             </div>

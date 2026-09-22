@@ -90,8 +90,8 @@ export const ContactPage: React.FC = () => {
               {/* Direct Desks Cards */}
               <div className="space-y-4">
                 {/* General & Secretariat */}
-                <div className="p-5 rounded-2xl bg-surface-raised border border-hairline shadow-luxury hover:shadow-luxury-lg hover:-translate-y-1 hover:scale-[1.012] hover:border-gold-600/40 transition-all duration-300 ease-out flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-950 text-gold-400 flex items-center justify-center shrink-0 border border-gold-500/30">
+                <div className="p-5 rounded-2xl bg-surface-raised border border-hairline shadow-luxury hover:shadow-luxury-lg hover:-translate-y-1 hover:border-gold-500/50 transition-all duration-300 ease-out flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-surface-sunken text-gold-700 dark:text-gold-400 flex items-center justify-center shrink-0 border border-gold-500/30">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
@@ -100,7 +100,7 @@ export const ContactPage: React.FC = () => {
                     </h4>
                     <a
                       href={`mailto:${siteConfig.contact.email}`}
-                      className="text-xs text-gold-700 hover:text-gold-600 font-semibold transition-colors break-all"
+                      className="text-xs text-gold-700 dark:text-gold-400 hover:text-gold-600 dark:hover:text-gold-300 font-semibold transition-colors break-all"
                     >
                       {siteConfig.contact.email}
                     </a>
@@ -108,8 +108,8 @@ export const ContactPage: React.FC = () => {
                 </div>
 
                 {/* Trade Commissioner Desk */}
-                <div className="p-5 rounded-2xl bg-surface-raised border border-hairline shadow-luxury hover:shadow-luxury-lg hover:-translate-y-1 hover:scale-[1.012] hover:border-gold-600/40 transition-all duration-300 ease-out flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-950 text-gold-400 flex items-center justify-center shrink-0 border border-gold-500/30">
+                <div className="p-5 rounded-2xl bg-surface-raised border border-hairline shadow-luxury hover:shadow-luxury-lg hover:-translate-y-1 hover:border-gold-500/50 transition-all duration-300 ease-out flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-surface-sunken text-gold-700 dark:text-gold-400 flex items-center justify-center shrink-0 border border-gold-500/30">
                     <Building2 className="w-5 h-5" />
                   </div>
                   <div>
@@ -118,7 +118,7 @@ export const ContactPage: React.FC = () => {
                     </h4>
                     <a
                       href={`mailto:${siteConfig.contact.tradeDeskEmail}`}
-                      className="text-xs text-gold-700 hover:text-gold-600 font-semibold transition-colors break-all"
+                      className="text-xs text-gold-700 dark:text-gold-400 hover:text-gold-600 dark:hover:text-gold-300 font-semibold transition-colors break-all"
                     >
                       {siteConfig.contact.tradeDeskEmail}
                     </a>
@@ -126,8 +126,8 @@ export const ContactPage: React.FC = () => {
                 </div>
 
                 {/* Media & Press Desk */}
-                <div className="p-5 rounded-2xl bg-surface-raised border border-hairline shadow-luxury hover:shadow-luxury-lg hover:-translate-y-1 hover:scale-[1.012] hover:border-gold-600/40 transition-all duration-300 ease-out flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-950 text-gold-400 flex items-center justify-center shrink-0 border border-gold-500/30">
+                <div className="p-5 rounded-2xl bg-surface-raised border border-hairline shadow-luxury hover:shadow-luxury-lg hover:-translate-y-1 hover:border-gold-500/50 transition-all duration-300 ease-out flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-surface-sunken text-gold-700 dark:text-gold-400 flex items-center justify-center shrink-0 border border-gold-500/30">
                     <ShieldCheck className="w-5 h-5" />
                   </div>
                   <div>
@@ -136,7 +136,7 @@ export const ContactPage: React.FC = () => {
                     </h4>
                     <a
                       href={`mailto:${siteConfig.contact.mediaEmail}`}
-                      className="text-xs text-gold-700 hover:text-gold-600 font-semibold transition-colors break-all"
+                      className="text-xs text-gold-700 dark:text-gold-400 hover:text-gold-600 dark:hover:text-gold-300 font-semibold transition-colors break-all"
                     >
                       {siteConfig.contact.mediaEmail}
                     </a>

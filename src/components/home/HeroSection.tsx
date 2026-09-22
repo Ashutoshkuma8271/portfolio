@@ -1,7 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
 import { Container } from '../layout/Container';
 import { CountUp } from '../ui/CountUp';
 import { BannerButton } from '../banner/BannerButton';
@@ -12,14 +10,6 @@ const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
 /** How long each photograph stays on screen. */
 const SLIDE_MS = 5200;
-
-/** The five-step read a first-time visitor should get in a few seconds. */
-const PATH = [
-  { label: 'GCC–India Trade', to: '/trade-investment' },
-  { label: 'Investment & Business', to: '/#invest' },
-  { label: 'Entrepreneurship', to: '/about' },
-  { label: 'Media & Film', to: '/media-press' },
-];
 
 interface CredentialProps {
   value: number;
@@ -139,87 +129,69 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* ── Copy ─────────────────────────────────────────────────── */}
       <Container className="relative z-10 flex flex-1 flex-col justify-end pb-6 pt-[36svh] sm:pb-8 sm:pt-36 lg:justify-center lg:pb-10 lg:pt-32">
         <div className="max-w-2xl text-center sm:text-left flex flex-col items-center sm:items-start mx-auto sm:mx-0 w-full">
+          {/* Eyebrow: Factual Tenure & Mission */}
           <motion.div {...rise(0)}>
-            <span className="inline-flex items-center gap-2.5 rounded-full border border-gold-600/40 bg-surface-raised/75 px-3.5 py-1.5 backdrop-blur-md">
+            <span className="inline-flex items-center gap-2 rounded-full border border-gold-600/40 bg-surface-raised/85 px-3.5 py-1.5 backdrop-blur-md shadow-2xs">
               <span className="relative flex h-2 w-2 shrink-0">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold-500 opacity-70" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-gold-500" />
               </span>
-              <span className="font-label text-[0.66rem] font-bold uppercase tracking-[0.2em] text-gold-800 dark:text-gold-300 sm:text-2xs sm:tracking-[0.24em]">
-                Bridging Nations &middot; Building Opportunities
+              <span className="font-label text-[0.66rem] font-bold uppercase tracking-[0.2em] text-gold-800 dark:text-gold-300 sm:text-2xs sm:tracking-[0.22em]">
+                Trade Commissioner since 2025
               </span>
             </span>
           </motion.div>
 
+          {/* 1. Main Heading: Immediate, concise, authoritative */}
           <motion.h1 {...rise(1)} className="mt-4 sm:mt-5 text-center sm:text-left w-full">
-            <span className="block font-display text-[clamp(1.9rem,4.2vw+0.6rem,3.9rem)] font-bold leading-[1.1] tracking-[0.012em] text-ink-heading">
-              H.E. Zeenat
-            </span>
-            <span className="gold-text-deep dark:gold-text mt-0.5 block font-cormorant text-[clamp(2.6rem,5.6vw+0.6rem,5.2rem)] font-semibold italic leading-[1.05]">
-              Kureshi
+            <span className="block font-display text-[clamp(2.2rem,4.4vw+0.8rem,4.2rem)] font-bold leading-[1.08] tracking-[-0.01em] text-ink-heading">
+              H.E. Zeenat Kureshi
             </span>
           </motion.h1>
 
-          <motion.div {...rise(2)} className="mt-4 flex flex-col sm:flex-row items-center sm:items-start gap-2.5 sm:gap-3.5 sm:mt-5 w-full">
+          {/* 2. Professional Role & Portfolio Line */}
+          <motion.div {...rise(2)} className="mt-3.5 sm:mt-4 flex flex-col sm:flex-row items-center sm:items-start gap-2.5 sm:gap-3.5 w-full">
             <span
               aria-hidden
-              className="hidden sm:block mt-1 h-full min-h-[3.2rem] w-[3px] shrink-0 rounded-full bg-gradient-to-b from-gold-400 to-gold-700"
+              className="hidden sm:block mt-1 h-9 w-[3px] shrink-0 rounded-full bg-gradient-to-b from-gold-400 to-gold-700"
             />
             <div className="text-center sm:text-left">
-              <p className="font-heading text-[clamp(1.1rem,1.2vw+0.7rem,1.5rem)] font-semibold leading-snug text-ink-heading">
-                GCC–India Trade Commissioner
+              <p className="font-heading text-[clamp(1.12rem,1.3vw+0.65rem,1.5rem)] font-semibold leading-snug text-gold-700 dark:text-gold-300">
+                Trade Commissioner | India–GCC Relations
               </p>
-              <p className="mt-1.5 font-label text-[0.68rem] font-bold uppercase tracking-[0.18em] text-gold-800 dark:text-gold-300 sm:text-2xs sm:tracking-[0.2em]">
-                Investor &bull; Entrepreneur &bull; Film Producer
+              <p className="mt-1 font-label text-[0.66rem] font-bold uppercase tracking-[0.16em] text-ink-soft sm:text-2xs">
+                Institutional Trade &bull; Cross-Border Investment &bull; Sovereign Diplomacy
               </p>
             </div>
           </motion.div>
 
+          {/* 3. Supporting Description: Highly readable with generous spacing */}
           <motion.p
             {...rise(3)}
-            className="mt-5 max-w-xl font-sans text-[clamp(1rem,0.4vw+0.92rem,1.18rem)] leading-relaxed text-ink text-center sm:text-left mx-auto sm:mx-0 sm:mt-6"
+            className="mt-5 max-w-xl font-sans text-[clamp(0.95rem,0.3vw+0.88rem,1.12rem)] leading-relaxed text-ink-soft text-center sm:text-left mx-auto sm:mx-0 sm:mt-5.5"
           >
-            Building commercial bridges between India and the GCC through trade, investment and
-            strategic partnerships.
+            Advancing strategic bilateral commerce, institutional investment corridors, and high-level economic diplomacy between India and the GCC nations.
           </motion.p>
 
+          {/* 4. Action CTAs */}
           <motion.div
             {...rise(4)}
             className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-center sm:justify-start gap-3 sm:gap-4 w-full sm:w-auto sm:mt-7"
           >
             <BannerButton
-              className="w-full sm:w-[195px] justify-center"
+              className="w-full sm:w-[190px] justify-center"
               onClick={fire(onOpenInvestmentModal, 'open-investment-modal')}
             >
               Invest With Us
             </BannerButton>
             <BannerButton
               variant="secondary"
-              className="w-full sm:w-[195px] justify-center"
+              className="w-full sm:w-[190px] justify-center"
               onClick={fire(onOpenCollaborateModal, 'open-collaborate-modal')}
             >
               Collaborate
             </BannerButton>
           </motion.div>
-
-          {/* The five-step read: person → trade → investment → entrepreneurship → media */}
-          <motion.nav
-            {...rise(5)}
-            aria-label="What she does"
-            className="mt-6 flex flex-wrap items-center justify-center sm:justify-start gap-x-1.5 gap-y-2 w-full"
-          >
-            {PATH.map((step, i) => (
-              <React.Fragment key={step.label}>
-                {i > 0 && <ArrowRight className="h-3 w-3 text-gold-600 shrink-0" aria-hidden />}
-                <Link
-                  to={step.to}
-                  className="whitespace-nowrap rounded-full border border-gold-600/30 bg-surface-raised/70 px-2.5 py-1.5 font-label text-[0.62rem] font-bold uppercase tracking-[0.1em] text-ink-heading backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-gold-500 hover:text-gold-800 dark:hover:text-gold-300"
-                >
-                  {step.label}
-                </Link>
-              </React.Fragment>
-            ))}
-          </motion.nav>
         </div>
       </Container>
 

@@ -223,17 +223,17 @@ SECRETARIAT SLA & RESPONSE TIME:
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="bg-white p-6 sm:p-10 rounded-3xl border border-gold-600/30 shadow-luxury-lg text-charcoal-900 relative"
+      className="bg-surface-raised p-6 sm:p-10 rounded-3xl border border-gold-600/30 shadow-luxury-lg text-ink relative"
     >
       <div className="mb-6">
-        <div className="inline-flex items-center gap-2 rounded-full border border-gold-600/30 bg-[#FAF6F0] px-3 py-1 text-2xs font-label font-bold uppercase tracking-[0.16em] text-[#8A6920] mb-2.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-700" />
+        <div className="inline-flex items-center gap-2 rounded-full border border-gold-600/30 bg-surface-sunken px-3 py-1 text-2xs font-label font-bold uppercase tracking-[0.16em] text-gold-800 dark:text-gold-300 mb-2.5">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-600 dark:bg-emerald-400" />
           <span>Executive Consultation &amp; Collaboration Desk</span>
         </div>
-        <h3 className="font-heading text-2xl sm:text-3xl font-bold text-emerald-950">
+        <h3 className="font-heading text-2xl sm:text-3xl font-bold text-ink-heading">
           Initiate Official Engagement
         </h3>
-        <p className="text-xs sm:text-sm text-charcoal-600 mt-1 leading-relaxed">
+        <p className="text-xs sm:text-sm text-ink-soft mt-1 leading-relaxed">
           For bilateral trade facilitation, speaking invitations, media interviews, film production, and strategic collaborations.
         </p>
       </div>
@@ -241,7 +241,7 @@ SECRETARIAT SLA & RESPONSE TIME:
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mb-4">
         {/* Name */}
         <div>
-          <label className="block text-[0.68rem] uppercase font-label tracking-wider font-bold text-emerald-950 mb-1.5">
+          <label className="block text-[0.68rem] uppercase font-label tracking-wider font-bold text-ink-heading mb-1.5">
             Full Name *
           </label>
           <div className="relative">
@@ -253,13 +253,13 @@ SECRETARIAT SLA & RESPONSE TIME:
             />
           </div>
           {errors.name && (
-            <p className="text-red-600 text-2xs mt-1 font-medium">{errors.name.message}</p>
+            <p className="text-red-600 dark:text-red-400 text-2xs mt-1 font-medium">{errors.name.message}</p>
           )}
         </div>
 
         {/* Organization */}
         <div>
-          <label className="block text-[0.68rem] uppercase font-label tracking-wider font-bold text-emerald-950 mb-1.5">
+          <label className="block text-[0.68rem] uppercase font-label tracking-wider font-bold text-ink-heading mb-1.5">
             Organization / Institutional Entity
           </label>
           <div className="relative">
@@ -274,7 +274,7 @@ SECRETARIAT SLA & RESPONSE TIME:
 
         {/* Email */}
         <div>
-          <label className="block text-[0.68rem] uppercase font-label tracking-wider font-bold text-emerald-950 mb-1.5">
+          <label className="block text-[0.68rem] uppercase font-label tracking-wider font-bold text-ink-heading mb-1.5">
             Corporate Email *
           </label>
           <div className="relative">
@@ -286,13 +286,13 @@ SECRETARIAT SLA & RESPONSE TIME:
             />
           </div>
           {errors.email && (
-            <p className="text-red-600 text-2xs mt-1 font-medium">{errors.email.message}</p>
+            <p className="text-red-600 dark:text-red-400 text-2xs mt-1 font-medium">{errors.email.message}</p>
           )}
         </div>
 
         {/* Phone */}
         <div>
-          <label className="block text-[0.68rem] uppercase font-label tracking-wider font-bold text-emerald-950 mb-1.5">
+          <label className="block text-[0.68rem] uppercase font-label tracking-wider font-bold text-ink-heading mb-1.5">
             Phone / WhatsApp with Country Code *
           </label>
           <div className="relative">
@@ -304,13 +304,13 @@ SECRETARIAT SLA & RESPONSE TIME:
             />
           </div>
           {errors.phone && (
-            <p className="text-red-600 text-2xs mt-1 font-medium">{errors.phone.message}</p>
+            <p className="text-red-600 dark:text-red-400 text-2xs mt-1 font-medium">{errors.phone.message}</p>
           )}
         </div>
 
         {/* Subject */}
         <div>
-          <label className="block text-[0.68rem] uppercase font-label tracking-wider font-bold text-emerald-950 mb-1.5">
+          <label className="block text-[0.68rem] uppercase font-label tracking-wider font-bold text-ink-heading mb-1.5">
             Nature of Communication *
           </label>
           <div className="relative">
@@ -331,7 +331,7 @@ SECRETARIAT SLA & RESPONSE TIME:
 
         {/* Regional Desk */}
         <div>
-          <label className="block text-[0.68rem] uppercase font-label tracking-wider font-bold text-emerald-950 mb-1.5">
+          <label className="block text-[0.68rem] uppercase font-label tracking-wider font-bold text-ink-heading mb-1.5">
             Designated Regional Desk
           </label>
           <div className="relative">
@@ -348,7 +348,7 @@ SECRETARIAT SLA & RESPONSE TIME:
 
         {/* Preferred Date Slot */}
         <div>
-          <label className="block text-[0.68rem] uppercase font-label tracking-wider font-bold text-emerald-950 mb-1.5">
+          <label className="block text-[0.68rem] uppercase font-label tracking-wider font-bold text-ink-heading mb-1.5">
             Preferred Consultation Date
           </label>
           <div className="relative">
@@ -362,7 +362,7 @@ SECRETARIAT SLA & RESPONSE TIME:
 
         {/* Preferred Time Window */}
         <div>
-          <label className="block text-[0.68rem] uppercase font-label tracking-wider font-bold text-emerald-950 mb-1.5">
+          <label className="block text-[0.68rem] uppercase font-label tracking-wider font-bold text-ink-heading mb-1.5">
             Preferred Meeting Time Slot
           </label>
           <div className="relative">
@@ -381,7 +381,7 @@ SECRETARIAT SLA & RESPONSE TIME:
 
       {/* Message */}
       <div className="mb-6">
-        <label className="block text-[0.68rem] uppercase font-label tracking-wider font-bold text-emerald-950 mb-1.5">
+        <label className="block text-[0.68rem] uppercase font-label tracking-wider font-bold text-ink-heading mb-1.5">
           Executive Summary / Purpose of Consultation *
         </label>
         <textarea
@@ -391,7 +391,7 @@ SECRETARIAT SLA & RESPONSE TIME:
           className="w-full rounded-xl border border-hairline bg-surface px-4 py-3 text-[0.95rem] text-ink-heading placeholder:text-ink-faint/80 outline-none transition-all duration-200 focus:border-gold-500 focus:ring-4 focus:ring-gold-500/15"
         />
         {errors.message && (
-          <p className="text-red-600 text-2xs mt-1 font-medium">{errors.message.message}</p>
+          <p className="text-red-600 dark:text-red-400 text-2xs mt-1 font-medium">{errors.message.message}</p>
         )}
       </div>
 

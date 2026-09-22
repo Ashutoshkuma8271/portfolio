@@ -51,18 +51,18 @@ export const TradeInquiryForm: React.FC = () => {
 
   if (isSubmitted) {
     return (
-      <div className="bg-white border-2 border-gold-500/50 p-8 sm:p-10 rounded-3xl text-center text-charcoal-900 shadow-[0_20px_50px_rgba(0,0,0,0.1),0_0_25px_rgba(199,154,61,0.2)] animate-fade-in space-y-4">
-        <div className="w-16 h-16 bg-gold-50 text-gold-600 rounded-full flex items-center justify-center mx-auto border-2 border-gold-500 shadow-[0_0_20px_rgba(199,154,61,0.25)]">
-          <CheckCircle2 className="w-8 h-8 text-emerald-700" />
+      <div className="bg-surface-raised border border-gold-500/50 p-8 sm:p-10 rounded-3xl text-center text-ink shadow-luxury-lg animate-fade-in space-y-4">
+        <div className="w-16 h-16 bg-gold-500/15 text-gold-700 dark:text-gold-400 rounded-full flex items-center justify-center mx-auto border-2 border-gold-500/40 shadow-sm">
+          <CheckCircle2 className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
         </div>
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF6F0] border border-gold-500/40 text-[#8A6920] font-label text-2xs font-bold uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-sunken border border-gold-500/40 text-gold-800 dark:text-gold-300 font-label text-2xs font-bold uppercase tracking-wider mb-2">
             <span>Filing Reference: {refId}</span>
           </div>
-          <h3 className="font-heading text-2xl sm:text-3xl font-bold text-emerald-950 mb-1.5">
+          <h3 className="font-heading text-2xl sm:text-3xl font-bold text-ink-heading mb-1.5">
             Trade &amp; Investment Dossier Dispatched
           </h3>
-          <p className="text-xs sm:text-sm text-charcoal-600 max-w-md mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm text-ink-soft max-w-md mx-auto leading-relaxed">
             Your strategic trade brief has been securely logged with the Office of the GCC–India Trade Commissioner. Our senior bilateral commercial desk will contact you within 24–48 business hours.
           </p>
         </div>
@@ -72,13 +72,13 @@ export const TradeInquiryForm: React.FC = () => {
             href={`https://wa.me/971501234567?text=${encodeURIComponent(`Hello Secretariat, I have submitted Trade Inquiry Brief [${refId}].`)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-2.5 bg-gradient-to-r from-emerald-950 via-emerald-900 to-emerald-950 hover:bg-emerald-900 text-ink-heading font-label font-bold text-xs uppercase tracking-wider rounded-xl shadow-md border border-gold-500/40 transition-all"
+            className="px-6 py-2.5 bg-gradient-to-r from-gold-500 via-gold-600 to-gold-500 text-emerald-950 font-label font-bold text-xs uppercase tracking-wider rounded-xl shadow-md border border-gold-500/40 transition-all hover:bg-gold-400"
           >
             Direct WhatsApp Desk
           </a>
           <button
             onClick={() => setIsSubmitted(false)}
-            className="px-5 py-2.5 border border-gold-500/50 bg-white text-emerald-950 hover:bg-gold-50 rounded-xl font-label text-xs uppercase tracking-wider transition-all cursor-pointer"
+            className="px-5 py-2.5 border border-gold-500/50 bg-surface-raised text-ink-heading hover:bg-surface-sunken rounded-xl font-label text-xs uppercase tracking-wider transition-all cursor-pointer"
           >
             Submit Another Inquiry
           </button>

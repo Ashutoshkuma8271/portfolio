@@ -19,7 +19,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: 'india-gcc-landscape-report-5-year-journey',
     title: 'India GCC Landscape Report: The 5-Year Journey of Tech Corridors & Sovereign Capital',
-    category: 'Global Trade',
+    category: 'Policy & Governance',
     date: 'September 2024',
     readTime: '8 min read',
     excerpt: 'Key insights from the landmark Nasscom & Zinnov research on GCC capability centers, bilateral trade corridors, and sovereign enterprise expansion between India and the Gulf.',
