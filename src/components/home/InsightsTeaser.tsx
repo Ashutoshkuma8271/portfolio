@@ -34,7 +34,7 @@ export const InsightsTeaser: React.FC = () => (
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              <p className="mt-4 sm:mt-5 font-label text-2xs sm:text-3xs font-bold uppercase tracking-[0.18em] text-gold-700 dark:text-gold-400">
+              <p className="mt-4 sm:mt-5 font-label text-3xs sm:text-2xs font-bold uppercase tracking-[0.18em] text-gold-700 dark:text-gold-400">
                 {post.category}
               </p>
               <h3 className="mt-2 line-clamp-3 font-heading text-base sm:text-lg font-bold leading-snug text-ink-heading transition-colors group-hover:text-gold-700 dark:group-hover:text-gold-400">

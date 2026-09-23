@@ -57,7 +57,7 @@ export const AboutSection: React.FC = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: '-60px' }}
-            className="relative px-2 py-4 text-center lg:col-span-5 lg:px-6 lg:py-6 flex flex-col items-center justify-center max-w-xl mx-auto lg:max-w-none"
+            className="relative px-2 py-4 text-center lg:col-span-5 lg:px-6 lg:py-6 flex flex-col items-center justify-center max-w-xl mx-auto lg:max-w-none border-t border-gold-600/20 pt-8 mt-2 lg:border-t-0 lg:pt-6 lg:mt-0"
           >
             {/* Elegant golden quotation mark icon */}
             <div

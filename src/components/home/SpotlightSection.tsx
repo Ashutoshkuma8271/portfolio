@@ -35,22 +35,22 @@ export const SpotlightSection: React.FC = () => {
               type="button"
               onClick={() => setPlaying(video.youtubeId)}
               aria-label={`Play: ${video.title}`}
-              className="grain group relative block aspect-[4/5] w-full overflow-hidden rounded-3xl border border-gold-500/40 bg-gradient-to-br from-emerald-800 to-emerald-950 text-left sm:aspect-video shadow-luxury-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600"
+              className="grain group relative block aspect-video w-full overflow-hidden rounded-3xl border border-gold-500/40 bg-gradient-to-br from-emerald-800 to-emerald-950 text-left shadow-luxury-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600"
             >
               <YoutubeThumb
                 videoId={video.youtubeId}
                 override={video.thumbnailUrl}
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-emerald-950/30 to-transparent" />
-              <span className="absolute left-1/2 top-[36%] flex h-[72px] w-[72px] -translate-x-1/2 -translate-y-1/2 sm:top-1/2 items-center justify-center rounded-full border-2 border-gold-300 bg-gradient-to-br from-gold-400 to-gold-600 text-emerald-950 shadow-[0_0_36px_rgba(230,189,101,0.55)] transition-transform duration-300 group-hover:scale-110">
-                <Play className="ml-1 h-7 w-7 fill-current" />
+              <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-emerald-950/40 to-transparent" />
+              <span className="absolute left-1/2 top-1/2 flex h-14 w-14 sm:h-[72px] sm:w-[72px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-gold-300 bg-gradient-to-br from-gold-400 to-gold-600 text-emerald-950 shadow-[0_0_36px_rgba(230,189,101,0.55)] transition-transform duration-300 group-hover:scale-110">
+                <Play className="ml-0.5 sm:ml-1 h-5 w-5 sm:h-7 sm:w-7 fill-current" />
               </span>
-              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
-                <p className="font-label text-2xs font-bold uppercase tracking-[0.18em] text-gold-300">
+              <div className="absolute inset-x-0 bottom-0 p-4 sm:p-8">
+                <p className="font-label text-3xs sm:text-2xs font-bold uppercase tracking-[0.18em] text-gold-300">
                   Featured keynote
                 </p>
-                <h3 className="mt-2 font-heading text-lg font-semibold leading-snug text-white sm:text-2xl">
+                <h3 className="mt-1 sm:mt-2 font-heading text-sm font-semibold leading-snug text-white sm:text-2xl line-clamp-2">
                   {video.title}
                 </h3>
               </div>

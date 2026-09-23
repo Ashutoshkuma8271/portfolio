@@ -31,39 +31,39 @@ import {
 import { useOfficeAuth } from '../../contexts/OfficeAuthContext';
 import { OfficeSignInModal } from '../ui/OfficeSignInModal';
 
-import tradeIcon from '../../assets/images/focus/trade-icon.png';
-import goldIcon from '../../assets/images/focus/gold-icon.png';
-import fleetIcon from '../../assets/images/focus/fleet-icon.png';
-import oilGasIcon from '../../assets/images/focus/oilgas-icon.png';
-import zeenatAvatar from '../../assets/images/focus/zeenat-avatar.png';
-import ddNewsLogo from '../../assets/images/focus/ddnews-logo.png';
-import investIndiaLogo from '../../assets/images/focus/invest-india-logo.png';
-import nagalandPostLogo from '../../assets/images/focus/nagaland-post-logo.png';
-import theNationalNewsLogo from '../../assets/images/focus/thenationalnews-logo.png';
-import economicTimesLogo from '../../assets/images/focus/economictimes-logo.png';
-import indianExpressLogo from '../../assets/images/focus/indianexpress-logo.png';
-import moneycontrolLogo from '../../assets/images/focus/moneycontrol-logo.png';
-import timesOfIndiaLogo from '../../assets/images/focus/timesofindia-logo.png';
-import gulfNewsLogo from '../../assets/images/focus/gulfnews-logo.png';
-import indiaComLogo from '../../assets/images/focus/indiacom-logo.png';
-import indiaShippingNewsLogo from '../../assets/images/focus/indiashippingnews-logo.png';
-import livemintLogo from '../../assets/images/focus/livemint-logo.png';
-import reutersLogo from '../../assets/images/focus/reuters-logo.png';
-import sarkaritelLogo from '../../assets/images/focus/sarkaritel-logo.png';
-import ndtvLogo from '../../assets/images/focus/ndtv-logo.png';
-import indiaTodayLogo from '../../assets/images/focus/indiatoday-logo.png';
-import forbesIndiaLogo from '../../assets/images/focus/forbesindia-logo.png';
-import jllLogo from '../../assets/images/focus/jll-logo.png';
-import thePrintLogo from '../../assets/images/focus/theprint-logo.png';
-import magzterLogo from '../../assets/images/focus/magzter-logo.png';
-import aniNewsLogo from '../../assets/images/focus/aninews-logo.png';
-import awazTheVoiceLogo from '../../assets/images/focus/awazthevoice-logo.png';
-import ahmedabadMirrorLogo from '../../assets/images/focus/ahmedabadmirror-logo.png';
-import cepaBadge from '../../assets/images/focus/cepa-tariff-badge.png';
-import bullionBadge from '../../assets/images/focus/bullion-gift-city-badge.png';
-import fleetBadge from '../../assets/images/focus/multimodal-port-badge.png';
-import oilGasBadge from '../../assets/images/focus/hydrocarbon-badge.png';
-import difcBadge from '../../assets/images/focus/difc-bkc-badge.png';
+import tradeIcon from '../../assets/images/sectors/trade-icon.png';
+import goldIcon from '../../assets/images/sectors/gold-icon.png';
+import fleetIcon from '../../assets/images/sectors/fleet-icon.png';
+import oilGasIcon from '../../assets/images/sectors/oilgas-icon.png';
+import zeenatAvatar from '../../assets/images/avatar/zeenat-avatar.png';
+import ddNewsLogo from '../../assets/images/news-logos/ddnews-logo.png';
+import investIndiaLogo from '../../assets/images/news-logos/invest-india-logo.png';
+import nagalandPostLogo from '../../assets/images/news-logos/nagaland-post-logo.png';
+import theNationalNewsLogo from '../../assets/images/news-logos/thenationalnews-logo.png';
+import economicTimesLogo from '../../assets/images/news-logos/economictimes-logo.png';
+import indianExpressLogo from '../../assets/images/news-logos/indianexpress-logo.png';
+import moneycontrolLogo from '../../assets/images/news-logos/moneycontrol-logo.png';
+import timesOfIndiaLogo from '../../assets/images/news-logos/timesofindia-logo.png';
+import gulfNewsLogo from '../../assets/images/news-logos/gulfnews-logo.png';
+import indiaComLogo from '../../assets/images/news-logos/indiacom-logo.png';
+import indiaShippingNewsLogo from '../../assets/images/news-logos/indiashippingnews-logo.png';
+import livemintLogo from '../../assets/images/news-logos/livemint-logo.png';
+import reutersLogo from '../../assets/images/news-logos/reuters-logo.png';
+import sarkaritelLogo from '../../assets/images/news-logos/sarkaritel-logo.png';
+import ndtvLogo from '../../assets/images/news-logos/ndtv-logo.png';
+import indiaTodayLogo from '../../assets/images/news-logos/indiatoday-logo.png';
+import forbesIndiaLogo from '../../assets/images/news-logos/forbesindia-logo.png';
+import jllLogo from '../../assets/images/news-logos/jll-logo.png';
+import thePrintLogo from '../../assets/images/news-logos/theprint-logo.png';
+import magzterLogo from '../../assets/images/news-logos/magzter-logo.png';
+import aniNewsLogo from '../../assets/images/news-logos/aninews-logo.png';
+import awazTheVoiceLogo from '../../assets/images/news-logos/awazthevoice-logo.png';
+import ahmedabadMirrorLogo from '../../assets/images/news-logos/ahmedabadmirror-logo.png';
+import cepaBadge from '../../assets/images/sectors/cepa-tariff-badge.png';
+import bullionBadge from '../../assets/images/sectors/bullion-gift-city-badge.png';
+import fleetBadge from '../../assets/images/sectors/multimodal-port-badge.png';
+import oilGasBadge from '../../assets/images/sectors/hydrocarbon-badge.png';
+import difcBadge from '../../assets/images/sectors/difc-bkc-badge.png';
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
@@ -715,23 +715,24 @@ export const SectorIntelligence: React.FC = () => {
 
                 <div>
                   {/* Card Header: Publication, Category Tag & Date */}
-                  <div className="flex items-center justify-between border-b border-gold-500/15 pb-3 mb-3.5 gap-2">
-                    <span className="inline-flex items-center gap-1.5 font-label text-[0.65rem] sm:text-3xs font-bold uppercase tracking-wider text-ink-heading bg-surface-sunken px-2.5 py-1 rounded-md border border-gold-500/30 shadow-2xs">
+                  <div className="mb-3.5 flex items-center justify-between gap-2">
+                    <span className="inline-flex items-center gap-1.5 font-label text-[0.68rem] font-bold uppercase tracking-wider text-ink-heading bg-surface-sunken px-2.5 py-1 rounded-md border border-gold-500/30 shadow-2xs shrink-0">
                       {renderPublicationLogo(item.publication)}
                       <span className="truncate max-w-[130px] sm:max-w-[160px]">{item.publication || 'Sovereign Wire'}</span>
                     </span>
+
                     <span className="inline-flex items-center gap-1.5 font-label text-3xs sm:text-2xs text-ink-faint shrink-0">
                       <ClockIcon className="h-3.5 w-3.5 text-gold-600 dark:text-gold-400 shrink-0" />
                       <span>{dateLabel(item.pubDate)}</span>
                     </span>
                   </div>
 
-                  {/* Category Pill */}
-                  <div className="mb-2.5 flex items-center">
-                    <span className="inline-flex items-center gap-1.5 text-[0.65rem] sm:text-3xs font-semibold uppercase tracking-wider text-gold-700 dark:text-gold-400 bg-gold-500/10 px-2.5 py-1 rounded-md border border-gold-500/20">
+                  {/* Category Kicker */}
+                  <div className="mb-2.5 flex items-center gap-1.5 font-label text-2xs font-bold uppercase tracking-[0.16em] text-[#8A6920] dark:text-gold-400">
+                    <span className="h-3.5 w-3.5 shrink-0 flex items-center justify-center">
                       {renderCategoryLogo(item.categoryTag || activeSector.categoryTag)}
-                      <span>{item.categoryTag || activeSector.categoryTag}</span>
                     </span>
+                    <span className="truncate">{item.categoryTag || activeSector.categoryTag}</span>
                   </div>
 
                   {/* Headline */}
@@ -785,26 +786,26 @@ export const SectorIntelligence: React.FC = () => {
                 </div>
 
                 {/* Bottom Actions: Prominent "My View" Action Button + Source Link */}
-                <div className="mt-4 pt-4 border-t border-gold-500/20 space-y-2">
+                <div className="mt-4 pt-4 border-t border-gold-500/20 space-y-2.5">
                   <motion.button
                     type="button"
                     onClick={() => openEditor(item)}
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: 'spring', stiffness: 380, damping: 26 }}
-                    className="w-full inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-gold-300/60 bg-gradient-to-b from-gold-400 to-gold-600 px-4 py-2.5 font-label text-xs font-bold uppercase tracking-[0.12em] text-emerald-950 shadow-[0_6px_14px_-6px_rgba(199,154,61,0.55)] hover:shadow-[0_12px_22px_-8px_rgba(199,154,61,0.6)] cursor-pointer"
+                    className="w-full inline-flex min-h-[42px] items-center justify-center gap-2 rounded-full border border-gold-400/70 bg-gradient-to-r from-[#0C241B] via-[#081E16] to-[#04100C] px-4 py-2 font-label text-xs font-bold uppercase tracking-[0.14em] text-gold-300 shadow-luxury hover:shadow-luxury-lg hover:border-gold-300 hover:text-white cursor-pointer transition-all duration-300"
                   >
-                    <PenLine className="h-4 w-4 text-emerald-950 shrink-0 stroke-[2.2]" />
-                    <span className="text-center text-emerald-950 font-bold">{hasCustomTake ? (isOffice ? 'Edit My View' : 'Read My View') : 'My View'}</span>
+                    <PenLine className="h-3.5 w-3.5 text-gold-400 shrink-0" />
+                    <span>{hasCustomTake ? (isOffice ? 'Edit My View' : 'Read My View') : 'My View'}</span>
                   </motion.button>
 
                   <a
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full inline-flex items-center justify-center text-center gap-1.5 py-1 text-2xs font-sans font-semibold uppercase tracking-wider text-ink-faint hover:text-ink-heading transition-colors group/link cursor-pointer"
+                    className="w-full inline-flex items-center justify-center text-center gap-1.5 py-1 text-2xs font-sans font-semibold uppercase tracking-wider text-ink-faint hover:text-gold-800 dark:hover:text-gold-300 transition-colors group/link cursor-pointer"
                   >
-                    <span className="text-center">Read article</span>
+                    <span>Read Original Article</span>
                     <ArrowUpRight className="h-3.5 w-3.5 text-gold-600 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 shrink-0" />
                   </a>
                 </div>

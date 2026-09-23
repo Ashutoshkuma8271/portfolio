@@ -6,9 +6,9 @@ import udcStage from '../assets/images/events/udc-brics-stage.webp';
 import unitedEconomicB from '../assets/images/events/united-economic-brics-b.webp';
 
 // 5 High-Definition Official Press & Summit Photographs
-import cinemaAwards from '../assets/images/events/cinema-awards-dia-mirza.png';
+import cinemaAwards from '../assets/images/events/cultural-cinema-honor-hd.png';
 import mediaCinemaIndoArab from '../assets/images/events/media-cinema-indo-arab.png';
-import aaccCredential from '../assets/images/events/aacc-commissioner-credential.png';
+import aaccCredential from '../assets/images/events/aacc-commissioner-credential-hd.jpg';
 import aaccArabDelegation from '../assets/images/events/aacc-arab-delegation-summit.png';
 import bilateralAccord from '../assets/images/events/bilateral-accord-delegation.png';
 import globalTradeSummit from '../assets/images/events/global-trade-summit-leaders.png';
@@ -43,13 +43,13 @@ export const eventPhotos = {
   cinemaAwards: {
     id: 'cinema-awards',
     src: cinemaAwards,
-    title: 'Cultural Cinema & Creative Leadership Honor with Dia Mirza',
-    caption: 'H.E. Zeenat Kureshi presented with the prestigious Cultural Cinema & Film Producer citation alongside Bollywood actress Dia Mirza.',
+    title: 'Cultural Cinema & Creative Leadership Honor',
+    caption: 'H.E. Zeenat Kureshi honored for exemplary contributions to purposeful storytelling, international film syndication, and cultural diplomacy.',
     event: 'National Cultural Cinema & Leadership Conclave',
     date: '2026',
     location: 'Mumbai & New Delhi, India',
-    alt: 'H.E. Zeenat Kureshi receiving cultural cinema & film producer award alongside Dia Mirza',
-    focal: '50% 25%',
+    alt: 'H.E. Zeenat Kureshi portrait in ceremonial gold embroidered couture',
+    focal: '50% 18%',
     orientation: 'portrait',
   },
   aaccCredential: {

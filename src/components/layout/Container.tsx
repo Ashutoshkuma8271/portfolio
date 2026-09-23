@@ -15,7 +15,9 @@ export const Container: React.FC<ContainerProps> = ({
     sm: 'max-w-4xl',
     md: 'max-w-5xl',
     lg: 'max-w-6xl',
-    xl: 'max-w-7xl',
+    // Grows once more past laptop width so content keeps filling the frame
+    // on large desktop monitors instead of capping out with empty margins.
+    xl: 'max-w-7xl 2xl:max-w-[96rem]',
     full: 'max-w-full',
   };
 

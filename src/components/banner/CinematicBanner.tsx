@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Pause, Play, ChevronRight, Camera } from 'lucide-react';
+import { Pause, Play, Camera } from 'lucide-react';
 import { Container } from '../layout/Container';
 import { BackdropMedia, BackdropMode } from './BackdropMedia';
 import { sectionMedia, SectionKey, SectionMedia } from '../../data/sectionMedia';
@@ -34,15 +33,6 @@ interface CinematicBannerProps {
 
 /**
  * The opening of every inner page.
- *
- * Layout: copy on the left over an opaque wash, the photograph / looping video
- * on the right, blended into the wash by a soft mask so faces are never
- * covered by the headline. A glass "lower third" of figures sits on the
- * bottom edge.
- *
- * Colour: every layer reads the light/dark surface + ink tokens, so a light
- * page gets an ivory banner and a dark page a deep-emerald one. (The earlier
- * version was hard-wired dark, which broke light mode.)
  */
 export const CinematicBanner: React.FC<CinematicBannerProps> = ({
   section,
@@ -50,7 +40,6 @@ export const CinematicBanner: React.FC<CinematicBannerProps> = ({
   title,
   accent,
   description,
-  breadcrumb,
   stats,
   actions,
   mediaOverride,
@@ -74,57 +63,29 @@ export const CinematicBanner: React.FC<CinematicBannerProps> = ({
       className="relative isolate flex min-h-[86svh] flex-col overflow-hidden bg-surface text-ink lg:max-h-[1000px] lg:min-h-[88svh]"
       aria-label={`${eyebrow} banner`}
     >
-      {/* 1. Photograph / looping video: right-hand side on desktop, full-bleed on phones */}
-      <div className="grain banner-fade-left absolute left-0 right-0 top-0 -z-10 h-[50svh] sm:h-[52svh] lg:inset-y-0 lg:left-[30%] lg:h-auto overflow-hidden">
+      {/* 1. Photograph / looping video: right-hand side on desktop, clean responsive top on mobile */}
+      <div className="grain banner-fade-left absolute left-0 right-0 top-0 -z-10 h-[50svh] sm:h-[52svh] lg:inset-y-0 lg:left-[25%] lg:h-auto overflow-hidden">
         <BackdropMedia media={media} paused={paused} onModeChange={setMode} priority />
       </div>
 
       {/* 2. Theme-following scrims: keeps text ultra-readable while keeping photos crisp & HD */}
       <div aria-hidden className="banner-scrim-x pointer-events-none absolute inset-0 -z-10 hidden lg:block" />
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[52svh] bg-gradient-to-b from-surface/30 via-surface/75 via-45% to-surface lg:hidden" />
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[52svh] bg-gradient-to-b from-surface/20 via-surface/40 via-55% to-surface lg:hidden" />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-32 bg-gradient-to-b from-surface/80 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-surface/70 to-transparent"
       />
 
       {/* 3. Copy */}
       <Container
-        className={`relative z-10 flex flex-1 flex-col justify-end pt-28 sm:pt-36 ${
-          hasRail ? 'pb-8 sm:pb-14' : 'pb-14 sm:pb-20'
+        className={`relative z-10 flex flex-1 flex-col justify-end pb-6 pt-[32svh] sm:pb-8 sm:pt-36 lg:justify-center lg:pb-10 lg:pt-28 ${
+          hasRail ? 'lg:pb-14' : ''
         }`}
       >
-        <div className="max-w-2xl">
-          {breadcrumb && (
-            <motion.nav
-              {...rise(0)}
-              aria-label="Breadcrumb"
-              className="mb-4 sm:mb-5 flex items-center gap-1.5 font-label text-2xs font-semibold uppercase tracking-[0.2em] text-ink-faint"
-            >
-              <Link to="/" className="transition-colors hover:text-gold-700 dark:hover:text-gold-300">
-                Home
-              </Link>
-              <ChevronRight className="h-3 w-3 text-gold-600/80" aria-hidden />
-              <span className="text-gold-800 dark:text-gold-300" aria-current="page">
-                {breadcrumb}
-              </span>
-            </motion.nav>
-          )}
-
-          <motion.div {...rise(1)}>
-            <span className="inline-flex items-center gap-2.5 rounded-full border border-gold-600/40 bg-surface-raised/75 px-3.5 py-1.5 backdrop-blur-md">
-              <span className="relative flex h-2 w-2 shrink-0">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold-500 opacity-70" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-gold-500" />
-              </span>
-              <span className="font-label text-2xs font-bold uppercase tracking-[0.22em] text-gold-800 dark:text-gold-300">
-                {eyebrow}
-              </span>
-            </span>
-          </motion.div>
-
+        <div className="max-w-2xl text-center sm:text-left flex flex-col items-center sm:items-start mx-auto sm:mx-0 w-full">
           <motion.h1
-            {...rise(2)}
-            className="mt-4 sm:mt-5 font-display text-[clamp(1.55rem,3.2vw+0.7rem,3.2rem)] font-semibold leading-[1.12] tracking-[0.012em] text-ink-heading text-balance"
+            {...rise(0)}
+            className="font-display text-[clamp(1.75rem,3.6vw+0.7rem,3.4rem)] font-bold leading-[1.1] tracking-[0.012em] text-ink-heading text-balance text-center sm:text-left"
           >
             {title}
             {accent && (
@@ -137,7 +98,7 @@ export const CinematicBanner: React.FC<CinematicBannerProps> = ({
             )}
           </motion.h1>
 
-          <motion.div {...rise(3)} aria-hidden className="mt-6 flex items-center gap-2">
+          <motion.div {...rise(2)} aria-hidden className="mt-5 flex items-center gap-2 justify-center sm:justify-start">
             <span className="h-[2px] w-14 rounded-full bg-gradient-to-r from-gold-500 to-gold-700" />
             <span className="h-1.5 w-1.5 rotate-45 bg-gold-500" />
             <span className="h-[2px] w-7 rounded-full bg-gradient-to-r from-gold-600 to-transparent" />
@@ -145,15 +106,15 @@ export const CinematicBanner: React.FC<CinematicBannerProps> = ({
 
           {description && (
             <motion.p
-              {...rise(4)}
-              className="mt-6 max-w-2xl font-sans text-[clamp(1rem,0.45vw+0.92rem,1.2rem)] leading-relaxed text-ink"
+              {...rise(3)}
+              className="mt-5 max-w-xl font-sans text-[clamp(0.95rem,0.3vw+0.88rem,1.15rem)] leading-relaxed text-ink-soft text-center sm:text-left mx-auto sm:mx-0"
             >
               {description}
             </motion.p>
           )}
 
           {actions && (
-            <motion.div {...rise(5)} className="mt-8 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 w-full sm:w-auto">
+            <motion.div {...rise(4)} className="mt-7 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center sm:justify-start gap-3 w-full sm:w-auto">
               {actions}
             </motion.div>
           )}

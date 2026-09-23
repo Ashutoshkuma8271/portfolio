@@ -59,7 +59,7 @@ export const FocusAreasSection: React.FC = () => (
           >
             <Link
               to={area.link}
-              className="grain group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-gold-600/25 bg-emerald-950 shadow-luxury transition-all duration-500 hover:-translate-y-1.5 hover:border-gold-500/60 hover:shadow-luxury-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600"
+              className="grain group relative block aspect-[16/11] sm:aspect-[4/5] overflow-hidden rounded-2xl border border-gold-600/25 bg-emerald-950 shadow-luxury transition-all duration-500 hover:-translate-y-1.5 hover:border-gold-500/60 hover:shadow-luxury-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600"
             >
               {PHOTO[area.id] ? (
                 <img
@@ -87,14 +87,14 @@ export const FocusAreasSection: React.FC = () => (
                 <ArrowUpRight className="h-4 w-4" />
               </span>
 
-              <div className="absolute inset-x-0 bottom-0 p-6">
-                <h3 className="font-heading text-xl font-semibold leading-snug text-white">
+              <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+                <h3 className="font-heading text-lg sm:text-xl font-semibold leading-snug text-white">
                   {area.title}
                 </h3>
-                <p className="mt-2 max-h-40 overflow-hidden text-[0.95rem] leading-relaxed text-ivory-600 transition-all duration-500 [@media(hover:hover)]:max-h-0 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:max-h-40 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-focus-visible:max-h-40 [@media(hover:hover)]:group-focus-visible:opacity-100">
+                <p className="mt-1.5 sm:mt-2 max-h-40 overflow-hidden text-xs sm:text-[0.95rem] leading-relaxed text-ivory-600 transition-all duration-500 [@media(hover:hover)]:max-h-0 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:max-h-40 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-focus-visible:max-h-40 [@media(hover:hover)]:group-focus-visible:opacity-100">
                   {area.description}
                 </p>
-                <span className="mt-3 block h-[2px] w-10 rounded-full bg-gold-400 transition-all duration-500 group-hover:w-20" />
+                <span className="mt-2.5 sm:mt-3 block h-[2px] w-10 rounded-full bg-gold-400 transition-all duration-500 group-hover:w-20" />
               </div>
             </Link>
           </motion.div>

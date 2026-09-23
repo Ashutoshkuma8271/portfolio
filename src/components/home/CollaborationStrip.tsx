@@ -5,7 +5,7 @@ import { siteConfig } from '../../data/siteConfig';
 
 export const CollaborationStrip: React.FC = () => {
   return (
-    <section className="relative overflow-hidden border-b border-hairline/80 bg-surface py-6 sm:py-8 lg:py-9">
+    <section className="relative overflow-hidden border-b border-hairline/80 bg-surface-sunken py-6 sm:py-8 lg:py-9">
       {/* Top delicate gold hairline transition */}
       <div
         aria-hidden

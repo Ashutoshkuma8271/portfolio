@@ -1,7 +1,7 @@
 import { BlogPost } from '../types';
-import focusTrade from '../assets/images/focus/trade.webp';
-import focusCultural from '../assets/images/focus/cultural.webp';
-import focusPartnerships from '../assets/images/focus/partnerships.webp';
+import cinemaCultureImg from '../assets/images/focus/cinema-culture-hd.png';
+import policyGovernanceImg from '../assets/images/focus/policy-governance-hd.png';
+import globalTradeImg from '../assets/images/focus/global-trade-hd.png';
 import focusWomen from '../assets/images/focus/women.webp';
 import heroPortrait from '../assets/images/hero/hero-commissioner-lg.webp';
 
@@ -28,7 +28,7 @@ export const blogPosts: BlogPost[] = [
       role: 'GCC–India Trade Commissioner',
       avatar: heroPortrait
     },
-    featuredImage: focusTrade,
+    featuredImage: policyGovernanceImg,
     tags: ['Nasscom', 'Zinnov', 'GCC', 'Capability Centers', 'Bilateral Commerce', 'Policy'],
     content: [
       "The landmark India GCC Landscape Report ('The 5-Year Journey'), conducted by Nasscom with Zinnov and industry partners, details the transformation of cross-border enterprise architecture, Global Capability Centers (GCCs), and bilateral commerce between India and the Gulf region.",
@@ -50,7 +50,7 @@ export const blogPosts: BlogPost[] = [
       role: 'GCC–India Trade Commissioner',
       avatar: heroPortrait
     },
-    featuredImage: focusPartnerships,
+    featuredImage: globalTradeImg,
     tags: ['CEPA', 'Bilateral Trade', 'GCC', 'Economic Policy', 'Investments'],
     content: [
       "The signing and operationalization of the Comprehensive Economic Partnership Agreement (CEPA) between the Republic of India and the United Arab Emirates marks a seismic inflection point in South-South economic architecture.",
@@ -74,7 +74,7 @@ export const blogPosts: BlogPost[] = [
       role: 'Film Producer & Cultural Envoy',
       avatar: heroPortrait
     },
-    featuredImage: focusCultural,
+    featuredImage: cinemaCultureImg,
     tags: ['Cinema', 'Cultural Diplomacy', 'Soft Power', 'Film Production'],
     content: [
       "Cinema is rarely just entertainment; in its highest form, it is an ambassador of civilization. In the Gulf region, where diaspora ties span decades, cinema forms the emotional tapestry of bilateral relations.",
@@ -118,7 +118,7 @@ export const blogPosts: BlogPost[] = [
       role: 'GCC–India Trade Commissioner',
       avatar: heroPortrait
     },
-    featuredImage: focusTrade,
+    featuredImage: policyGovernanceImg,
     tags: ['Saudi Vision 2030', 'Infrastructure', 'EPC', 'FDI', 'Policy'],
     content: [
       "The scale and velocity of transformation underway in the Kingdom of Saudi Arabia under Vision 2030 is unparalleled in modern economic history. From the futuristic linear city of NEOM to massive renewable desalination installations, the capital expenditure commitments are extraordinary.",
@@ -127,3 +127,4 @@ export const blogPosts: BlogPost[] = [
     ]
   }
 ];
+

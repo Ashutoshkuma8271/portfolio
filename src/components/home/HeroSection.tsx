@@ -27,7 +27,7 @@ const Credential: React.FC<CredentialProps> = ({ value, suffix = '', label, dela
       className="block font-heading text-[clamp(1.35rem,2.2vw+0.7rem,2.5rem)] font-semibold leading-none text-ink-heading tabular-nums"
       suffixClassName="text-gold-600"
     />
-    <div className="mt-1.5 font-label text-[0.64rem] font-semibold uppercase leading-snug tracking-[0.12em] text-gold-800 dark:text-gold-300 sm:text-2xs">
+    <div className="mt-1.5 font-label text-3xs sm:text-2xs font-bold uppercase leading-tight sm:leading-snug tracking-[0.08em] sm:tracking-[0.12em] text-gold-800 dark:text-gold-300 break-words sm:break-normal">
       {label}
     </div>
   </div>
@@ -109,7 +109,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               aria-hidden={!isActive}
               decoding="async"
               loading="eager"
-              style={{ objectPosition: s.focal }}
+              style={{ objectPosition: s.focal, filter: 'contrast(1.05) saturate(1.08)' }}
               className={`absolute inset-0 h-full w-full object-cover will-change-transform transition-opacity duration-[1000ms] ease-in-out ${
                 isActive ? 'z-[1] opacity-100' : 'opacity-0'
               }`}
@@ -136,7 +136,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold-500 opacity-70" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-gold-500" />
               </span>
-              <span className="font-label text-[0.66rem] font-bold uppercase tracking-[0.2em] text-gold-800 dark:text-gold-300 sm:text-2xs sm:tracking-[0.22em]">
+              <span className="font-label text-3xs font-bold uppercase tracking-[0.18em] text-gold-800 dark:text-gold-300 sm:text-2xs sm:tracking-[0.22em]">
                 Trade Commissioner since 2025
               </span>
             </span>
@@ -205,7 +205,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               onClick={() => setActive(i)}
               aria-label={`Show photograph ${i + 1} of ${heroSlides.length}`}
               aria-current={i === active}
-              className="group flex h-7 w-11 items-center sm:w-16 cursor-pointer py-2 focus-visible:outline-none"
+              className="group flex h-9 w-12 items-center sm:w-16 cursor-pointer py-2.5 px-0.5 focus-visible:outline-none"
             >
               <span className="relative block h-[3.5px] w-full overflow-hidden rounded-full bg-ink-heading/20 transition-colors group-hover:bg-gold-500/40">
                 <span
@@ -255,6 +255,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </ul>
             </div>
           </div>
+
+          {/* Compact echo of the value list for phones/tablets, where the 4th
+              column above is hidden for space -- keeps the message visible
+              at every screen size instead of dropping it. */}
+          <ul className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 border-t border-gold-600/20 pb-3.5 pt-3 font-label text-3xs font-bold uppercase tracking-[0.1em] text-ink-soft lg:hidden">
+            {siteConfig.heroValues.map((value, i) => (
+              <React.Fragment key={value}>
+                {i > 0 && (
+                  <li aria-hidden className="text-gold-600">
+                    &middot;
+                  </li>
+                )}
+                <li>{value}</li>
+              </React.Fragment>
+            ))}
+          </ul>
         </Container>
       </motion.div>
     </section>

@@ -7,10 +7,6 @@ import { SEO } from '../components/ui/SEO';
 import { aboutData } from '../data/about';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Scale,
-  Film,
-  HeartHandshake,
-  Building2,
   ShieldCheck,
   X
 } from 'lucide-react';
@@ -19,13 +15,18 @@ import { TimelineSection } from '../components/about/TimelineSection';
 import { InternationalRolesSection } from '../components/about/InternationalRolesSection';
 import { AwardsSection } from '../components/about/AwardsSection';
 
+import tenetBg1 from '../assets/images/tenets/tenet-bg-1.jpg';
+import tenetBg2 from '../assets/images/tenets/tenet-bg-2.jpg';
+import tenetBg3 from '../assets/images/tenets/tenet-bg-3.jpg';
+import tenetBg4 from '../assets/images/tenets/tenet-bg-4.jpg';
+
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
-const TENET_ICONS = [
-  Scale,
-  Film,
-  HeartHandshake,
-  Building2
+const TENET_BG_IMAGES = [
+  tenetBg1,
+  tenetBg2,
+  tenetBg3,
+  tenetBg4
 ];
 
 
@@ -64,47 +65,54 @@ export const AboutPage: React.FC = () => {
         1. DETAILED BIOGRAPHY & EXECUTIVE DOSSIER
         ======================================================================
       */}
-      <section id="dossier" className="relative bg-surface py-20 lg:py-28">
+      <section id="dossier" className="relative bg-surface py-14 sm:py-20 lg:py-28">
         {/* Subtle background ambient texture */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_-10%,rgba(199,154,61,0.07),transparent)]"
         />
 
-        <Container className="relative z-10">
-          <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
+        <Container className="relative z-10 px-5 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16">
 
             {/* Left: Editorial Content (7 cols) */}
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-7 flex flex-col justify-center">
               <SectionHeading
                 eyebrow="Executive Biography"
                 title="A Multifaceted Journey of Purpose & Statecraft"
                 subtitle="Uniting sovereign trade corridors, celebrated arts, and nationwide grassroots leadership."
+                className="mb-6 sm:mb-8"
               />
 
               {/* Bio Paragraphs with Luxury Editorial Formatting */}
-              <div className="space-y-6 font-sans text-base leading-relaxed text-ink sm:text-lg">
-                {aboutData.bioParagraphs.map((para, idx) => (idx === 0 || bioOpen) && (
-                  <p key={idx} className={idx === 0 ? "text-lg sm:text-xl font-medium text-ink-heading leading-relaxed first-letter:float-left first-letter:mr-3 first-letter:font-heading first-letter:text-5xl first-letter:font-bold first-letter:text-gold-600 first-letter:leading-none" : ""}>
+              <div className="space-y-5 font-sans text-[0.95rem] sm:text-base lg:text-lg leading-relaxed text-ink">
+                {aboutData.bioParagraphs.map((para, idx) => (idx < 2 || bioOpen) && (
+                  <p 
+                    key={idx} 
+                    className={idx === 0 
+                      ? "text-base sm:text-lg lg:text-xl font-medium text-ink-heading leading-relaxed first-letter:float-left first-letter:mr-2.5 sm:first-letter:mr-3 first-letter:font-heading first-letter:text-4xl sm:first-letter:text-5xl first-letter:font-bold first-letter:text-gold-600 first-letter:leading-none" 
+                      : "text-ink-soft"}
+                  >
                     {para}
                   </p>
                 ))}
               </div>
-              {aboutData.bioParagraphs.length > 1 && (
-                <div className="mt-8 flex items-center justify-center sm:justify-start w-full">
+
+              {aboutData.bioParagraphs.length > 2 && (
+                <div className="mt-8 flex items-center justify-start w-full">
                   <BannerButton
                     variant="secondary"
-                    className="w-full sm:w-auto min-w-[240px] justify-center"
+                    className="w-full sm:w-auto min-w-[200px] justify-center cursor-pointer shadow-xs hover:shadow-gold-glow"
                     onClick={() => setBioOpen((o) => !o)}
                   >
-                    {bioOpen ? 'Show less' : 'Read the full biography'}
+                    {bioOpen ? 'Show summary' : 'Read full biography'}
                   </BannerButton>
                 </div>
               )}
             </div>
 
             {/* Right: Portrait & Diplomatic Credentials (5 cols) */}
-            <div className="top-28 lg:sticky lg:col-span-5">
+            <div className="lg:col-span-5 w-full max-w-[380px] sm:max-w-[440px] mx-auto lg:max-w-none">
               <motion.div
                 initial={{ opacity: 0, scale: 0.97 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -158,23 +166,24 @@ export const AboutPage: React.FC = () => {
             ======================================================================
           */}
           <div className="mt-16 sm:mt-20 border-t border-hairline/90 pt-12 sm:pt-16">
-            <div className="mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-              <div>
-                <span className="mb-1 block font-label text-xs font-semibold uppercase tracking-[0.22em] text-[#A9812A]">
-                  Strategic Pillars
-                </span>
-                <h3 className="font-heading text-2xl sm:text-3xl font-bold text-ink-heading">
-                  Core Leadership Tenets
-                </h3>
+            <div className="mb-12 text-center max-w-2xl mx-auto px-4">
+              <span className="mb-2 block font-label text-xs font-bold uppercase tracking-[0.22em] text-[#A9812A]">
+                Strategic Pillars
+              </span>
+              <h3 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-ink-heading">
+                Core Leadership Tenets
+              </h3>
+              <div className="my-3 flex items-center justify-center gap-2">
+                <span className="h-[1.5px] w-12 rounded-full bg-gradient-to-r from-transparent via-gold-500 to-transparent" />
               </div>
-              <p className="max-w-md text-sm text-ink-soft leading-relaxed">
+              <p className="text-sm sm:text-base text-ink-soft leading-relaxed">
                 Foundational principles guiding bilateral commerce, high-impact cultural media, and nationwide civic empowerment.
               </p>
             </div>
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {aboutData.leadershipPillars.map((pillar, idx) => {
-                const IconComponent = TENET_ICONS[idx % TENET_ICONS.length];
+                const bgImage = TENET_BG_IMAGES[idx % TENET_BG_IMAGES.length];
                 return (
                   <motion.div
                     key={pillar.title}
@@ -182,21 +191,32 @@ export const AboutPage: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-60px' }}
                     transition={{ duration: 0.5, delay: idx * 0.08, ease: EASE_OUT }}
-                    className="group relative flex flex-col justify-between rounded-2xl border border-gold-600/25 bg-surface-raised p-6 sm:p-7 shadow-luxury transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-gold-500/60 hover:shadow-luxury-lg"
+                    className="group relative flex flex-col rounded-2xl overflow-hidden border border-gold-500/30 bg-[#061B14] shadow-luxury transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-gold-400 hover:shadow-[0_16px_36px_rgba(10,30,22,0.35)]"
                   >
-                    <div>
-                      <div className="mb-5 flex items-center justify-between">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-gold-500/35 bg-gold-500/10 text-gold-700 transition-all duration-300 group-hover:bg-gold-600 group-hover:text-emerald-950 group-hover:scale-105">
-                          <IconComponent className="h-6 w-6" />
-                        </div>
-                        <span className="h-1.5 w-1.5 rounded-full bg-gold-500/40 group-hover:bg-gold-500 transition-colors" />
+                    {/* Clear HD Image Frame */}
+                    <div className="relative aspect-[4/3] w-full overflow-hidden bg-emerald-950">
+                      <img
+                        src={bgImage}
+                        alt={pillar.title}
+                        className="h-full w-full object-cover object-[center_15%] transition-transform duration-700 ease-out group-hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      {/* Subtle Bottom Vignette */}
+                      <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#061B14] to-transparent" />
+                    </div>
+
+                    {/* Centered Professional Content Area */}
+                    <div className="relative p-5 sm:p-6 flex flex-col items-center text-center flex-1 justify-between bg-[#061B14]">
+                      <div>
+                        <h4 className="font-heading text-lg sm:text-xl font-bold text-white tracking-wide transition-colors group-hover:text-gold-300 mb-2">
+                          {pillar.title}
+                        </h4>
+                        <div className="mb-2.5 mx-auto h-[1.5px] w-8 rounded-full bg-gold-500/60 transition-all duration-300 group-hover:w-14 group-hover:bg-gold-400" />
+                        <p className="font-sans text-xs sm:text-sm leading-relaxed text-neutral-300/90">
+                          {pillar.description}
+                        </p>
                       </div>
-                      <h4 className="font-heading text-lg font-bold text-ink-heading transition-colors group-hover:text-gold-800 mb-2.5">
-                        {pillar.title}
-                      </h4>
-                      <p className="font-sans text-sm leading-relaxed text-ink-soft">
-                        {pillar.description}
-                      </p>
                     </div>
                   </motion.div>
                 );

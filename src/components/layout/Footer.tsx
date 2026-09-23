@@ -40,14 +40,14 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-surface-sunken text-ink-heading border-t border-gold-600/30 pt-16 pb-12 overflow-hidden relative">
+    <footer className="bg-surface-sunken text-ink-heading border-t border-gold-600/30 pt-16 pb-28 sm:pb-24 lg:pb-16 overflow-hidden relative">
       {/* Background ambient lighting */}
       <div className="absolute top-0 right-0 w-80 h-80 bg-gold-600/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-emerald-800/20 rounded-full blur-3xl pointer-events-none" />
 
       <Container className="relative z-10">
         {/* Top Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 md:gap-8 lg:gap-10 xl:gap-12 mb-12 sm:mb-16">
           {/* Column 1: Monogram & Bio (4 cols) */}
           <div className="lg:col-span-4">
             <div className="mb-5 flex items-center gap-3.5">
@@ -63,7 +63,7 @@ export const Footer: React.FC = () => {
             </div>
 
             {/* Ethos line from the client's brand lockup */}
-            <p className="mb-6 flex items-center gap-2.5 font-label text-2xs font-semibold uppercase tracking-[0.18em] text-ink-faint">
+            <p className="mb-4 flex items-center gap-2.5 font-label text-2xs font-semibold uppercase tracking-[0.18em] text-ink-faint">
               <span>People</span>
               <span className="text-gold-600/70 text-xs">&middot;</span>
               <span>Partnerships</span>
@@ -71,7 +71,7 @@ export const Footer: React.FC = () => {
               <span>Progress</span>
             </p>
 
-            <p className="text-base sm:text-lg text-ink-soft leading-relaxed mb-6">
+            <p className="text-sm sm:text-base text-ink-soft leading-relaxed mb-6 max-w-sm">
               Advancing India–GCC trade, investment and strategic partnerships, cultural cinema, and nationwide women empowerment.
             </p>
 
@@ -84,7 +84,7 @@ export const Footer: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="w-9 h-9 rounded-full bg-surface-raised border border-gold-500/30 hover:border-gold-400 hover:bg-gold-600 hover:text-emerald-950 text-gold-700 dark:text-gold-400 flex items-center justify-center transition-all duration-300"
+                  className="w-9 h-9 rounded-full bg-surface-raised border border-gold-500/30 hover:border-gold-400 hover:bg-gold-600 hover:text-emerald-950 text-gold-700 dark:text-gold-400 flex items-center justify-center transition-all duration-300 shadow-xs"
                 >
                   {getSocialIcon(social.platform)}
                 </a>
@@ -92,13 +92,13 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Column 2: Navigation & Verticals (3 cols) */}
-          <div className="lg:col-span-3">
-            <h4 className="text-xs uppercase tracking-[0.2em] font-semibold text-gold-700 dark:text-gold-400 mb-4">
+          {/* Column 2: Navigation & Verticals (2 cols) */}
+          <div className="lg:col-span-2">
+            <h4 className="text-xs uppercase tracking-[0.2em] font-semibold text-gold-700 dark:text-gold-400 mb-3">
               Explore
             </h4>
 
-            <GoldDivider className="mb-5" />
+            <GoldDivider className="mb-4" />
             <ul className="space-y-2.5 text-xs tracking-wider uppercase">
               <li>
                 <Link to="/" className="text-ink-soft hover:text-gold-700 dark:hover:text-gold-400 transition-colors flex items-center gap-2">
@@ -112,12 +112,12 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/trade-investment" className="text-ink-soft hover:text-gold-700 dark:hover:text-gold-400 transition-colors flex items-center gap-2">
-                  <span>Trade & Investment</span>
+                  <span>Trade &amp; Investment</span>
                 </Link>
               </li>
               <li>
                 <Link to="/media-press" className="text-ink-soft hover:text-gold-700 dark:hover:text-gold-400 transition-colors flex items-center gap-2">
-                  <span>Media & Press</span>
+                  <span>Media &amp; Press</span>
                 </Link>
               </li>
               <li>
@@ -127,7 +127,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/insights" className="text-ink-soft hover:text-gold-700 dark:hover:text-gold-400 transition-colors flex items-center gap-2">
-                  <span>Insights & Articles</span>
+                  <span>Insights &amp; Articles</span>
                 </Link>
               </li>
               <li>
@@ -138,24 +138,24 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Column 3: Contact & Diplomatic Desks (2 cols) */}
-          <div className="lg:col-span-2">
-            <h4 className="text-xs uppercase tracking-[0.2em] font-semibold text-gold-700 dark:text-gold-400 mb-4">
+          {/* Column 3: Contact & Diplomatic Desks (3 cols) */}
+          <div className="lg:col-span-3">
+            <h4 className="text-xs uppercase tracking-[0.2em] font-semibold text-gold-700 dark:text-gold-400 mb-3">
               Offices
             </h4>
-            <GoldDivider className="mb-5" />
-            <div className="space-y-4 text-sm text-ink-soft leading-relaxed">
-              <div className="flex items-start gap-2">
+            <GoldDivider className="mb-4" />
+            <div className="space-y-3.5 text-sm text-ink-soft leading-relaxed">
+              <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-gold-500 shrink-0 mt-0.5" />
                 <span>BKC, Mumbai • DIFC, Dubai</span>
               </div>
-              <div className="flex items-start gap-2">
+              <div className="flex items-start gap-2.5">
                 <Mail className="w-4 h-4 text-gold-500 shrink-0 mt-0.5" />
                 <a href={`mailto:${siteConfig.contact.email}`} className="hover:text-gold-700 dark:hover:text-gold-400 transition-colors break-all">
                   {siteConfig.contact.email}
                 </a>
               </div>
-              <div className="flex items-start gap-2">
+              <div className="flex items-start gap-2.5">
                 <Clock className="w-4 h-4 text-gold-500 shrink-0 mt-0.5" />
                 <span>Mon–Fri (IST / GST)</span>
               </div>
@@ -164,10 +164,10 @@ export const Footer: React.FC = () => {
 
           {/* Column 4: Newsletter & Dispatch (3 cols) */}
           <div className="lg:col-span-3">
-            <h4 className="text-xs uppercase tracking-[0.2em] font-semibold text-gold-700 dark:text-gold-400 mb-4">
+            <h4 className="text-xs uppercase tracking-[0.2em] font-semibold text-gold-700 dark:text-gold-400 mb-3">
               Executive Dispatch
             </h4>
-            <GoldDivider className="mb-5" />
+            <GoldDivider className="mb-4" />
             <p className="text-sm text-ink-soft leading-relaxed mb-4">
               Subscribe for periodic strategic notes on GCC–India trade corridors, policy developments, and cinematic releases.
             </p>
@@ -176,11 +176,12 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-hairline flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-ink-faint">
-          <ShieldCheck className="w-4 h-4 text-gold-500 shrink-0" />
-          <span>© {new Date().getFullYear()} Zeenat Kureshi. All Rights Reserved.</span>
-          <span className="hidden sm:inline text-hairline">•</span>
-          <span className="hidden sm:inline">Diplomatic Portal — India &amp; GCC</span>
+        <div className="pt-8 border-t border-hairline/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-ink-faint">
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-gold-500 shrink-0" />
+            <span>© {new Date().getFullYear()} Zeenat Kureshi. All Rights Reserved.</span>
+          </div>
+          <span className="text-ink-faint">Diplomatic Portal — India &amp; GCC</span>
         </div>
       </Container>
     </footer>

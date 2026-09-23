@@ -7,7 +7,7 @@ import { Reveal } from '../ui/Reveal';
 import { SectorArt, type SectorArtKind } from '../enquiry/SectorArt';
 import { INVEST_SECTORS, type InvestSectorId } from '../../data/investSectors';
 import { whatsappLink } from '../../lib/enquiry';
-import whatsapp3dIcon from '../../assets/images/focus/whatsapp-3d-icon.png';
+import whatsapp3dIcon from '../../assets/images/icons/whatsapp-3d-icon.png';
 
 const ART: Record<InvestSectorId, SectorArtKind> = {
   trade: 'trade',
@@ -108,7 +108,7 @@ export const InvestSection: React.FC = () => (
           >
             <TiltCard onClick={() => openInvestment(s.id)} label={`Invest in ${s.label}`} className="w-full">
               <div
-                className="relative flex h-52 sm:h-56 w-full items-center justify-center overflow-hidden p-0 bg-surface-sunken border-b border-gold-600/20"
+                className="relative flex h-40 sm:h-56 w-full items-center justify-center overflow-hidden p-0 bg-surface-sunken border-b border-gold-600/20"
               >
                 <div
                   aria-hidden
@@ -120,20 +120,20 @@ export const InvestSection: React.FC = () => (
                 />
               </div>
 
-              <div className="flex flex-1 flex-col items-center p-6 text-center">
-                <h3 className="font-heading text-2xl font-semibold text-ink-heading">{s.label}</h3>
-                <p className="mt-1.5 text-[0.95rem] leading-relaxed text-ink-soft max-w-[20rem]">{s.tagline}</p>
-                <div className="mt-5 flex w-full justify-center">
-                  <ul className="inline-flex flex-col items-start space-y-2.5 text-left">
+              <div className="flex flex-1 flex-col items-center p-5 sm:p-6 text-center">
+                <h3 className="font-heading text-xl sm:text-2xl font-semibold text-ink-heading">{s.label}</h3>
+                <p className="mt-1.5 text-xs sm:text-[0.95rem] leading-relaxed text-ink-soft max-w-[20rem]">{s.tagline}</p>
+                <div className="mt-4 sm:mt-5 flex w-full justify-center">
+                  <ul className="inline-flex flex-col items-start space-y-2 sm:space-y-2.5 text-left">
                     {s.focus.map((f) => (
-                      <li key={f} className="flex items-center gap-2.5 text-sm leading-snug text-ink">
-                        <Check className="h-4 w-4 shrink-0 text-gold-600" />
+                      <li key={f} className="flex items-center gap-2.5 text-xs sm:text-sm leading-snug text-ink">
+                        <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0 text-gold-600" />
                         <span>{f}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-                <div className="mt-auto pt-6">
+                <div className="mt-auto pt-5 sm:pt-6">
                   <span className="inline-flex items-center justify-center gap-2 font-label text-xs font-bold uppercase tracking-[0.16em] text-gold-800 transition-all group-hover:gap-3.5 dark:text-gold-300">
                     Invest in {s.label}
                     <ArrowRight className="h-4 w-4" />

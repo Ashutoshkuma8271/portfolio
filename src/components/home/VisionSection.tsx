@@ -46,11 +46,11 @@ export const VisionSection: React.FC = () => {
           repeat: Infinity,
           ease: 'easeInOut',
         }}
-        className="pointer-events-none absolute -left-24 top-1/2 -translate-y-1/2 opacity-30 sm:-left-12 lg:opacity-40"
+        className="pointer-events-none absolute -left-16 sm:-left-12 top-1/2 -translate-y-1/2 opacity-20 sm:opacity-30 lg:opacity-40"
       >
         <svg
           viewBox="0 0 200 200"
-          className="h-[380px] w-[380px] text-gold-400/70 sm:h-[540px] sm:w-[540px]"
+          className="h-[300px] w-[300px] text-gold-400/70 sm:h-[540px] sm:w-[540px]"
           fill="none"
           stroke="currentColor"
         >

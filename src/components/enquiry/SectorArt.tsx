@@ -27,11 +27,11 @@ const FRAME: Record<SectorArtKind, { vb: string; ground?: { cx: number; cy: numb
 const Ground: React.FC<{ g?: { cx: number; cy: number; rx: number } }> = ({ g }) =>
   g ? <ellipse cx={g.cx} cy={g.cy} rx={g.rx} ry="12" fill="rgba(0,0,0,0.14)" /> : null;
 
-import importExportHd from '../../assets/images/focus/import-export-hd.png';
-import goldBullionHd from '../../assets/images/focus/gold-bullion-hd.png';
-import fleetHd from '../../assets/images/focus/fleet-hd.png';
-import oilGasHd from '../../assets/images/focus/oilgas-hd.png';
-import realEstateHd from '../../assets/images/focus/realestate-hd.png';
+import importExportHd from '../../assets/images/sector-art/import-export-hd.png';
+import goldBullionHd from '../../assets/images/sector-art/gold-bullion-hd.png';
+import fleetHd from '../../assets/images/sector-art/fleet-hd.png';
+import oilGasHd from '../../assets/images/sector-art/oilgas-hd.png';
+import realEstateHd from '../../assets/images/sector-art/realestate-hd.png';
 
 export const SectorArt: React.FC<{ kind: SectorArtKind; className?: string }> = ({ kind, className }) => {
   if (kind === 'trade') {

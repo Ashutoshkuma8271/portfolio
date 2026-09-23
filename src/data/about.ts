@@ -3,7 +3,7 @@ import { TimelineEvent, InternationalRole, AwardItem } from '../types';
 export const aboutData = {
   headline: 'Architect of Bilateral Commerce, Cinema Visionary & Transformational Leader',
   eyebrow: 'BIOGRAPHY & LEADERSHIP',
-  shortIntro: 'Zeenat Kureshi stands at the convergence of international economic diplomacy, high-impact cinematic production, and civic leadership. As GCC–India Trade Commissioner and National President of the All India Jamiatul Quresh Women Cell, she mobilizes cross-border enterprise and grassroots empowerment.',
+  shortIntro: 'Advancing strategic bilateral trade corridors, international cultural cinema, and nationwide grassroots women empowerment across India and the GCC.',
   
   bioParagraphs: [
     "With over two decades of multifaceted executive and public leadership, Zeenat Kureshi has established herself as a trusted liaison between sovereign trade bodies, high-net-worth family offices in the Gulf Cooperation Council (GCC), and India's rapidly expanding commercial landscape.",
@@ -15,19 +15,19 @@ export const aboutData = {
   leadershipPillars: [
     {
       title: 'Economic Diplomacy',
-      description: 'Catalyzing cross-border foreign direct investments (FDI), resolving trade friction points, and structuring sovereign-aligned private partnerships.',
+      description: 'Catalyzing cross-border FDI, bilateral trade corridors, and sovereign-aligned private partnerships.',
     },
     {
       title: 'Cultural Storytelling',
-      description: 'Leveraging feature cinema and global co-productions as powerful instruments of soft power, intercultural understanding, and socio-economic critique.',
+      description: 'Leveraging international cinema and co-productions as instruments of global cultural diplomacy.',
     },
     {
       title: 'Civic & Gender Equality',
-      description: 'Dismantling socio-economic barriers through institutionalized micro-finance access, leadership mentorship, and grassroots community defense.',
+      description: 'Empowering women across 14 states through policy advocacy, skill centers, and grassroots mentorship.',
     },
     {
       title: 'Institutional Governance',
-      description: 'Advising industry chambers, parliamentary delegations, and bilateral business councils on sustainable trade treaties and ethical investment benchmarks.',
+      description: 'Advising trade chambers, sovereign delegations, and multilateral councils on bilateral commerce.',
     }
   ],
 

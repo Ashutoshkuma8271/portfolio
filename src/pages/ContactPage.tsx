@@ -8,7 +8,7 @@ import { GoldDivider } from '../components/ui/GoldDivider';
 import { ContactForm } from '../components/forms/ContactForm';
 import { SEO } from '../components/ui/SEO';
 import { siteConfig } from '../data/siteConfig';
-import whatsapp3dIcon from '../assets/images/focus/whatsapp-3d-icon.png';
+import whatsapp3dIcon from '../assets/images/icons/whatsapp-3d-icon.png';
 import { 
   Mail, 
   Linkedin, 
