@@ -1,15 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, CheckCircle2, Building } from 'lucide-react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Container } from '../layout/Container';
+import { OrgSeal } from '../ui/OrgSeal';
+import { MapPinLogo } from '../ui/MapPinLogo';
 import { aboutData } from '../../data/about';
 
 import { eventPhotos } from '../../data/eventPhotos';
 
 import gccCouncilSeal from '../../assets/images/roles/india-gcc-trade-council-seal.png';
-import executiveShield from '../../assets/images/roles/executive-board-shield.jpg';
+import executiveShield from '../../assets/images/roles/executive-board-shield.png';
 import cultureDiplomacyLogo from '../../assets/images/roles/culture-diplomacy-logo.png';
+import gulfPanelPhoto from '../../assets/images/focus/global-trade-hd.png';
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
@@ -19,6 +21,21 @@ const ROLE_EMBLEMS = [
   cultureDiplomacyLogo,
 ];
 
+/**
+ * One photograph per role, each showing the kind of work that role covers.
+ * None of these appear elsewhere on the About page (the bilateral-accord
+ * frame is already a tenet card, so it is deliberately not reused here).
+ */
+const ROLE_PHOTOS: { src: string; alt: string; focal: string }[] = [
+  {
+    src: gulfPanelPhoto,
+    alt: 'H.E. Zeenat Kureshi seated on a chamber of commerce panel with Gulf delegates',
+    focal: '50% 35%',
+  },
+  { src: eventPhotos.womenPanel.src, alt: eventPhotos.womenPanel.alt, focal: '50% 55%' },
+  { src: eventPhotos.mediaCinema.src, alt: eventPhotos.mediaCinema.alt, focal: '50% 22%' },
+];
+
 export const InternationalRolesSection: React.FC = () => {
   return (
     <section className="relative overflow-hidden bg-surface-sunken py-20 text-ink-heading lg:py-28">
@@ -26,7 +43,7 @@ export const InternationalRolesSection: React.FC = () => {
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         <img
           src={eventPhotos.aaccArabDelegation.src}
-          alt={eventPhotos.aaccArabDelegation.alt}
+          alt=""
           className="h-full w-full object-cover object-center opacity-10 filter saturate-50 blur-[0.5px] transform scale-105"
           loading="lazy"
           decoding="async"
@@ -47,75 +64,77 @@ export const InternationalRolesSection: React.FC = () => {
           center
         />
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 mt-12">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 mt-10">
           {aboutData.internationalRoles.map((role, idx) => {
             const emblemSrc = ROLE_EMBLEMS[idx % ROLE_EMBLEMS.length];
+            const photo = ROLE_PHOTOS[idx % ROLE_PHOTOS.length];
             return (
-              <motion.div
+              <motion.article
                 key={role.title}
-                initial={{ opacity: 0, y: 22 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.55, delay: idx * 0.1, ease: EASE_OUT }}
-                className="group relative flex flex-col justify-between h-full rounded-2xl border border-gold-600/30 bg-surface-raised p-6 sm:p-7 shadow-luxury transition-all duration-300 hover:-translate-y-1.5 hover:border-gold-500/60 hover:shadow-luxury-lg"
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.5, delay: idx * 0.08, ease: EASE_OUT }}
+                className="group relative flex h-full w-full flex-col overflow-hidden rounded-xl border border-gold-600/25 bg-surface-raised shadow-luxury transition-all duration-300 hover:-translate-y-1 hover:border-gold-500/50 hover:shadow-luxury-lg"
               >
-                {/* Top Corner Filigree */}
-                <div aria-hidden className="absolute top-4 right-4 h-5 w-5 border-t border-r border-gold-400/50 pointer-events-none transition-transform duration-300 group-hover:scale-110" />
+                {/* Compact Photographic Masthead */}
+                <div className="grain relative h-44 sm:h-48 overflow-hidden bg-emerald-950">
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    loading="lazy"
+                    decoding="async"
+                    style={{ objectPosition: photo.focal }}
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-emerald-950/80 via-emerald-950/20 to-transparent" />
+                  <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-gold-400/35 bg-emerald-950/80 px-2.5 py-1 text-2xs font-semibold text-gold-200 shadow-2xs backdrop-blur-md">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>{role.period}</span>
+                  </span>
+                  <span aria-hidden className="absolute inset-x-0 bottom-0 h-[2px] origin-left scale-x-0 bg-gradient-to-r from-gold-600 via-gold-400 to-gold-600 transition-transform duration-500 ease-out group-hover:scale-x-100" />
+                </div>
 
-                <div>
-                  {/* Top Row: Icon Medallion & Status Badge */}
-                  <div className="mb-5 flex items-center justify-between">
-                    <div className="flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-2xl border border-gold-500/40 bg-white p-2.5 shadow-[0_4px_14px_rgba(0,0,0,0.06)] transition-all duration-300 group-hover:scale-105 group-hover:border-gold-400 group-hover:shadow-[0_6px_20px_rgba(199,154,61,0.3)]">
-                      <img
-                        src={emblemSrc}
-                        alt={role.title}
-                        className="h-full w-full object-contain"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </div>
+                {/* Card Content */}
+                <div className="flex flex-1 flex-col p-6 sm:p-7">
+                  {/* Title with uniform height across cards */}
+                  <div className="min-h-[3.5rem] flex items-center mb-1">
+                    <h3 className="font-heading text-lg sm:text-xl font-bold text-ink-heading transition-colors group-hover:text-gold-800 dark:group-hover:text-gold-300 leading-snug">
+                      {role.title}
+                    </h3>
+                  </div>
 
-                    <div className="inline-flex items-center gap-1.5 rounded-full border border-gold-500/35 bg-gold-500/10 px-3 py-1 text-2xs font-semibold text-gold-800 dark:text-gold-300">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      <span>{role.period}</span>
+                  {/* Sleek Organisation & Region Bar with uniform height */}
+                  <div className="mt-3 mb-5 min-h-[70px] flex items-center gap-3.5 rounded-xl border border-gold-500/15 bg-gradient-to-br from-gold-500/[0.06] via-surface-sunken/60 to-surface-sunken/20 p-3">
+                    <OrgSeal name={role.organization} fallbackLogo={emblemSrc} size="md" />
+                    <div className="min-w-0 flex-1">
+                      <p className="font-heading text-sm sm:text-[0.92rem] font-semibold text-ink-heading leading-snug truncate">
+                        {role.organization}
+                      </p>
+                      <p className="mt-1 flex items-center gap-1.5 text-xs sm:text-[0.82rem] text-ink-soft truncate">
+                        <MapPinLogo className="h-3.5 shrink-0" />
+                        <span className="truncate">{role.region}</span>
+                      </p>
                     </div>
                   </div>
 
-                  <h3 className="mb-3 font-heading text-lg sm:text-xl font-bold text-ink-heading transition-colors group-hover:text-gold-800 leading-snug">
-                    {role.title}
-                  </h3>
-
-                  {/* Metadata: Organization & Geographic Region */}
-                  <div className="mb-5 space-y-2">
-                    <div className="flex items-start gap-2 font-label text-xs font-semibold text-gold-800 dark:text-gold-300">
-                      <Building className="h-3.5 w-3.5 shrink-0 text-gold-600 dark:text-gold-400 mt-0.5" />
-                      <span>{role.organization}</span>
-                    </div>
-                    <div className="flex items-start gap-2 font-sans text-xs text-ink-soft">
-                      <MapPin className="h-3.5 w-3.5 shrink-0 text-gold-600 dark:text-gold-400 mt-0.5" />
-                      <span>{role.region}</span>
-                    </div>
-                  </div>
-
-                  {/* Divider */}
-                  <div className="mb-4 h-px w-full bg-gradient-to-r from-gold-500/30 via-gold-500/10 to-transparent" />
-
-                  {/* Responsibilities */}
-                  <div className="space-y-2.5">
-                    <span className="block font-label text-2xs font-bold uppercase tracking-[0.2em] text-[#8A6920] dark:text-gold-400">
-                      Core Mandate Responsibilities
-                    </span>
-                    <ul className="space-y-2 font-sans text-xs sm:text-sm text-ink-soft leading-relaxed">
+                  {/* Mandate Focus (Clean Bullets with Standard Readable Typography) */}
+                  <div className="mt-auto pt-1">
+                    <p className="mb-3 flex items-center gap-2 font-label text-xs font-bold uppercase tracking-[0.14em] text-[#8A6920] dark:text-gold-400">
+                      <span>Mandate &amp; Core Focus</span>
+                      <span aria-hidden className="h-px flex-1 bg-gradient-to-r from-gold-500/30 to-transparent" />
+                    </p>
+                    <ul className="space-y-3">
                       {role.responsibilities.map((resp) => (
-                        <li key={resp} className="flex items-start gap-2.5">
-                          <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold-600 dark:text-gold-400" />
-                          <span className="leading-relaxed">{resp}</span>
+                        <li key={resp} className="flex items-start gap-3 text-sm sm:text-[0.92rem] leading-relaxed text-ink-soft">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-500 ring-2 ring-gold-500/20" />
+                          <span>{resp}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                 </div>
-              </motion.div>
+              </motion.article>
             );
           })}
         </div>

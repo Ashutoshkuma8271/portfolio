@@ -49,27 +49,29 @@ export const SectionNav: React.FC<SectionNavProps> = ({ items }) => {
       className="sticky top-16 z-30 border-b border-hairline bg-surface/90 backdrop-blur-lg sm:top-20"
     >
       <Container>
-        <ul className="scrollbar-hidden -mx-1 flex items-center gap-1 overflow-x-auto py-2.5">
-          {items.map((item) => {
-            const isActive = active === item.id;
-            return (
-              <li key={item.id} className="shrink-0">
-                <a
-                  href={`#${item.id}`}
-                  onClick={(e) => go(e, item.id)}
-                  aria-current={isActive ? 'true' : undefined}
-                  className={`relative inline-flex items-center rounded-full px-4 py-2 font-label text-xs font-bold uppercase tracking-[0.16em] transition-colors duration-200 ${
-                    isActive
-                      ? 'bg-emerald-950 text-gold-300'
-                      : 'text-ink-soft hover:bg-gold-500/10 hover:text-ink-heading'
-                  }`}
-                >
-                  {item.label}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="flex w-full items-center justify-start sm:justify-center py-2.5">
+          <ul className="scrollbar-hidden flex max-w-full items-center gap-1.5 sm:gap-2.5 overflow-x-auto py-0.5 px-1 sm:px-0">
+            {items.map((item) => {
+              const isActive = active === item.id;
+              return (
+                <li key={item.id} className="shrink-0">
+                  <a
+                    href={`#${item.id}`}
+                    onClick={(e) => go(e, item.id)}
+                    aria-current={isActive ? 'true' : undefined}
+                    className={`relative inline-flex items-center rounded-full px-4 sm:px-5 py-2 font-label text-xs sm:text-[0.78rem] font-bold uppercase tracking-[0.14em] transition-all duration-200 ${
+                      isActive
+                        ? 'bg-emerald-950 text-gold-300 border border-gold-400/40 shadow-xs dark:bg-emerald-900/90 dark:text-gold-200'
+                        : 'text-ink-soft hover:bg-gold-500/10 hover:text-ink-heading'
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </Container>
     </nav>
   );

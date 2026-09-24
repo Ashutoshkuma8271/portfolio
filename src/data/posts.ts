@@ -4,6 +4,8 @@ import policyGovernanceImg from '../assets/images/focus/policy-governance-hd.png
 import globalTradeImg from '../assets/images/focus/global-trade-hd.png';
 import focusWomen from '../assets/images/focus/women.webp';
 import heroPortrait from '../assets/images/hero/hero-commissioner-lg.webp';
+// Arab delegation frame for the Saudi essay, so it no longer repeats the lead essay's photo.
+import gulfDelegationImg from '../assets/images/events/aacc-arab-delegation-summit.png';
 
 /**
  * ============================================================================
@@ -118,7 +120,7 @@ export const blogPosts: BlogPost[] = [
       role: 'GCC–India Trade Commissioner',
       avatar: heroPortrait
     },
-    featuredImage: policyGovernanceImg,
+    featuredImage: gulfDelegationImg,
     tags: ['Saudi Vision 2030', 'Infrastructure', 'EPC', 'FDI', 'Policy'],
     content: [
       "The scale and velocity of transformation underway in the Kingdom of Saudi Arabia under Vision 2030 is unparalleled in modern economic history. From the futuristic linear city of NEOM to massive renewable desalination installations, the capital expenditure commitments are extraordinary.",

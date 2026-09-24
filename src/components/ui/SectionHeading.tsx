@@ -7,11 +7,31 @@ interface SectionHeadingProps {
   /** Trailing phrase set in gold italic, e.g. "Impact" in "Four Pillars of Impact". */
   accent?: string;
   subtitle?: string;
-  center?: boolean;
+  /** 'mobile' centres below `sm`; 'tablet' centres below `lg` (for sections that stay one column until desktop). */
+  center?: boolean | 'mobile' | 'tablet';
   /** Set on deep-emerald bands so the type flips to ivory / light gold. */
   isDark?: boolean;
   className?: string;
 }
+
+const ALIGN = {
+  left: { text: 'text-left', justify: '', leadRule: 'hidden', trailRule: 'w-12', subtitle: '' },
+  center: { text: 'text-center', justify: 'justify-center', leadRule: '', trailRule: 'w-8', subtitle: 'mx-auto' },
+  mobile: {
+    text: 'text-center sm:text-left',
+    justify: 'justify-center sm:justify-start',
+    leadRule: 'sm:hidden',
+    trailRule: 'w-8 sm:w-12',
+    subtitle: 'mx-auto sm:mx-0',
+  },
+  tablet: {
+    text: 'text-center lg:text-left',
+    justify: 'justify-center lg:justify-start',
+    leadRule: 'lg:hidden',
+    trailRule: 'w-8 lg:w-12',
+    subtitle: 'mx-auto lg:mx-0',
+  },
+} as const;
 
 /**
  * The one heading treatment used by every content section.
@@ -29,17 +49,16 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   isDark = false,
   className = '',
 }) => {
+  const a = ALIGN[center === true ? 'center' : center === false ? 'left' : center];
   return (
-    <div className={`mb-12 ${center ? 'text-center' : 'text-left'} ${className}`}>
+    <div className={`mb-12 ${a.text} ${className}`}>
       {eyebrow && (
         <div
-          className={`mb-4 flex items-center gap-3 ${center ? 'justify-center' : ''}`}
+          className={`mb-4 flex items-center gap-3 ${a.justify}`}
         >
           <span
             aria-hidden
-            className={`h-px w-8 ${isDark ? 'bg-gold-400/70' : 'bg-gold-600/70'} ${
-              center ? '' : 'hidden'
-            }`}
+            className={`h-px w-8 ${isDark ? 'bg-gold-400/70' : 'bg-gold-600/70'} ${a.leadRule}`}
           />
           <span
             className={`font-label text-xs font-bold uppercase tracking-[0.26em] ${
@@ -50,7 +69,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
           </span>
           <span
             aria-hidden
-            className={`h-px ${center ? 'w-8' : 'w-12'} ${
+            className={`h-px ${a.trailRule} ${
               isDark ? 'bg-gold-400/70' : 'bg-gold-600/70'
             }`}
           />
@@ -83,9 +102,9 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
 
       {subtitle && (
         <p
-          className={`max-w-3xl text-[clamp(1rem,0.4vw+0.9rem,1.175rem)] leading-relaxed ${
-            center ? 'mx-auto' : ''
-          } ${isDark ? 'text-ivory-700' : 'text-ink-soft'}`}
+          className={`max-w-3xl text-[clamp(1rem,0.4vw+0.9rem,1.175rem)] leading-relaxed ${a.subtitle} ${
+            isDark ? 'text-ivory-700' : 'text-ink-soft'
+          }`}
         >
           {subtitle}
         </p>

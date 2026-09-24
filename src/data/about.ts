@@ -107,6 +107,7 @@ export const aboutData = {
       responsibilities: [
         'Curating bilateral film festivals celebrating Indo-Arab cinematic heritage',
         'Facilitating co-production incentives and filming treaties between UAE and India',
+        'Jury curation and international distribution advocacy for purposeful cultural cinema',
       ],
       iconName: 'Film'
     }

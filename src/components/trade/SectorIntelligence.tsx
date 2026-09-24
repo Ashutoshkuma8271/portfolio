@@ -30,35 +30,13 @@ import {
 } from '../../lib/commentaryStore';
 import { useOfficeAuth } from '../../contexts/OfficeAuthContext';
 import { OfficeSignInModal } from '../ui/OfficeSignInModal';
+import { PublicationLogo } from '../ui/PublicationLogo';
 
 import tradeIcon from '../../assets/images/sectors/trade-icon.png';
 import goldIcon from '../../assets/images/sectors/gold-icon.png';
 import fleetIcon from '../../assets/images/sectors/fleet-icon.png';
 import oilGasIcon from '../../assets/images/sectors/oilgas-icon.png';
 import zeenatAvatar from '../../assets/images/avatar/zeenat-avatar.png';
-import ddNewsLogo from '../../assets/images/news-logos/ddnews-logo.png';
-import investIndiaLogo from '../../assets/images/news-logos/invest-india-logo.png';
-import nagalandPostLogo from '../../assets/images/news-logos/nagaland-post-logo.png';
-import theNationalNewsLogo from '../../assets/images/news-logos/thenationalnews-logo.png';
-import economicTimesLogo from '../../assets/images/news-logos/economictimes-logo.png';
-import indianExpressLogo from '../../assets/images/news-logos/indianexpress-logo.png';
-import moneycontrolLogo from '../../assets/images/news-logos/moneycontrol-logo.png';
-import timesOfIndiaLogo from '../../assets/images/news-logos/timesofindia-logo.png';
-import gulfNewsLogo from '../../assets/images/news-logos/gulfnews-logo.png';
-import indiaComLogo from '../../assets/images/news-logos/indiacom-logo.png';
-import indiaShippingNewsLogo from '../../assets/images/news-logos/indiashippingnews-logo.png';
-import livemintLogo from '../../assets/images/news-logos/livemint-logo.png';
-import reutersLogo from '../../assets/images/news-logos/reuters-logo.png';
-import sarkaritelLogo from '../../assets/images/news-logos/sarkaritel-logo.png';
-import ndtvLogo from '../../assets/images/news-logos/ndtv-logo.png';
-import indiaTodayLogo from '../../assets/images/news-logos/indiatoday-logo.png';
-import forbesIndiaLogo from '../../assets/images/news-logos/forbesindia-logo.png';
-import jllLogo from '../../assets/images/news-logos/jll-logo.png';
-import thePrintLogo from '../../assets/images/news-logos/theprint-logo.png';
-import magzterLogo from '../../assets/images/news-logos/magzter-logo.png';
-import aniNewsLogo from '../../assets/images/news-logos/aninews-logo.png';
-import awazTheVoiceLogo from '../../assets/images/news-logos/awazthevoice-logo.png';
-import ahmedabadMirrorLogo from '../../assets/images/news-logos/ahmedabadmirror-logo.png';
 import cepaBadge from '../../assets/images/sectors/cepa-tariff-badge.png';
 import bullionBadge from '../../assets/images/sectors/bullion-gift-city-badge.png';
 import fleetBadge from '../../assets/images/sectors/multimodal-port-badge.png';
@@ -139,220 +117,6 @@ const renderSectorBrand = (sectorId: string, iconType: string) => {
     default:
       return renderSectorIcon(iconType, 'h-5 w-5');
   }
-};
-
-const renderPublicationLogo = (publication?: string) => {
-  const raw = (publication || '').toLowerCase();
-  const clean = raw.replace(/[^a-z0-9]/g, '');
-
-  if (clean.includes('dd') || clean.includes('doordarshan') || clean.includes('ddnews')) {
-    return (
-      <img
-        src={ddNewsLogo}
-        alt="DD News"
-        className="h-3.5 w-3.5 shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('national') || clean.includes('thenational') || clean.includes('thenationalnews')) {
-    return (
-      <img
-        src={theNationalNewsLogo}
-        alt="The National News"
-        className="h-3.5 w-3.5 rounded-xs shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('economic') || clean.includes('economictimes') || clean.includes('theeconomictimes') || clean === 'et') {
-    return (
-      <img
-        src={economicTimesLogo}
-        alt="The Economic Times"
-        className="h-3.5 w-auto max-w-[28px] rounded-xs shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('indianexpress') || clean.includes('express') || clean.includes('theindianexpress')) {
-    return (
-      <img
-        src={indianExpressLogo}
-        alt="The Indian Express"
-        className="h-3.5 w-3.5 shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('moneycontrol') || clean.includes('money control')) {
-    return (
-      <img
-        src={moneycontrolLogo}
-        alt="Moneycontrol"
-        className="h-3.5 w-auto max-w-[42px] shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('timesofindia') || clean.includes('toi') || clean.includes('thetimesofindia')) {
-    return (
-      <img
-        src={timesOfIndiaLogo}
-        alt="The Times of India"
-        className="h-3.5 w-auto max-w-[28px] rounded-xs shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('gulfnews') || clean.includes('gulf news') || clean.includes('gulf')) {
-    return (
-      <img
-        src={gulfNewsLogo}
-        alt="Gulf News"
-        className="h-3.5 w-3.5 shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('indiacom') || clean.includes('indianews') || clean === 'india' || clean === 'indiacom') {
-    return (
-      <img
-        src={indiaComLogo}
-        alt="India.com"
-        className="h-3.5 w-auto max-w-[34px] shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('indiashipping') || clean.includes('shippingnews') || clean.includes('shipping')) {
-    return (
-      <img
-        src={indiaShippingNewsLogo}
-        alt="India Shipping News"
-        className="h-3.5 w-3.5 shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('livemint') || clean.includes('mint')) {
-    return (
-      <img
-        src={livemintLogo}
-        alt="Livemint"
-        className="h-3.5 w-auto max-w-[36px] shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('reuters') || clean.includes('reuterscom') || clean.includes('thomsonreuters')) {
-    return (
-      <img
-        src={reutersLogo}
-        alt="Reuters"
-        className="h-3.5 w-3.5 shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('sarkaritel') || clean.includes('sarkari')) {
-    return (
-      <img
-        src={sarkaritelLogo}
-        alt="Sarkaritel.com"
-        className="h-3.5 w-auto max-w-[44px] shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('ndtv') || clean.includes('newdelhitelevision')) {
-    return (
-      <img
-        src={ndtvLogo}
-        alt="NDTV"
-        className="h-3.5 w-auto max-w-[32px] rounded-xs shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('indiatoday') || clean.includes('today')) {
-    return (
-      <img
-        src={indiaTodayLogo}
-        alt="India Today"
-        className="h-3.5 w-auto max-w-[32px] rounded-xs shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('forbesindia') || clean.includes('forbes')) {
-    return (
-      <img
-        src={forbesIndiaLogo}
-        alt="Forbes India"
-        className="h-3.5 w-auto max-w-[40px] shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('jll') || clean.includes('joneslanglasalle')) {
-    return (
-      <img
-        src={jllLogo}
-        alt="JLL"
-        className="h-3.5 w-auto max-w-[36px] shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('theprint') || clean.includes('print')) {
-    return (
-      <img
-        src={thePrintLogo}
-        alt="ThePrint"
-        className="h-3.5 w-auto max-w-[38px] shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('magzter')) {
-    return (
-      <img
-        src={magzterLogo}
-        alt="Magzter"
-        className="h-3.5 w-auto max-w-[42px] shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('aninews') || clean === 'ani' || clean.includes('asiannewsinternational')) {
-    return (
-      <img
-        src={aniNewsLogo}
-        alt="ANI News"
-        className="h-3.5 w-auto max-w-[28px] rounded-xs shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('awaz') || clean.includes('thevoice') || clean.includes('awazthevoice')) {
-    return (
-      <img
-        src={awazTheVoiceLogo}
-        alt="Awaz The Voice"
-        className="h-3.5 w-auto max-w-[42px] shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('ahmedabad') || clean.includes('mirror') || clean.includes('ahmedabadmirror')) {
-    return (
-      <img
-        src={ahmedabadMirrorLogo}
-        alt="Ahmedabad Mirror"
-        className="h-3.5 w-auto max-w-[44px] shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('investindia') || clean.includes('invest')) {
-    return (
-      <img
-        src={investIndiaLogo}
-        alt="Invest India"
-        className="h-3.5 w-3.5 shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  if (clean.includes('nagaland') || clean.includes('nagalandpost')) {
-    return (
-      <img
-        src={nagalandPostLogo}
-        alt="Nagaland Post"
-        className="h-3.5 w-3.5 shrink-0 object-contain filter drop-shadow-xs"
-      />
-    );
-  }
-  return <Diamond className="h-2 w-2 shrink-0" />;
 };
 
 const renderCategoryLogo = (categoryTag?: string) => {
@@ -708,23 +472,24 @@ export const SectorIntelligence: React.FC = () => {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: idx * 0.07, ease: EASE_OUT }}
-                className="group flex flex-col justify-between rounded-3xl border border-gold-500/35 bg-surface-raised p-5 sm:p-6 lg:p-7 shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-gold-500/70 hover:shadow-[0_16px_36px_-8px_rgba(18,51,43,0.12),0_0_20px_rgba(199,154,61,0.15)] relative overflow-hidden"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-hairline bg-surface-raised p-5 sm:p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_10px_28px_-16px_rgba(18,51,43,0.18)] transition-all duration-300 hover:-translate-y-1 hover:border-gold-500/50 hover:shadow-[0_22px_44px_-18px_rgba(18,51,43,0.28),0_0_0_1px_rgba(199,154,61,0.12)]"
               >
-                {/* Subtle top gold highlight */}
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold-500/40 to-transparent" />
+                {/* Gold rule that draws in on hover */}
+                <div className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-gradient-to-r from-gold-700 via-gold-400 to-gold-700 transition-transform duration-500 ease-out group-hover:scale-x-100" />
 
                 <div>
-                  {/* Card Header: Publication, Category Tag & Date */}
-                  <div className="mb-3.5 flex items-center justify-between gap-2">
-                    <span className="inline-flex items-center gap-1.5 font-label text-[0.68rem] font-bold uppercase tracking-wider text-ink-heading bg-surface-sunken px-2.5 py-1 rounded-md border border-gold-500/30 shadow-2xs shrink-0">
-                      {renderPublicationLogo(item.publication)}
-                      <span className="truncate max-w-[130px] sm:max-w-[160px]">{item.publication || 'Sovereign Wire'}</span>
-                    </span>
-
-                    <span className="inline-flex items-center gap-1.5 font-label text-3xs sm:text-2xs text-ink-faint shrink-0">
-                      <ClockIcon className="h-3.5 w-3.5 text-gold-600 dark:text-gold-400 shrink-0" />
-                      <span>{dateLabel(item.pubDate)}</span>
-                    </span>
+                  {/* Source row: outlet logo, outlet name, date */}
+                  <div className="mb-4 flex items-center gap-3">
+                    <PublicationLogo publication={item.publication || 'Sovereign Wire'} size="md" />
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate font-label text-2xs font-bold uppercase tracking-[0.12em] text-ink-heading">
+                        {item.publication || 'Sovereign Wire'}
+                      </p>
+                      <p className="mt-0.5 inline-flex items-center gap-1.5 font-label text-3xs sm:text-2xs text-ink-faint">
+                        <ClockIcon className="h-3 w-3 text-gold-600 dark:text-gold-400 shrink-0" />
+                        <span>{dateLabel(item.pubDate)}</span>
+                      </p>
+                    </div>
                   </div>
 
                   {/* Category Kicker */}
@@ -764,13 +529,13 @@ export const SectorIntelligence: React.FC = () => {
                             H.E. Zeenat Kureshi&apos;s View
                           </span>
                         </div>
-                        <span className="inline-flex items-center gap-1 font-label text-[0.58rem] font-semibold text-emerald-800 dark:text-emerald-300 uppercase bg-emerald-500/15 px-2 py-0.5 rounded">
+                        <span className="inline-flex items-center gap-1 font-label text-3xs font-semibold text-emerald-800 dark:text-emerald-300 uppercase bg-emerald-500/15 px-2 py-0.5 rounded">
                           <ShieldCheck className="h-3 w-3 shrink-0" />
                           Published
                         </span>
                       </div>
 
-                      <p className="font-sans text-xs text-ink leading-relaxed italic">
+                      <p className="font-cormorant text-[1.05rem] font-medium italic leading-snug text-ink-heading">
                         &ldquo;{savedCustomNote.body}&rdquo;
                       </p>
                       <p className="flex flex-wrap items-center gap-x-3 gap-y-1 pt-1 font-label text-3xs font-bold uppercase tracking-wider text-ink-faint">
@@ -786,14 +551,15 @@ export const SectorIntelligence: React.FC = () => {
                 </div>
 
                 {/* Bottom Actions: Prominent "My View" Action Button + Source Link */}
-                <div className="mt-4 pt-4 border-t border-gold-500/20 space-y-2.5">
+                {/* Side by side only where the card is wide enough for both labels */}
+                <div className="mt-4 grid grid-cols-1 gap-2.5 border-t border-hairline pt-4 xs:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                   <motion.button
                     type="button"
                     onClick={() => openEditor(item)}
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: 'spring', stiffness: 380, damping: 26 }}
-                    className="w-full inline-flex min-h-[42px] items-center justify-center gap-2 rounded-full border border-gold-400/70 bg-gradient-to-r from-[#0C241B] via-[#081E16] to-[#04100C] px-4 py-2 font-label text-xs font-bold uppercase tracking-[0.14em] text-gold-300 shadow-luxury hover:shadow-luxury-lg hover:border-gold-300 hover:text-white cursor-pointer transition-all duration-300"
+                    className="inline-flex min-h-[44px] cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-gold-400/70 bg-gradient-to-r from-[#0C241B] via-[#081E16] to-[#04100C] px-3 py-2 font-label text-2xs font-bold uppercase tracking-[0.1em] text-gold-300 shadow-luxury transition-all duration-300 hover:border-gold-300 hover:text-white hover:shadow-luxury-lg"
                   >
                     <PenLine className="h-3.5 w-3.5 text-gold-400 shrink-0" />
                     <span>{hasCustomTake ? (isOffice ? 'Edit My View' : 'Read My View') : 'My View'}</span>
@@ -803,9 +569,10 @@ export const SectorIntelligence: React.FC = () => {
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full inline-flex items-center justify-center text-center gap-1.5 py-1 text-2xs font-sans font-semibold uppercase tracking-wider text-ink-faint hover:text-gold-800 dark:hover:text-gold-300 transition-colors group/link cursor-pointer"
+                    aria-label={`Read the original article on ${item.publication || 'the source site'}`}
+                    className="group/link inline-flex min-h-[44px] cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-gold-600/40 bg-surface-raised px-3 py-2 font-label text-2xs font-bold uppercase tracking-[0.1em] text-ink-heading transition-all duration-300 hover:-translate-y-0.5 hover:border-gold-600 hover:bg-gold-500/10 hover:text-gold-900 dark:hover:text-gold-200"
                   >
-                    <span>Read Original Article</span>
+                    <span>Read Original</span>
                     <ArrowUpRight className="h-3.5 w-3.5 text-gold-600 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 shrink-0" />
                   </a>
                 </div>
@@ -866,6 +633,7 @@ export const SectorIntelligence: React.FC = () => {
           </label>
           <textarea
             rows={4}
+            maxLength={4000}
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
             placeholder="Write your view on this dispatch, economic implications, or diplomatic policy takeaway..."

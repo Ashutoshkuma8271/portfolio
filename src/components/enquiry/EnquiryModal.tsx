@@ -17,10 +17,13 @@ import {
   whatsappLink,
   deskEmail,
   enquiryEndpointConfigured,
-  type EnquiryKind,
+  type EnquiryKind as AnyEnquiryKind,
   type SubmitResult,
 } from '../../lib/enquiry';
 import { eventPhotos } from '../../data/eventPhotos';
+
+/** The three pop-up enquiry types (the footer newsletter posts through the same lib, not this modal). */
+type EnquiryKind = Exclude<AnyEnquiryKind, 'newsletter'>;
 import { INVEST_SECTORS, type InvestSectorId } from '../../data/investSectors';
 
 /* ─────────────────────────── field model ─────────────────────────── */
@@ -108,7 +111,7 @@ const CONFIG: Record<EnquiryKind, KindConfig> = {
         label: 'Direct Phone / WhatsApp',
         type: 'tel',
         required: true,
-        placeholder: '+971 50 123 4567 or +91 98200 00000',
+        placeholder: '+91 99997 45023',
         half: true,
       },
       {
@@ -219,7 +222,7 @@ const CONFIG: Record<EnquiryKind, KindConfig> = {
         label: 'Direct Phone / WhatsApp',
         type: 'tel',
         required: true,
-        placeholder: '+971 50 123 4567 or +91 98200 00000',
+        placeholder: '+91 99997 45023',
         half: true,
       },
       {
@@ -321,7 +324,7 @@ const CONFIG: Record<EnquiryKind, KindConfig> = {
         label: 'Direct Phone / WhatsApp',
         type: 'tel',
         required: true,
-        placeholder: '+971 50 123 4567 or +91 98200 00000',
+        placeholder: '+91 99997 45023',
         half: true,
       },
       {

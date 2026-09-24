@@ -138,7 +138,7 @@ export const WomenCellInquiryForm: React.FC = () => {
             </label>
             <input
               type="tel"
-              placeholder="+91 98200 00000"
+              placeholder="+91 99997 45023"
               {...register('phone')}
               className={`${inputClass} ${errors.phone ? 'border-red-500' : ''}`}
             />

@@ -8,6 +8,7 @@ import { Card } from '../ui/Card';
 import { VideoModal } from '../ui/VideoModal';
 import { mediaData } from '../../data/media';
 import { YoutubeThumb } from '../ui/YoutubeThumb';
+import { PublicationLogo } from '../ui/PublicationLogo';
 
 /**
  * Home-page "In the Spotlight": the featured keynote and the most recent
@@ -62,8 +63,9 @@ export const SpotlightSection: React.FC = () => {
               <Reveal key={art.id} delay={0.08 * (i + 1)}>
                 <a href={art.url} target="_blank" rel="noopener noreferrer" className="group block h-full">
                   <Card interactive className="flex flex-col items-center justify-center p-6 sm:p-7 text-center h-full">
-                    <span className="inline-flex items-center justify-center px-3 py-1 rounded-full bg-gold-500/10 text-xs font-semibold text-gold-800 dark:text-gold-300 border border-gold-600/20">
-                      {art.publication}
+                    <span className="inline-flex max-w-full items-center gap-2.5 rounded-full border border-gold-600/20 bg-gold-500/[0.07] py-1 pl-1 pr-3.5">
+                      <PublicationLogo publication={art.publication} size="sm" className="!rounded-full" />
+                      <span className="truncate text-xs font-semibold text-gold-800 dark:text-gold-300">{art.publication}</span>
                     </span>
                     <h3 className="mt-3 font-heading text-lg font-semibold leading-snug text-ink-heading transition-colors group-hover:text-gold-800 sm:text-xl">
                       {art.title}

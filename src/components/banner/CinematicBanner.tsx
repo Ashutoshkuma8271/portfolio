@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import React, { useRef, useState } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { Pause, Play, Camera } from 'lucide-react';
 import { Container } from '../layout/Container';
 import { BackdropMedia, BackdropMode } from './BackdropMedia';
@@ -33,6 +33,11 @@ interface CinematicBannerProps {
 
 /**
  * The opening of every inner page.
+ *
+ * Full-bleed photograph on the right (top frame on mobile), copy on the left.
+ * The copy is held to the left half so it never sits on the picture, which
+ * means the picture needs no wash over it -- only a short blend at its left
+ * edge -- and stays fully clear. A gentle scroll parallax gives it depth.
  */
 export const CinematicBanner: React.FC<CinematicBannerProps> = ({
   section,
@@ -46,9 +51,13 @@ export const CinematicBanner: React.FC<CinematicBannerProps> = ({
   scrollTargetId,
 }) => {
   const reduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
   const [mode, setMode] = useState<BackdropMode>('photo');
   const [paused, setPaused] = useState(false);
   const media: SectionMedia = { ...sectionMedia[section], ...mediaOverride };
+
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
+  const imageY = useTransform(scrollYProgress, [0, 1], ['0%', reduceMotion ? '0%' : '8%']);
 
   const rise = (i: number) => ({
     initial: { opacity: 0, y: reduceMotion ? 0 : 22 },
@@ -60,32 +69,34 @@ export const CinematicBanner: React.FC<CinematicBannerProps> = ({
 
   return (
     <section
-      className="relative isolate flex min-h-[86svh] flex-col overflow-hidden bg-surface text-ink lg:max-h-[1000px] lg:min-h-[88svh]"
+      ref={sectionRef}
+      className="relative isolate flex min-h-[86svh] flex-col overflow-hidden bg-surface text-ink lg:min-h-[88svh]"
       aria-label={`${eyebrow} banner`}
     >
-      {/* 1. Photograph / looping video: right-hand side on desktop, clean responsive top on mobile */}
-      <div className="grain banner-fade-left absolute left-0 right-0 top-0 -z-10 h-[50svh] sm:h-[52svh] lg:inset-y-0 lg:left-[25%] lg:h-auto overflow-hidden">
-        <BackdropMedia media={media} paused={paused} onModeChange={setMode} priority />
+      {/* 1. Photograph / looping video: full-bleed right-hand side on desktop, top frame on mobile */}
+      {/* banner-photo-blend: eased fade into the page along the photo's inner edge (see index.css) */}
+      <div className="banner-photo-blend absolute left-0 right-0 top-0 -z-10 h-[40svh] overflow-hidden sm:h-[44svh] lg:inset-y-0 lg:left-[44%] lg:h-auto xl:left-[46%]">
+        <motion.div style={{ y: imageY, scale: 1.08 }} className="grain absolute inset-0 will-change-transform">
+          <BackdropMedia media={media} paused={paused} onModeChange={setMode} priority />
+        </motion.div>
       </div>
 
-      {/* 2. Theme-following scrims: keeps text ultra-readable while keeping photos crisp & HD */}
-      <div aria-hidden className="banner-scrim-x pointer-events-none absolute inset-0 -z-10 hidden lg:block" />
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[52svh] bg-gradient-to-b from-surface/20 via-surface/40 via-55% to-surface lg:hidden" />
+      {/* Keeps the navigation legible where it crosses the photograph */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-surface/70 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-surface/90 via-surface/45 to-transparent"
       />
 
-      {/* 3. Copy */}
+      {/* 2. Copy -- held to the left half on desktop so it never sits on the picture */}
       <Container
-        className={`relative z-10 flex flex-1 flex-col justify-end pb-6 pt-[32svh] sm:pb-8 sm:pt-36 lg:justify-center lg:pb-10 lg:pt-28 ${
-          hasRail ? 'lg:pb-14' : ''
+        className={`relative z-10 flex flex-1 flex-col justify-end pb-8 pt-[34svh] sm:pb-10 sm:pt-[38svh] lg:justify-center lg:pb-12 lg:pt-28 ${
+          hasRail ? 'lg:pb-16' : ''
         }`}
       >
-        <div className="max-w-2xl text-center sm:text-left flex flex-col items-center sm:items-start mx-auto sm:mx-0 w-full">
+        <div className="mx-auto flex w-full max-w-2xl flex-col items-center text-center lg:mx-0 lg:w-1/2 lg:max-w-none lg:items-start lg:pr-16 lg:text-left">
           <motion.h1
             {...rise(0)}
-            className="font-display text-[clamp(1.75rem,3.6vw+0.7rem,3.4rem)] font-bold leading-[1.1] tracking-[0.012em] text-ink-heading text-balance text-center sm:text-left"
+            className="font-display text-[clamp(1.75rem,2.4vw+0.9rem,3.1rem)] font-bold leading-[1.1] tracking-[0.012em] text-ink-heading text-balance"
           >
             {title}
             {accent && (
@@ -98,7 +109,7 @@ export const CinematicBanner: React.FC<CinematicBannerProps> = ({
             )}
           </motion.h1>
 
-          <motion.div {...rise(2)} aria-hidden className="mt-5 flex items-center gap-2 justify-center sm:justify-start">
+          <motion.div {...rise(2)} aria-hidden className="mt-5 flex items-center gap-2">
             <span className="h-[2px] w-14 rounded-full bg-gradient-to-r from-gold-500 to-gold-700" />
             <span className="h-1.5 w-1.5 rotate-45 bg-gold-500" />
             <span className="h-[2px] w-7 rounded-full bg-gradient-to-r from-gold-600 to-transparent" />
@@ -107,39 +118,42 @@ export const CinematicBanner: React.FC<CinematicBannerProps> = ({
           {description && (
             <motion.p
               {...rise(3)}
-              className="mt-5 max-w-xl font-sans text-[clamp(0.95rem,0.3vw+0.88rem,1.15rem)] leading-relaxed text-ink-soft text-center sm:text-left mx-auto sm:mx-0"
+              className="mt-5 max-w-xl font-sans text-[clamp(0.95rem,0.3vw+0.88rem,1.15rem)] leading-relaxed text-ink-soft"
             >
               {description}
             </motion.p>
           )}
 
           {actions && (
-            <motion.div {...rise(4)} className="mt-7 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center sm:justify-start gap-3 w-full sm:w-auto">
+            <motion.div
+              {...rise(4)}
+              className="mt-7 flex w-full flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-3.5 max-w-xl lg:max-w-none"
+            >
               {actions}
             </motion.div>
           )}
         </div>
       </Container>
 
-      {/* 5. Photo credit */}
+      {/* 3. Photo credit */}
       {media.caption && (
         <div
-          className={`pointer-events-none absolute right-8 z-10 hidden items-center gap-2 rounded-full border border-gold-600/30 bg-surface/75 px-3.5 py-1.5 font-label text-2xs font-semibold uppercase tracking-[0.14em] text-ink-soft backdrop-blur-md lg:flex ${
+          className={`pointer-events-none absolute z-10 hidden max-w-[calc(56%-4rem)] ${mode === 'video' ? 'right-20' : 'right-8'} items-center gap-2 rounded-full border border-white/15 bg-emerald-950/65 px-3.5 py-1.5 font-label text-2xs font-semibold uppercase tracking-[0.14em] text-ivory-500 backdrop-blur-md lg:flex xl:max-w-[calc(54%-4rem)] ${
             hasRail ? 'bottom-32' : 'bottom-8'
           }`}
         >
-          <Camera className="h-3.5 w-3.5 text-gold-600" aria-hidden />
-          {media.caption}
+          <Camera className="h-3.5 w-3.5 shrink-0 text-gold-300" aria-hidden />
+          <span className="truncate">{media.caption}</span>
         </div>
       )}
 
-      {/* 6. Lower third: key figures on glass */}
+      {/* 4. Key figures */}
       {hasRail && (
         <motion.div
           initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7, ease: EASE_OUT }}
-          className="relative z-10 border-t border-gold-600/30 bg-surface/80 backdrop-blur-xl"
+          className="relative z-10 border-t border-gold-600/30 bg-surface-raised/95 backdrop-blur-xl"
         >
           <Container>
             <dl
@@ -150,14 +164,14 @@ export const CinematicBanner: React.FC<CinematicBannerProps> = ({
               {stats!.map((s, i) => (
                 <div
                   key={s.label}
-                  className={`px-3 py-4 text-center sm:text-left sm:px-6 sm:py-5 ${i === 0 ? 'pl-2 sm:pl-0' : ''} ${
+                  className={`px-3 py-4 text-center sm:px-6 sm:py-5 lg:text-left ${i === 0 ? 'lg:pl-0' : ''} ${
                     stats!.length >= 4 && i >= 2 ? 'border-t border-gold-600/25 sm:border-t-0' : ''
                   }`}
                 >
                   <dd className="font-heading text-[clamp(1.15rem,1.6vw+0.65rem,2rem)] font-semibold leading-none text-ink-heading tabular-nums">
                     {s.value}
                   </dd>
-                  <dt className="mt-1.5 font-label text-[0.66rem] font-semibold uppercase leading-snug tracking-[0.13em] text-gold-800 dark:text-gold-300 sm:text-2xs">
+                  <dt className="mt-1.5 font-label text-3xs font-semibold uppercase leading-snug tracking-[0.13em] text-gold-800 dark:text-gold-300 sm:text-2xs">
                     {s.label}
                   </dt>
                 </div>
@@ -167,7 +181,7 @@ export const CinematicBanner: React.FC<CinematicBannerProps> = ({
         </motion.div>
       )}
 
-      {/* 7. Controls */}
+      {/* 5. Controls */}
       {scrollTargetId && (
         <a
           href={`#${scrollTargetId}`}

@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { 
-  TrendingUp, 
-  ShieldCheck, 
+  TrendingUp,
+  TrendingDown,
+  ShieldCheck,
   ArrowUpRight, 
   Clock, 
   Scale, 
@@ -13,15 +14,27 @@ import {
 import { Container } from '../layout/Container';
 import { useLiveMetals, GRAMS_PER_TROY_OUNCE } from '../../hooks/useLiveMetals';
 import { useTheme } from '../../contexts/ThemeContext';
+import { Flag } from '../ui/Flag';
+import goldIcon from '../../assets/images/sectors/gold-icon.png';
+import { ThreeGoldAccent } from '../ui/ThreeGoldAccent';
 
 type ActiveTab = 'live-gold' | 'all-time' | 'silver';
+
+/** Mark for each price card, in card order: spot gold, UAE, India. */
+const MARKET_LOGOS: React.ReactNode[] = [
+  <img key="gold" src={goldIcon} alt="" className="h-6 w-6 shrink-0 object-contain" />,
+  <Flag key="uae" country="uae" className="h-4" />,
+  <Flag key="india" country="india" className="h-4" />,
+];
 
 interface MarketDataPoint {
   label: string;
   sub: string;
   value: string;
-  change: string;
-  isPositive: boolean;
+  /** Badge text: a price change (with `trend`) or a neutral note (without). Hidden when null. */
+  change: string | null;
+  trend?: 'up' | 'down';
+  changeTitle?: string;
 }
 
 /**
@@ -117,7 +130,7 @@ const TradingViewAdvancedChart: React.FC<{
 };
 
 export const LiveGoldMarketGraph: React.FC = () => {
-  const { metals, fx } = useLiveMetals();
+  const { metals, fx, reference, status } = useLiveMetals();
   const { theme } = useTheme();
   const [activeTab, setActiveTab] = useState<ActiveTab>('live-gold');
 
@@ -128,48 +141,87 @@ export const LiveGoldMarketGraph: React.FC = () => {
     return () => window.clearInterval(t);
   }, []);
 
-  const updatedAt = metals.XAU.updatedAt;
+  const isSilver = activeTab === 'silver';
+  const currentMetal = isSilver ? metals.XAG : metals.XAU;
+  const updatedAt = currentMetal.updatedAt;
   const stale = updatedAt !== null && now - updatedAt > 120_000;
 
-  // Real-time spot metrics
-  const spot = metals.XAU.price ?? 3042.80;
-  const sessionOpen = metals.XAU.points[0]?.price ?? null;
-  const spotDelta = sessionOpen !== null ? spot - sessionOpen : 0;
-  const spotDeltaPct = sessionOpen ? (spotDelta / sessionOpen) * 100 : 0.42;
+  // Real-time spot metrics. Nothing is shown until the feed answers -- no placeholder
+  // figures that could be read as a live quote.
+  const spot = currentMetal.price;
+  const PENDING = status === 'error' ? 'Unavailable' : '—';
 
   const fmt = (v: number, digits = 2) =>
     v.toLocaleString('en-US', { minimumFractionDigits: digits, maximumFractionDigits: digits });
 
-  const perGram = spot / GRAMS_PER_TROY_OUNCE;
-  const aedPerGram = fx.AED !== null ? perGram * fx.AED : perGram * 3.6725;
-  const inrPer10g = fx.INR !== null ? perGram * 10 * fx.INR : perGram * 10 * 86.85;
+  const perGram = spot !== null ? spot / GRAMS_PER_TROY_OUNCE : null;
+  const aedPerGram = perGram !== null && fx.AED !== null ? perGram * fx.AED : null;
+  const inrValue = perGram !== null && fx.INR !== null 
+    ? (isSilver ? perGram * 1000 * fx.INR : perGram * 10 * fx.INR) 
+    : null;
 
-  const changeLabel = `${spotDelta >= 0 ? '+' : ''}${spotDeltaPct.toFixed(2)}% (${spotDelta >= 0 ? '+' : ''}$${fmt(Math.abs(spotDelta))})`;
+  // Day change against the dataset's start-of-day (UTC) reference price (for Gold).
+  const todayUtc = new Date().toISOString().slice(0, 10);
+  const dayChange =
+    !isSilver && spot !== null && reference
+      ? {
+          delta: spot - reference.price,
+          pct: ((spot - reference.price) / reference.price) * 100,
+          since:
+            reference.date === todayUtc
+              ? 'today'
+              : `since ${new Date(`${reference.date}T00:00:00Z`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' })}`,
+        }
+      : null;
 
-  // Market highlight cards
-  const marketHighlights: MarketDataPoint[] = [
-    {
-      label: 'Gold Spot (XAU/USD)',
-      sub: 'Live institutional benchmark',
-      value: `$${fmt(spot)} / oz`,
-      change: changeLabel,
-      isPositive: spotDelta >= 0,
-    },
-    {
-      label: 'Gold in UAE (AED)',
-      sub: 'Spot-derived · 24K per gram',
-      value: `AED ${fmt(aedPerGram)} / g`,
-      change: 'Dubai Souk Basis',
-      isPositive: true,
-    },
-    {
-      label: 'Gold in India (INR)',
-      sub: 'Spot-derived · 24K per 10g',
-      value: `₹${fmt(inrPer10g, 0)} / 10g`,
-      change: 'Bilateral CEPA 0%',
-      isPositive: true,
-    },
-  ];
+  // Dynamic market highlight cards linked to activeTab
+  const marketHighlights: MarketDataPoint[] = isSilver
+    ? [
+        {
+          label: 'Silver Spot (XAG/USD)',
+          sub: 'Live international benchmark',
+          value: spot !== null ? `$${fmt(spot)} / oz` : PENDING,
+          change: 'Spot in USD',
+        },
+        {
+          label: 'Silver in UAE (AED)',
+          sub: 'Spot-derived · 999 Fine Silver per gram',
+          value: aedPerGram !== null ? `AED ${fmt(aedPerGram)} / g` : PENDING,
+          change: 'Dubai Souk Basis',
+        },
+        {
+          label: 'Silver in India (INR)',
+          sub: '999 Fine Silver per 1 kg · excl. import duty & GST',
+          value: inrValue !== null ? `₹${fmt(inrValue, 0)} / kg` : PENDING,
+          change: 'Spot in INR (1 kg)',
+        },
+      ]
+    : [
+        {
+          label: 'Gold Spot (XAU/USD)',
+          sub: activeTab === 'all-time' ? 'Macro historical & live benchmark' : 'Live international benchmark',
+          value: spot !== null ? `$${fmt(spot)} / oz` : PENDING,
+          change: dayChange
+            ? `${dayChange.delta >= 0 ? '+' : '−'}${fmt(Math.abs(dayChange.pct))}% (${dayChange.delta >= 0 ? '+' : '−'}$${fmt(Math.abs(dayChange.delta))}) ${dayChange.since}`
+            : null,
+          trend: dayChange ? (dayChange.delta >= 0 ? 'up' : 'down') : undefined,
+          changeTitle: dayChange
+            ? `Change against the ${reference!.date} 00:00 UTC reference price of $${fmt(reference!.price)}`
+            : undefined,
+        },
+        {
+          label: 'Gold in UAE (AED)',
+          sub: 'Spot-derived · 24K per gram',
+          value: aedPerGram !== null ? `AED ${fmt(aedPerGram)} / g` : PENDING,
+          change: 'Dubai Souk Basis',
+        },
+        {
+          label: 'Gold in India (INR)',
+          sub: '24K per 10g · excl. import duty & GST',
+          value: inrValue !== null ? `₹${fmt(inrValue, 0)} / 10g` : PENDING,
+          change: 'Spot in INR (10g)',
+        },
+      ];
 
   return (
     <section id="terminal" className="relative overflow-hidden bg-surface-sunken py-12 sm:py-16 lg:py-20 text-ink-heading">
@@ -191,7 +243,11 @@ export const LiveGoldMarketGraph: React.FC = () => {
       <Container className="relative z-10">
         {/* Section Masthead */}
         <div className="mb-8 sm:mb-10 text-center max-w-3xl mx-auto px-2">
-          <div className="inline-flex items-center gap-2 rounded-full border border-gold-500/40 bg-gold-500/15 px-3.5 py-1.5 text-2xs font-label font-bold uppercase tracking-[0.2em] text-gold-300 mb-3 shadow-sm">
+          <div className="flex justify-center mb-2">
+            <ThreeGoldAccent size={110} className="drop-shadow-[0_12px_24px_rgba(212,175,55,0.25)]" />
+          </div>
+
+          <div className="inline-flex items-center gap-2 rounded-full border border-gold-500/40 bg-gold-500/15 px-3.5 py-1.5 text-2xs font-label font-bold uppercase tracking-[0.2em] text-gold-800 dark:text-gold-300 mb-3 shadow-sm">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
@@ -216,17 +272,38 @@ export const LiveGoldMarketGraph: React.FC = () => {
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="font-label text-2xs sm:text-[0.72rem] font-bold uppercase tracking-wider text-gold-800 dark:text-gold-400 truncate">
-                    {m.label}
+                  <span className="flex min-w-0 items-center gap-2">
+                    {idx === 0 ? (
+                      isSilver ? (
+                        <span key="silver" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-slate-400/40 bg-gradient-to-br from-slate-200 to-slate-400 dark:from-slate-700 dark:to-slate-900 text-slate-800 dark:text-slate-200 font-label font-bold text-[0.62rem] shadow-sm">
+                          Ag
+                        </span>
+                      ) : (
+                        <img key="gold" src={goldIcon} alt="" className="h-6 w-6 shrink-0 object-contain" />
+                      )
+                    ) : (
+                      MARKET_LOGOS[idx]
+                    )}
+                    <span className="font-label text-2xs sm:text-[0.72rem] font-bold uppercase tracking-wider text-gold-800 dark:text-gold-400 truncate">
+                      {m.label}
+                    </span>
                   </span>
-                  <span className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-[0.62rem] sm:text-2xs font-bold shrink-0 ${
-                    m.isPositive 
-                      ? 'border-emerald-500/25 bg-emerald-500/10 text-emerald-800 dark:text-emerald-300'
-                      : 'border-rose-500/25 bg-rose-500/10 text-rose-800 dark:text-rose-300'
-                  }`}>
-                    <TrendingUp className="h-3 w-3" />
-                    <span>{m.change}</span>
-                  </span>
+                  {m.change && (
+                    <span
+                      title={m.changeTitle}
+                      className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-3xs sm:text-2xs font-bold shrink-0 ${
+                        m.trend === 'up'
+                          ? 'border-emerald-500/25 bg-emerald-500/10 text-emerald-800 dark:text-emerald-300'
+                          : m.trend === 'down'
+                            ? 'border-rose-500/25 bg-rose-500/10 text-rose-800 dark:text-rose-300'
+                            : 'border-gold-600/25 bg-gold-500/10 text-gold-800 dark:text-gold-300'
+                      }`}
+                    >
+                      {m.trend === 'up' && <TrendingUp className="h-3 w-3" aria-hidden />}
+                      {m.trend === 'down' && <TrendingDown className="h-3 w-3" aria-hidden />}
+                      <span>{m.change}</span>
+                    </span>
+                  )}
                 </div>
                 <p className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-ink-heading tracking-tight mt-2">
                   {m.value}
@@ -269,8 +346,11 @@ export const LiveGoldMarketGraph: React.FC = () => {
                   )}
                 </div>
                 <p className="text-2xs text-ink-soft font-sans truncate">
-                  {updatedAt ? `Tick updated ${new Date(updatedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}` : 'Connecting to sovereign trade feed…'}
-                  {' · Streaming institutional tick-by-tick market data'}
+                  {updatedAt
+                    ? `Tick updated ${new Date(updatedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })} · Streaming institutional tick-by-tick market data`
+                    : status === 'error'
+                      ? 'Price cards are offline right now; the chart below streams independently'
+                      : 'Connecting to sovereign trade feed…'}
                 </p>
               </div>
             </div>

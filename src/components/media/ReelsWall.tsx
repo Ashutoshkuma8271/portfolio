@@ -2,9 +2,24 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ExternalLink, Play, X } from 'lucide-react';
 import { reels, embedUrl, reelThumb, type Reel } from '../../data/reels';
-import { SectorArt } from '../enquiry/SectorArt';
+import { BrandMark } from '../ui/BrandMark';
+import facebookLogo from '../../assets/images/platform-logos/facebook.png';
+import youtubeLogo from '../../assets/images/platform-logos/youtube.png';
 
 const PLATFORM_LABEL = { youtube: 'YouTube', facebook: 'Facebook' } as const;
+const PLATFORM_LOGO = { youtube: youtubeLogo, facebook: facebookLogo } as const;
+
+/** Poster for posts with no public still (Facebook): the office monogram on the brand ground. */
+const BrandPoster: React.FC = () => (
+  <div aria-hidden className="grain absolute inset-0">
+    <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_45%_at_50%_22%,rgba(212,163,89,0.28),transparent_70%)]" />
+    <div className="absolute inset-x-6 top-[14%] flex flex-col items-center gap-3 transition-transform duration-700 group-hover:scale-105">
+      <BrandMark theme="dark" size={84} className="drop-shadow-[0_6px_18px_rgba(199,154,61,0.35)]" />
+      <span className="h-px w-12 bg-gradient-to-r from-transparent via-gold-400 to-transparent" />
+      <span className="font-label text-[0.62rem] font-bold uppercase tracking-[0.24em] text-gold-300/90">Official channel</span>
+    </div>
+  </div>
+);
 
 /** Vertical 9:16 player in a modal. Loads the embed only once opened. */
 const ReelPlayer: React.FC<{ reel: Reel | null; onClose: () => void; onStep: (d: 1 | -1) => void }> = ({
@@ -135,10 +150,11 @@ export const ReelsWall: React.FC = () => {
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
               ) : (
-                <SectorArt kind="cinema" className="absolute left-1/2 top-[22%] w-[130%] -translate-x-1/2 opacity-90 transition-transform duration-700 group-hover:scale-110" />
+                <BrandPoster />
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-emerald-950/30 to-transparent" />
-              <span className="absolute left-3 top-3 rounded-full border border-gold-400/40 bg-emerald-950/70 px-2.5 py-1 font-label text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gold-300 backdrop-blur">
+              <span className="absolute left-3 top-3 z-[3] inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-emerald-950/75 py-1 pl-1 pr-2.5 font-label text-3xs font-bold uppercase tracking-[0.14em] text-ivory-500 backdrop-blur">
+                <img src={PLATFORM_LOGO[r.platform]} alt="" className="h-4 w-4 rounded-full bg-white object-contain p-[1.5px]" />
                 {PLATFORM_LABEL[r.platform]}
               </span>
               <span className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-gold-300 bg-gradient-to-br from-gold-400 to-gold-600 text-emerald-950 shadow-[0_0_30px_rgba(230,189,101,0.5)] transition-transform duration-300 group-hover:scale-110">

@@ -12,6 +12,12 @@ import aaccCredential from '../assets/images/events/aacc-commissioner-credential
 import aaccArabDelegation from '../assets/images/events/aacc-arab-delegation-summit.png';
 import bilateralAccord from '../assets/images/events/bilateral-accord-delegation.png';
 import globalTradeSummit from '../assets/images/events/global-trade-summit-leaders.png';
+import tradeSummitAccord from '../assets/images/events/trade-summit-accord-hd.jpg';
+import udcDiplomaticAward from '../assets/images/events/udc-diplomatic-award-hd.jpg';
+import commonwealthLeadership from '../assets/images/events/commonwealth-leadership-banner-hd.jpg';
+import gccNationsMedia from '../assets/images/events/gcc-nations-media-press-hd.jpg';
+import insightsSummitDialogue from '../assets/images/events/insights-summit-dialogue-hd.jpg';
+import bricsSummitContact from '../assets/images/events/brics-summit-contact-hd.jpg';
 
 export interface EventPhoto {
   id: string;
@@ -109,8 +115,8 @@ export const eventPhotos = {
     date: '9 September 2026',
     location: 'New Delhi, India',
     alt: 'H.E. Zeenat Kureshi standing between the Indian and German flags at the Agrivoltaics World Conference curtain raiser',
-    focal: '58% 38%',
-    orientation: 'portrait',
+    focal: '52% 40%',
+    orientation: 'landscape',
   },
   unitedEconomicA: {
     id: 'united-economic-a',
@@ -133,7 +139,7 @@ export const eventPhotos = {
     date: '10 September 2026',
     location: 'FIEO Niryat Bhawan, New Delhi',
     alt: 'Delegates on stage at the UDC BRICS Business Summit 2026',
-    focal: '60% 20%',
+    focal: '72% 25%',
     orientation: 'landscape',
   },
   womenPanel: {
@@ -145,7 +151,7 @@ export const eventPhotos = {
     date: 'September 2026',
     location: 'New Delhi, India',
     alt: 'Panel of ten women seated on stage under the UDC BRICS Summit 2026 backdrop',
-    focal: '50% 62%',
+    focal: '60% 70%',
     orientation: 'landscape',
   },
   udcStage: {
@@ -157,7 +163,7 @@ export const eventPhotos = {
     date: 'September 2026',
     location: 'New Delhi, India',
     alt: 'H.E. Zeenat Kureshi with fellow delegates on stage at the UDC BRICS Summit 2026',
-    focal: '47% 34%',
+    focal: '46% 40%',
     orientation: 'landscape',
   },
   unitedEconomicB: {
@@ -170,6 +176,78 @@ export const eventPhotos = {
     location: 'New Delhi, India',
     alt: 'H.E. Zeenat Kureshi with a fellow attendee at the United Economic BRICS Summit',
     focal: '46% 26%',
+    orientation: 'landscape',
+  },
+  tradeSummitAccord: {
+    id: 'trade-summit-accord-hd',
+    src: tradeSummitAccord,
+    title: 'World Economic Summit & Bilateral Trade Accord Signing',
+    caption: 'H.E. Zeenat Kureshi presiding over high-level international trade accord and bilateral delegation pacts.',
+    event: 'World Economic Summit & Bilateral Trade Delegation',
+    date: '2025–2026',
+    location: 'Klang, Malaysia & New Delhi',
+    alt: 'H.E. Zeenat Kureshi holding official bilateral trade delegation accord at international summit table',
+    focal: '8% 25%',
+    orientation: 'landscape',
+  },
+  udcDiplomaticAward: {
+    id: 'udc-diplomatic-award-hd',
+    src: udcDiplomaticAward,
+    title: 'United Diplomatic Council — Diplomatic Excellence Honor',
+    caption: 'H.E. Zeenat Kureshi conferred with the Diplomatic Excellence Award by the United Diplomatic Council under the Saudi Economic Diplomacy framework.',
+    event: 'United Diplomatic Council (UDC)',
+    date: '2025–2026',
+    location: 'Riyadh & New Delhi',
+    alt: 'H.E. Zeenat Kureshi holding the Diplomatic Excellence Award beside the United Diplomatic Council Saudi Vision 2030 pavilion',
+    focal: '68% 22%',
+    orientation: 'portrait',
+  },
+  commonwealthLeadership: {
+    id: 'commonwealth-leadership-banner-hd',
+    src: commonwealthLeadership,
+    title: 'India Commonwealth Business Meeting 2025 — Leadership & Civic Mandate',
+    caption: 'H.E. Zeenat Kureshi presented with the Leadership Certificate of Appreciation at the India Commonwealth Business Meeting 2025.',
+    event: 'India Commonwealth Business Meeting 2025',
+    date: '2025',
+    location: 'Kolkata, India',
+    alt: 'H.E. Zeenat Kureshi receiving Certificate of Appreciation at India Commonwealth Business Meeting 2025 in Kolkata',
+    focal: '72% 28%',
+    orientation: 'landscape',
+  },
+  gccNationsMedia: {
+    id: 'gcc-nations-media-press-hd',
+    src: gccNationsMedia,
+    title: 'GCC Nations — Global Diplomatic & Economic Broadcast Dialogue',
+    caption: 'H.E. Zeenat Kureshi in official broadcast dialogue exploring India-GCC sovereign trade corridors, energy security, and media innovation.',
+    event: 'GCC Nations Broadcast & Press Dialogue',
+    date: '2025–2026',
+    location: 'Dubai, UAE',
+    alt: 'H.E. Zeenat Kureshi on GCC Nations media broadcast interview with GCC sovereign flags and skyline',
+    focal: '80% 28%',
+    orientation: 'landscape',
+  },
+  insightsSummitDialogue: {
+    id: 'insights-summit-dialogue-hd',
+    src: insightsSummitDialogue,
+    title: 'International Economic Summit & Diplomatic Dialogue',
+    caption: 'H.E. Zeenat Kureshi engaging with international trade delegates and diplomatic leadership.',
+    event: 'International Economic Summit & Trade Conclave',
+    date: '2025–2026',
+    location: 'New Delhi, India',
+    alt: 'H.E. Zeenat Kureshi in diplomatic dialogue with international delegates and dignitaries',
+    focal: '35% 24%',
+    orientation: 'landscape',
+  },
+  bricsSummitContact: {
+    id: 'brics-summit-contact-hd',
+    src: bricsSummitContact,
+    title: 'United Economic BRICS Summit — Bilateral Investment Secretariat',
+    caption: 'H.E. Zeenat Kureshi at the United Economic BRICS Summit strengthening bilateral investment partnerships.',
+    event: 'United Economic BRICS Summit',
+    date: 'September 2026',
+    location: 'New Delhi, India',
+    alt: 'H.E. Zeenat Kureshi at the United Economic BRICS Summit representing diplomatic and investment mandates',
+    focal: '50% 20%',
     orientation: 'landscape',
   },
 } satisfies Record<string, EventPhoto>;

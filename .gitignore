@@ -25,3 +25,9 @@ yarn-error.log*
 
 # raw footage awaiting optimisation (npm run optimize-videos)
 media-source/
+
+# Scratch & temporary scripts
+scratch/
+body.txt
+b.json
+

@@ -31,12 +31,12 @@ export const siteConfig = {
   ],
 
   contact: {
-    email: 'contact@zeenatkureshi.com',
-    tradeDeskEmail: 'trade.commissioner@zeenatkureshi.com',
-    mediaEmail: 'press@zeenatkureshi.com',
-    phone: '+971 4 000 0000 / +91 98200 00000',
-    whatsappNumber: '919820000000', // Without '+' for wa.me link
-    whatsappDisplay: '+91 98200 00000',
+    email: 'zeenatkureshiofficial@gmail.com',
+    tradeDeskEmail: 'zeenatkureshiofficial@gmail.com',
+    mediaEmail: 'zeenatkureshiofficial@gmail.com',
+    phone: '+91 99997 45023',
+    whatsappNumber: '919999745023', // Without '+' for wa.me link
+    whatsappDisplay: '+91 99997 45023',
     location: 'Mumbai • New Delhi • Dubai',
     primaryOffice: 'Bandra Kurla Complex (BKC), Mumbai, Maharashtra 400051, India',
     uaeOffice: 'Dubai International Financial Centre (DIFC), Dubai, UAE',
@@ -59,7 +59,7 @@ export const siteConfig = {
     { platform: 'facebook', url: 'https://www.facebook.com/zeenathkureshe/', label: 'Facebook' },
     { platform: 'youtube', url: 'https://www.youtube.com/@zeenatkureshiofficial', label: 'YouTube' },
     { platform: 'x', url: 'https://x.com/zeenatkureshi', label: 'X (Twitter)' },
-    { platform: 'whatsapp', url: 'https://wa.me/919820000000', label: 'WhatsApp' },
+    { platform: 'whatsapp', url: 'https://wa.me/919999745023', label: 'WhatsApp' },
   ] as SocialLink[],
   imdbUrl: 'https://www.imdb.com/name/nm16165017/',
 

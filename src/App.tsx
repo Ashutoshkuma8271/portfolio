@@ -20,8 +20,11 @@ const ContactPage = lazy(() => import('./pages/ContactPage').then(m => ({ defaul
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 
 import { PageSkeleton } from './components/ui/SkeletonLoader';
+import { useLenis } from './hooks/useLenis';
 
 export const App: React.FC = () => {
+  useLenis();
+
   return (
     <HelmetProvider>
       <ScrollToTop />

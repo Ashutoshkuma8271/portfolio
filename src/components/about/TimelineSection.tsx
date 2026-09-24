@@ -1,13 +1,47 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Container } from '../layout/Container';
 import { aboutData } from '../../data/about';
-import { MapPin, Building } from 'lucide-react';
+import { OrgSeal } from '../ui/OrgSeal';
+import { MapPinLogo } from '../ui/MapPinLogo';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
 export const TimelineSection: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const spineProgressRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (reduceMotion) return;
+
+    const ctx = gsap.context(() => {
+      if (spineProgressRef.current && containerRef.current) {
+        gsap.fromTo(
+          spineProgressRef.current,
+          { scaleY: 0 },
+          {
+            scaleY: 1,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: 'top 75%',
+              end: 'bottom 80%',
+              scrub: 0.6,
+            },
+          }
+        );
+      }
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [reduceMotion]);
+
   return (
     <section className="relative border-y border-hairline/90 bg-surface py-20 lg:py-28 overflow-hidden">
       {/* Background ambient gold gradient */}
@@ -24,9 +58,15 @@ export const TimelineSection: React.FC = () => {
           center
         />
 
-        <div className="relative mx-auto mt-16 max-w-4xl">
-          {/* Vertical spine with gold gradient */}
-          <div className="absolute bottom-0 left-3 sm:left-4 top-0 w-[2px] -translate-x-1/2 bg-gradient-to-b from-gold-500 via-gold-400/70 to-emerald-950/40 lg:left-1/2" />
+        <div ref={containerRef} className="relative mx-auto mt-16 max-w-4xl">
+          {/* Vertical spine base track */}
+          <div className="absolute bottom-0 left-3 sm:left-4 top-0 w-[2px] -translate-x-1/2 bg-gold-600/20 lg:left-1/2" />
+
+          {/* GSAP ScrollTrigger Scrubbing Golden Spine */}
+          <div
+            ref={spineProgressRef}
+            className="absolute bottom-0 left-3 sm:left-4 top-0 w-[2px] origin-top -translate-x-1/2 bg-gradient-to-b from-gold-500 via-gold-400 to-emerald-700 shadow-[0_0_8px_rgba(212,175,55,0.6)] lg:left-1/2"
+          />
 
           <div className="space-y-8 sm:space-y-10 lg:space-y-12">
             {aboutData.timeline.map((item, idx) => {
@@ -49,14 +89,14 @@ export const TimelineSection: React.FC = () => {
 
                   {/* Content card with responsive padding */}
                   <div className="w-full pl-7 sm:pl-11 lg:w-1/2 lg:pl-0 lg:px-8">
-                    <div className="group relative rounded-2xl border border-gold-600/25 bg-surface-raised p-6 sm:p-7 shadow-luxury transition-all duration-300 ease-out hover:-translate-y-1 hover:border-gold-500/60 hover:shadow-luxury-lg">
+                    <div className="group relative rounded-2xl border border-gold-600/25 bg-surface-raised p-6 sm:p-7 text-center shadow-luxury transition-all duration-300 ease-out hover:-translate-y-1 hover:border-gold-500/60 hover:shadow-luxury-lg lg:text-left">
                       {/* Top Header Row: Period Badge & Category */}
-                      <div className="mb-3.5 flex flex-wrap items-center justify-between gap-2">
-                        <span className="inline-flex items-center gap-1.5 rounded-full border border-gold-500/35 bg-gold-500/10 px-3 py-0.5 font-label text-[11px] font-bold uppercase tracking-[0.16em] text-[#8A6920] dark:text-gold-300 shadow-2xs">
+                      <div className="mb-3.5 flex flex-wrap items-center justify-center gap-2 lg:justify-between">
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-gold-500/35 bg-gold-500/10 px-3 py-0.5 font-label text-3xs font-bold uppercase tracking-[0.16em] text-[#8A6920] dark:text-gold-300 shadow-2xs">
                           <span className="h-1.5 w-1.5 rounded-full bg-gold-500" />
                           {item.year}
                         </span>
-                        <span className="rounded-full border border-emerald-900/20 bg-emerald-950/80 px-2.5 py-0.5 font-label text-[10px] font-bold uppercase tracking-wider text-gold-300 shadow-2xs">
+                        <span className="rounded-full border border-emerald-900/20 bg-emerald-950/80 px-2.5 py-0.5 font-label text-3xs font-bold uppercase tracking-wider text-gold-300 shadow-2xs">
                           {item.category}
                         </span>
                       </div>
@@ -66,21 +106,22 @@ export const TimelineSection: React.FC = () => {
                         {item.title}
                       </h3>
 
-                      {/* Sleek Integrated Organization & Location Meta-Bar */}
-                      <div className="mb-3.5 flex flex-wrap items-center gap-y-1.5 gap-x-2.5 text-xs text-ink-soft">
-                        <span className="inline-flex items-center gap-1.5 font-semibold text-ink-heading">
-                          <Building className="h-3.5 w-3.5 text-gold-600 dark:text-gold-400 shrink-0" />
-                          {item.organization}
-                        </span>
-                        {item.location && (
-                          <>
-                            <span className="text-gold-500/50 hidden sm:inline">&bull;</span>
-                            <span className="inline-flex items-center gap-1 font-medium text-gold-700 dark:text-gold-300">
-                              <MapPin className="h-3.5 w-3.5 text-gold-500 shrink-0" />
-                              {item.location}
-                            </span>
-                          </>
-                        )}
+                      {/* Organisation & location, one per line so neither wraps into the other */}
+                      <div className="mb-4 flex justify-center lg:justify-start">
+                        <div className="inline-flex items-center gap-3.5 text-left">
+                          <OrgSeal name={item.organization} size="lg" />
+                          <div className="min-w-0">
+                            <p className="font-label text-xs font-semibold leading-snug text-ink-heading sm:text-[0.82rem]">
+                              {item.organization}
+                            </p>
+                            {item.location && (
+                              <p className="mt-1 flex items-center gap-1.5 text-xs leading-snug text-ink-soft">
+                                <MapPinLogo className="h-3.5" />
+                                <span>{item.location}</span>
+                              </p>
+                            )}
+                          </div>
+                        </div>
                       </div>
 
                       {/* Description */}
@@ -89,7 +130,7 @@ export const TimelineSection: React.FC = () => {
                       </p>
 
                       {/* Bottom gold accent hairline */}
-                      <div className="mt-4 h-[1.5px] w-12 bg-gradient-to-r from-gold-500 to-transparent transition-all duration-500 group-hover:w-full" />
+                      <div className="mx-auto mt-4 h-[1.5px] w-12 bg-gradient-to-r from-gold-500 to-transparent transition-all duration-500 group-hover:w-full lg:mx-0" />
                     </div>
                   </div>
                 </motion.div>

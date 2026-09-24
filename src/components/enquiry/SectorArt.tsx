@@ -1,10 +1,8 @@
 import React from 'react';
 
 /**
- * Original isometric illustrations for the five investment sectors (and the
- * cinema pillar). Drawn in SVG so they are crisp at any size, weigh almost
- * nothing, and work in light and dark mode -- no stock photography needed for
- * ideas a photograph can't show (a gold bar, an oil barrel, a ship).
+ * Sector imagery: a photograph for each of the five investment sectors, and an
+ * SVG illustration for the cinema pillar.
  */
 export type SectorArtKind = 'trade' | 'gold' | 'fleet' | 'oilgas' | 'realestate' | 'cinema';
 
@@ -27,73 +25,39 @@ const FRAME: Record<SectorArtKind, { vb: string; ground?: { cx: number; cy: numb
 const Ground: React.FC<{ g?: { cx: number; cy: number; rx: number } }> = ({ g }) =>
   g ? <ellipse cx={g.cx} cy={g.cy} rx={g.rx} ry="12" fill="rgba(0,0,0,0.14)" /> : null;
 
-import importExportHd from '../../assets/images/sector-art/import-export-hd.png';
-import goldBullionHd from '../../assets/images/sector-art/gold-bullion-hd.png';
-import fleetHd from '../../assets/images/sector-art/fleet-hd.png';
-import oilGasHd from '../../assets/images/sector-art/oilgas-hd.png';
-import realEstateHd from '../../assets/images/sector-art/realestate-hd.png';
+import tradePhoto from '../../assets/images/sector-photos/trade.webp';
+import goldPhoto from '../../assets/images/sector-photos/gold.webp';
+import fleetPhoto from '../../assets/images/sector-photos/fleet.webp';
+import oilGasPhoto from '../../assets/images/sector-photos/oilgas.webp';
+import realEstatePhoto from '../../assets/images/sector-photos/realestate.webp';
+
+// Unsplash License (free commercial use). Source photo IDs: IVG8SDczupk, ktXmcyqYx54,
+// Rhwj3CPwc6o, L-RSVfhluGw, O1ulT7On0WQ -- unsplash.com/photos/<id>.
+const PHOTOS: Partial<Record<SectorArtKind, { src: string; alt: string; focal: string }>> = {
+  trade: { src: tradePhoto, alt: 'Aerial view of a container port with a loaded cargo ship and cranes', focal: '50% 62%' },
+  gold: { src: goldPhoto, alt: 'Gold bullion bars', focal: '45% 55%' },
+  fleet: { src: fleetPhoto, alt: 'Freight truck on a desert highway', focal: '35% 62%' },
+  oilgas: { src: oilGasPhoto, alt: 'Oil refinery illuminated at night', focal: '50% 50%' },
+  realestate: { src: realEstatePhoto, alt: 'Dubai Marina towers at night', focal: '50% 55%' },
+};
 
 export const SectorArt: React.FC<{ kind: SectorArtKind; className?: string }> = ({ kind, className }) => {
-  if (kind === 'trade') {
+  const photo = PHOTOS[kind];
+  if (photo) {
     return (
-      <div className={`relative flex h-full w-full items-center justify-center bg-gradient-to-br from-[#0c281e] via-[#051510] to-[#020b08] p-4 ${className || ''}`}>
+      <div className={`relative h-full w-full overflow-hidden bg-emerald-950 ${className || ''}`}>
         <img
-          src={importExportHd}
-          alt="Import & Export — Global Trade & Logistics"
+          src={photo.src}
+          alt={photo.alt}
           loading="lazy"
-          className="h-full w-full object-contain filter drop-shadow-md transition-transform duration-500 hover:scale-105"
+          decoding="async"
+          style={{ objectPosition: photo.focal }}
+          className="h-full w-full object-cover"
         />
-      </div>
-    );
-  }
-
-  if (kind === 'gold') {
-    return (
-      <div className={`relative flex h-full w-full items-center justify-center bg-black overflow-hidden ${className || ''}`}>
-        <img
-          src={goldBullionHd}
-          alt="Gold — Value Beyond Time"
-          loading="lazy"
-          className="h-full w-full object-contain p-1.5 transition-transform duration-500 hover:scale-105"
-        />
-      </div>
-    );
-  }
-
-  if (kind === 'fleet') {
-    return (
-      <div className={`relative flex h-full w-full items-center justify-center bg-white overflow-hidden p-2 ${className || ''}`}>
-        <img
-          src={fleetHd}
-          alt="Fleet — Driving a Smarter Tomorrow"
-          loading="lazy"
-          className="h-full w-full object-contain transition-transform duration-500 hover:scale-105"
-        />
-      </div>
-    );
-  }
-
-  if (kind === 'oilgas') {
-    return (
-      <div className={`relative flex h-full w-full items-center justify-center overflow-hidden ${className || ''}`}>
-        <img
-          src={oilGasHd}
-          alt="Oil & Gas — Energy for a Brighter Tomorrow"
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-        />
-      </div>
-    );
-  }
-
-  if (kind === 'realestate') {
-    return (
-      <div className={`relative flex h-full w-full items-center justify-center overflow-hidden ${className || ''}`}>
-        <img
-          src={realEstateHd}
-          alt="Real Estate — Building Better Tomorrows"
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+        {/* Deepens the lower edge so every photo sits on the card in the same emerald key */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-emerald-950/55 via-emerald-950/5 to-transparent"
         />
       </div>
     );

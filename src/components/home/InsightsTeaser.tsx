@@ -14,7 +14,7 @@ export const InsightsTeaser: React.FC = () => (
   <section className="border-t border-hairline bg-surface py-16 sm:py-20 lg:py-24">
     <Container>
       <div className="flex flex-wrap items-end justify-between gap-x-8 mb-8 sm:mb-12">
-        <SectionHeading eyebrow="Insights" title="Latest" accent="Essays" className="mb-0" />
+        <SectionHeading eyebrow="Insights" title="Latest" accent="Essays" center="mobile" className="mb-0 w-full sm:w-auto" />
         <div className="hidden sm:block">
           <BannerButton variant="secondary" to="/insights">
             All insights

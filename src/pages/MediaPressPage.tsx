@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, ArrowUpRight, Expand, Mail } from 'lucide-react';
+import { ArrowUpRight, Expand, Mail } from 'lucide-react';
 import { PageHeader } from '../components/layout/PageHeader';
 import { BannerButton } from '../components/banner/BannerButton';
 import { SectionNav } from '../components/layout/SectionNav';
@@ -13,8 +13,12 @@ import { Lightbox } from '../components/ui/Lightbox';
 import { ReelsWall } from '../components/media/ReelsWall';
 import { MediaInquiryForm } from '../components/forms/MediaInquiryForm';
 import { SEO } from '../components/ui/SEO';
+import { PublicationLogo } from '../components/ui/PublicationLogo';
+import { MapPinLogo } from '../components/ui/MapPinLogo';
+import { Flag, type FlagCountry } from '../components/ui/Flag';
 import { mediaData } from '../data/media';
 import { galleryImages } from '../data/gallery';
+import { eventPhotos } from '../data/eventPhotos';
 import { siteConfig } from '../data/siteConfig';
 import { reels } from '../data/reels';
 import type { MediaArticle } from '../types';
@@ -40,19 +44,19 @@ const GALLERY_SPANS = [
 /** "ANI News (Asian News International)" -> "ANI News" -- the bracketed expansion is noise in a card header. */
 const shortName = (name: string) => name.replace(/\s*\(.*?\)\s*/g, ' ').trim();
 
-/** Two-letter monogram for a publication ("The Tribune India" -> "TI", "IMDb" -> "IM"). */
-const monogram = (name: string) => {
-  const words = shortName(name)
-    .replace(/[^A-Za-z\s]/g, ' ')
-    .split(/\s+/)
-    .filter((w) => w && !/^(the|of|and)$/i.test(w));
-  if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
-  return words
-    .slice(0, 2)
-    .map((w) => w[0])
-    .join('')
-    .toUpperCase();
+/** Host country of each speaking venue, for its flag. */
+const venueFlag = (location: string): FlagCountry | null => {
+  const l = location.toLowerCase();
+  if (/uae|dubai|abu dhabi/.test(l)) return 'uae';
+  if (/qatar|doha/.test(l)) return 'qatar';
+  if (/oman|muscat/.test(l)) return 'oman';
+  if (/saudi|riyadh|jeddah/.test(l)) return 'saudi';
+  if (/india|delhi|mumbai/.test(l)) return 'india';
+  return null;
 };
+
+/** Lead-story photograph: the trade accord signing, not used elsewhere on this page. */
+const LEAD_PHOTO = eventPhotos.tradeSummitAccord;
 
 const ArticleCard: React.FC<{ art: MediaArticle; tone?: 'light' | 'dark'; large?: boolean }> = ({
   art,
@@ -61,11 +65,27 @@ const ArticleCard: React.FC<{ art: MediaArticle; tone?: 'light' | 'dark'; large?
 }) => {
   const dark = tone === 'dark';
   return (
-    <a href={art.url} target="_blank" rel="noopener noreferrer" className="group block h-full">
+    <a href={art.url} target="_blank" rel="noopener noreferrer" className={`group flex h-full flex-col ${large ? 'rounded-2xl shadow-luxury transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-luxury-lg' : ''}`}>
+      {large && (
+        <div className="grain relative aspect-[16/8] overflow-hidden rounded-t-2xl border border-b-0 border-gold-600/30 bg-emerald-950">
+          <img
+            src={LEAD_PHOTO.src}
+            alt={LEAD_PHOTO.alt}
+            loading="lazy"
+            decoding="async"
+            style={{ objectPosition: '15% 30%' }}
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+          <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-emerald-950/55 via-transparent to-transparent" />
+          <span className="absolute left-5 top-5 z-[3] rounded-full border border-gold-400/50 bg-emerald-950/70 px-3.5 py-1.5 font-label text-2xs font-bold uppercase tracking-[0.16em] text-gold-200 backdrop-blur-md">
+            Lead story
+          </span>
+        </div>
+      )}
       <Card
         tone={tone}
-        interactive
-        className={`flex h-full flex-col justify-between ${large ? 'p-8 sm:p-10' : 'p-6 sm:p-7'} ${
+        interactive={!large}
+        className={`flex flex-1 flex-col justify-between overflow-hidden ${large ? 'rounded-t-none p-8 sm:p-10' : 'p-6 sm:p-7'} ${
           dark ? 'bg-surface-raised' : ''
         }`}
       >
@@ -77,18 +97,10 @@ const ArticleCard: React.FC<{ art: MediaArticle; tone?: 'light' | 'dark'; large?
             &rdquo;
           </span>
         )}
-        <div>
-          <div className="mb-5 flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+        <div className="text-center sm:text-left">
+          <div className="mb-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 sm:justify-between">
             <div className="flex items-center gap-3">
-              <span
-                className={`flex h-10 w-10 items-center justify-center rounded-full border font-heading text-sm font-semibold ${
-                  dark
-                    ? 'border-gold-600/40 bg-gold-500/10 text-gold-800 dark:text-gold-300'
-                    : 'border-gold-600/35 bg-gold-500/10 text-gold-800 dark:text-gold-300'
-                }`}
-              >
-                {monogram(art.publication)}
-              </span>
+              <PublicationLogo publication={art.publication} size="md" />
               <span
                 className={`text-sm font-semibold ${
                   'text-gold-800 dark:text-gold-300'
@@ -104,7 +116,7 @@ const ArticleCard: React.FC<{ art: MediaArticle; tone?: 'light' | 'dark'; large?
 
           <h3
             className={`font-heading font-semibold leading-snug transition-colors ${
-              large ? 'text-2xl sm:text-3xl lg:text-4xl' : 'text-lg sm:text-xl'
+              large ? 'text-2xl sm:text-[1.75rem]' : 'text-lg sm:text-xl'
             } ${'text-ink-heading group-hover:text-gold-800 dark:group-hover:text-gold-300'}`}
           >
             {art.title}
@@ -119,7 +131,7 @@ const ArticleCard: React.FC<{ art: MediaArticle; tone?: 'light' | 'dark'; large?
         </div>
 
         <div
-          className={`mt-6 flex items-center justify-between border-t pt-4 text-sm ${
+          className={`relative mt-6 flex items-center justify-between border-t pt-4 text-sm ${
             'border-hairline text-ink-faint'
           }`}
         >
@@ -195,7 +207,8 @@ export const MediaPressPage: React.FC = () => {
                 <div key={run} className="flex items-center" aria-hidden={run === 1}>
                   {publications.map((pub) => (
                     <span key={pub} className="flex items-center whitespace-nowrap">
-                      <span className="font-heading text-base font-semibold text-ink-heading">{pub}</span>
+                      <PublicationLogo publication={pub} size="sm" className="mr-2.5" />
+                      <span className="font-heading text-base font-semibold text-ink-heading">{shortName(pub)}</span>
                       <span className="mx-6 h-1.5 w-1.5 rotate-45 bg-gold-600" />
                     </span>
                   ))}
@@ -272,7 +285,7 @@ export const MediaPressPage: React.FC = () => {
                 className="absolute -left-[2.6rem] top-7 h-3.5 w-3.5 rounded-full border-2 border-gold-500 bg-surface sm:-left-[3.6rem]"
               />
               <Reveal delay={idx * 0.05}>
-                <Card interactive className="grid gap-5 p-6 sm:p-8 md:grid-cols-[11rem_1fr_auto] md:items-center">
+                <Card interactive className="grid justify-items-center gap-5 p-6 text-center sm:p-8 md:grid-cols-[11rem_1fr_auto] md:items-center md:justify-items-stretch md:text-left">
                   <div>
                     <span className="gold-text-deep dark:gold-text font-heading text-2xl font-semibold leading-none">
                       {spk.date}
@@ -292,9 +305,12 @@ export const MediaPressPage: React.FC = () => {
                     <p className="mt-1 text-[0.95rem] text-ink-faint">Topic: {spk.topic}</p>
                   </div>
 
-                  <div className="flex items-center gap-2 rounded-xl bg-surface-sunken px-4 py-2.5 text-sm font-medium text-ink-heading">
-                    <MapPin className="h-4 w-4 shrink-0 text-gold-600" />
+                  <div className="flex items-center gap-2.5 rounded-xl border border-gold-500/20 bg-surface-sunken px-4 py-2.5 text-left text-sm font-medium text-ink-heading">
+                    <MapPinLogo className="h-[18px]" />
                     <span>{spk.location}</span>
+                    {venueFlag(spk.location) && (
+                      <Flag country={venueFlag(spk.location)!} className="h-4" />
+                    )}
                   </div>
                 </Card>
               </Reveal>
@@ -368,12 +384,13 @@ export const MediaPressPage: React.FC = () => {
       {/* ── 5. Inquiry ───────────────────────────────────────────────── */}
       <Section id="inquiry" tone="sunken">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-14">
-          <div className="lg:col-span-5">
+          <div className="flex flex-col items-center lg:col-span-5 lg:items-start">
             <SectionHeading
               eyebrow="Press Communications"
               title="Request an Interview or"
               accent="Press Briefing"
               subtitle="Connect directly with the media and public relations secretariat for rapid editorial routing."
+              center="tablet"
             />
             <a
               href={`mailto:${siteConfig.contact.mediaEmail}`}

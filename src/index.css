@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer base {
+
   /* ============================================================
      SEMANTIC SURFACE + INK TOKENS
      One source of truth for every page background, card, band and
@@ -12,16 +13,26 @@
      that made each page look like a slightly different website.
      ============================================================ */
   :root {
-    --surface: 250 246 240;        /* page background - warm cream   */
-    --surface-raised: 255 255 255; /* cards sitting on the page      */
-    --surface-sunken: 244 239 230; /* alternating quieter band       */
-    --surface-deep: 12 34 28;      /* editorial dark band            */
-    --surface-deepest: 7 21 17;    /* footer / deepest band          */
-    --ink: 17 19 18;               /* primary text                   */
-    --ink-soft: 61 68 65;          /* secondary text                 */
-    --ink-faint: 84 92 88;         /* tertiary / meta text           */
-    --hairline: 229 220 206;       /* borders on light surfaces      */
-    --ink-heading: 7 21 17;        /* display headings               */
+    --surface: 250 246 240;
+    /* page background - warm cream   */
+    --surface-raised: 255 255 255;
+    /* cards sitting on the page      */
+    --surface-sunken: 244 239 230;
+    /* alternating quieter band       */
+    --surface-deep: 12 34 28;
+    /* editorial dark band            */
+    --surface-deepest: 7 21 17;
+    /* footer / deepest band          */
+    --ink: 17 19 18;
+    /* primary text                   */
+    --ink-soft: 61 68 65;
+    /* secondary text                 */
+    --ink-faint: 84 92 88;
+    /* tertiary / meta text           */
+    --hairline: 229 220 206;
+    /* borders on light surfaces      */
+    --ink-heading: 7 21 17;
+    /* display headings               */
   }
 
   :root.dark {
@@ -60,14 +71,17 @@
   body {
     line-height: 1.55;
   }
+
   h1,
   h2,
   .font-display {
     line-height: 1.1;
-    letter-spacing: 0.012em; /* Cinzel is already open; keep it engraved, not airy */
+    letter-spacing: 0.012em;
+    /* Cinzel is already open; keep it engraved, not airy */
     font-family: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
     text-wrap: balance;
   }
+
   /* Secondary headings are Plus Jakarta Sans and stay below the display scale on
      tablets so they never out-shout the section title above them. */
   h3,
@@ -76,9 +90,15 @@
     line-height: 1.3;
     letter-spacing: -0.005em;
   }
+
   @media (min-width: 640px) and (max-width: 1023px) {
-    h3 { font-size: clamp(1.05rem, 2vw + 0.4rem, 1.3rem) !important; }
-    h4 { font-size: clamp(1rem, 1.6vw + 0.3rem, 1.1rem) !important; }
+    h3 {
+      font-size: clamp(1.05rem, 2vw + 0.4rem, 1.3rem) !important;
+    }
+
+    h4 {
+      font-size: clamp(1rem, 1.6vw + 0.3rem, 1.1rem) !important;
+    }
   }
 
   body {
@@ -92,6 +112,7 @@
 }
 
 @layer utilities {
+
   /* Re-points the ink/surface tokens for anything sitting on top of a dark
      photograph or video (the transparent navbar over a banner). Custom
      properties cascade by proximity, so this beats the :root / :root.dark
@@ -109,29 +130,54 @@
      in light mode and a deep-emerald wash in dark mode. Photographs stay
      crisply visible on the right; copy sits on the high-contrast left. */
   .banner-scrim-x {
-    background-image: linear-gradient(
-      90deg,
-      rgb(var(--surface) / 0.98) 0%,
-      rgb(var(--surface) / 0.95) 32%,
-      rgb(var(--surface) / 0.80) 46%,
-      rgb(var(--surface) / 0.22) 60%,
-      transparent 74%
-    );
+    background-image: linear-gradient(90deg,
+        rgb(var(--surface)) 0%,
+        rgb(var(--surface)) 44%,
+        rgb(var(--surface) / 0.88) 55%,
+        rgb(var(--surface) / 0.25) 70%,
+        transparent 84%);
   }
+
   .banner-scrim-y {
-    background-image: linear-gradient(
-      180deg,
-      rgb(var(--surface) / 0.45) 0%,
-      rgb(var(--surface) / 0.10) 26%,
-      rgb(var(--surface) / 0.60) 65%,
-      rgb(var(--surface) / 0.96) 100%
-    );
+    background-image: linear-gradient(180deg,
+        rgb(var(--surface) / 0.45) 0%,
+        rgb(var(--surface) / 0.10) 26%,
+        rgb(var(--surface) / 0.60) 65%,
+        rgb(var(--surface) / 0.96) 100%);
   }
-  /* Desktop mask: softer fade onset so photos stay sharp and clear. */
+
+  /* Desktop mask: soft crisp fade onset so photos stay sharp and clear. */
   @media (min-width: 1024px) {
     .banner-fade-left {
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 18%);
-      mask-image: linear-gradient(to right, transparent 0%, #000 18%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 6%);
+      mask-image: linear-gradient(to right, transparent 0%, #000 6%);
+    }
+  }
+
+  /* Banner photograph -> page hand-off. An eased (S-curve) fade rather than a
+     straight ramp, so there is no visible edge where the picture meets the
+     page: along the bottom on phones/tablets (photo above the copy) and along
+     the left on desktop (photo beside the copy). Only the edge fades; the
+     rest of the picture stays at full clarity. */
+  .banner-photo-blend {
+    --blend: clamp(5rem, 14svh, 8rem);
+    --blend-stops: transparent 0,
+      rgb(0 0 0 / 0.04) calc(var(--blend) * 0.12),
+      rgb(0 0 0 / 0.14) calc(var(--blend) * 0.26),
+      rgb(0 0 0 / 0.32) calc(var(--blend) * 0.4),
+      rgb(0 0 0 / 0.56) calc(var(--blend) * 0.56),
+      rgb(0 0 0 / 0.78) calc(var(--blend) * 0.72),
+      rgb(0 0 0 / 0.93) calc(var(--blend) * 0.87),
+      #000 var(--blend);
+    -webkit-mask-image: linear-gradient(to top, var(--blend-stops));
+    mask-image: linear-gradient(to top, var(--blend-stops));
+  }
+
+  @media (min-width: 1024px) {
+    .banner-photo-blend {
+      --blend: clamp(9rem, 13vw, 16rem);
+      -webkit-mask-image: linear-gradient(to right, var(--blend-stops));
+      mask-image: linear-gradient(to right, var(--blend-stops));
     }
   }
 
@@ -174,6 +220,7 @@
     position: relative;
     display: inline-block;
   }
+
   .gold-underline::after {
     content: '';
     position: absolute;
@@ -221,7 +268,7 @@
   }
 
   .hero-mesh {
-    background-image: 
+    background-image:
       radial-gradient(at 100% 0%, rgba(199, 154, 61, 0.08) 0px, transparent 50%),
       radial-gradient(at 0% 100%, rgba(18, 51, 43, 0.06) 0px, transparent 50%);
   }
@@ -235,23 +282,27 @@
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
+
   .scrollbar-hidden::-webkit-scrollbar {
     display: none;
   }
 
   .gold-shimmer {
-    background: linear-gradient(
-      90deg,
-      rgba(199, 154, 61, 0) 0%,
-      rgba(230, 189, 101, 0.5) 50%,
-      rgba(199, 154, 61, 0) 100%
-    );
+    background: linear-gradient(90deg,
+        rgba(199, 154, 61, 0) 0%,
+        rgba(230, 189, 101, 0.5) 50%,
+        rgba(199, 154, 61, 0) 100%);
     background-size: 200% 100%;
     animation: shimmer 3s infinite;
   }
 
   @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
+    0% {
+      background-position: -200% 0;
+    }
+
+    100% {
+      background-position: 200% 0;
+    }
   }
 }

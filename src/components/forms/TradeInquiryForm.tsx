@@ -170,7 +170,7 @@ export const TradeInquiryForm: React.FC = () => {
             </label>
             <input
               type="tel"
-              placeholder="+971 50 123 4567 or +91 98200 00000"
+              placeholder="+91 99997 45023"
               {...register('phone')}
               className={`${inputClass} ${errors.phone ? 'border-red-500' : ''}`}
             />

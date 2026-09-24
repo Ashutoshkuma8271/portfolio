@@ -81,16 +81,18 @@ export const AboutPage: React.FC = () => {
                 eyebrow="Executive Biography"
                 title="A Multifaceted Journey of Purpose & Statecraft"
                 subtitle="Uniting sovereign trade corridors, celebrated arts, and nationwide grassroots leadership."
+                center="tablet"
                 className="mb-6 sm:mb-8"
               />
 
-              {/* Bio Paragraphs with Luxury Editorial Formatting */}
-              <div className="space-y-5 font-sans text-[0.95rem] sm:text-base lg:text-lg leading-relaxed text-ink">
+              {/* Bio Paragraphs with Luxury Editorial Formatting. The floated drop cap
+                  only works on left-aligned text, so below lg it is a gold initial instead. */}
+              <div className="mx-auto max-w-2xl space-y-5 text-center font-sans text-[0.95rem] sm:text-base lg:mx-0 lg:max-w-none lg:text-left lg:text-lg leading-relaxed text-ink">
                 {aboutData.bioParagraphs.map((para, idx) => (idx < 2 || bioOpen) && (
-                  <p 
-                    key={idx} 
-                    className={idx === 0 
-                      ? "text-base sm:text-lg lg:text-xl font-medium text-ink-heading leading-relaxed first-letter:float-left first-letter:mr-2.5 sm:first-letter:mr-3 first-letter:font-heading first-letter:text-4xl sm:first-letter:text-5xl first-letter:font-bold first-letter:text-gold-600 first-letter:leading-none" 
+                  <p
+                    key={idx}
+                    className={idx === 0
+                      ? "text-base sm:text-lg lg:text-xl font-medium text-ink-heading leading-relaxed first-letter:font-heading first-letter:font-bold first-letter:text-gold-600 lg:first-letter:float-left lg:first-letter:mr-3 lg:first-letter:text-5xl lg:first-letter:leading-none"
                       : "text-ink-soft"}
                   >
                     {para}
@@ -99,7 +101,7 @@ export const AboutPage: React.FC = () => {
               </div>
 
               {aboutData.bioParagraphs.length > 2 && (
-                <div className="mt-8 flex items-center justify-start w-full">
+                <div className="mt-8 flex items-center justify-center lg:justify-start w-full">
                   <BannerButton
                     variant="secondary"
                     className="w-full sm:w-auto min-w-[200px] justify-center cursor-pointer shadow-xs hover:shadow-gold-glow"

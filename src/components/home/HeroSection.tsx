@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { Container } from '../layout/Container';
 import { CountUp } from '../ui/CountUp';
 import { BannerButton } from '../banner/BannerButton';
@@ -19,7 +19,7 @@ interface CredentialProps {
 }
 
 const Credential: React.FC<CredentialProps> = ({ value, suffix = '', label, delay }) => (
-  <div className="min-w-0 text-center sm:text-left">
+  <div className="min-w-0 text-center lg:text-left">
     <CountUp
       value={value}
       suffix={suffix}
@@ -81,6 +81,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     [],
   );
 
+  // Parallax: the photographs drift slightly slower than the page. Transform-only, off for reduced motion.
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
+  const imageY = useTransform(scrollYProgress, [0, 1], ['0%', reduceMotion ? '0%' : '8%']);
+
   const rise = (i: number) => ({
     initial: { opacity: 0, y: reduceMotion ? 0 : 24 },
     animate: { opacity: 1, y: 0 },
@@ -93,42 +97,42 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-surface text-ink"
       aria-label="Introduction"
     >
-      {/* ── Photographs: cross-fading slideshow (HD clear presentation) ── */}
+      {/* ── Photographs: full-bleed cross-fading slideshow ── */}
       <div
-        className="grain banner-fade-left absolute left-0 right-0 top-0 -z-10 h-[52svh] overflow-hidden lg:inset-y-0 lg:left-[22%] lg:h-auto"
+        className="banner-photo-blend absolute left-0 right-0 top-0 -z-10 h-[40svh] sm:h-[44svh] overflow-hidden lg:inset-y-0 lg:left-[44%] xl:left-[46%] lg:h-auto"
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => setHovering(false)}
       >
-        {heroSlides.map((s, i) => {
-          const isActive = i === active;
-          return (
-            <img
-              key={s.id}
-              src={s.src}
-              alt={isActive ? s.alt : ''}
-              aria-hidden={!isActive}
-              decoding="async"
-              loading="eager"
-              style={{ objectPosition: s.focal, filter: 'contrast(1.05) saturate(1.08)' }}
-              className={`absolute inset-0 h-full w-full object-cover will-change-transform transition-opacity duration-[1000ms] ease-in-out ${
-                isActive ? 'z-[1] opacity-100' : 'opacity-0'
-              }`}
-            />
-          );
-        })}
+        <motion.div style={{ y: imageY, scale: 1.08 }} className="grain absolute inset-0 will-change-transform">
+          {heroSlides.map((s, i) => {
+            const isActive = i === active;
+            return (
+              <img
+                key={s.id}
+                src={s.src}
+                alt={isActive ? s.alt : ''}
+                aria-hidden={!isActive}
+                decoding="async"
+                loading="eager"
+                style={{ objectPosition: s.focal, filter: 'contrast(1.05) saturate(1.08)' }}
+                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1000ms] ease-in-out ${
+                  isActive ? 'z-[1] opacity-100' : 'opacity-0'
+                }`}
+              />
+            );
+          })}
+        </motion.div>
       </div>
 
-      {/* ── Theme-following scrims: keeps text ultra-readable while keeping photos crisp & HD ── */}
-      <div aria-hidden className="banner-scrim-x pointer-events-none absolute inset-0 -z-10 hidden lg:block" />
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[52svh] bg-gradient-to-b from-surface/20 via-transparent via-50% to-surface lg:hidden" />
+      {/* Keeps the navigation legible where it crosses the photograph */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-surface/70 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-surface/90 via-surface/45 to-transparent"
       />
 
-      {/* ── Copy ─────────────────────────────────────────────────── */}
-      <Container className="relative z-10 flex flex-1 flex-col justify-end pb-6 pt-[36svh] sm:pb-8 sm:pt-36 lg:justify-center lg:pb-10 lg:pt-32">
-        <div className="max-w-2xl text-center sm:text-left flex flex-col items-center sm:items-start mx-auto sm:mx-0 w-full">
+      {/* ── Copy -- held to the left half on desktop so it never sits on the photographs ── */}
+      <Container className="relative z-10 flex flex-1 flex-col justify-end pb-8 pt-[36svh] sm:justify-center sm:pb-10 sm:pt-[42svh] lg:justify-center lg:pb-12 lg:pt-32">
+        <div className="max-w-2xl text-center lg:text-left flex flex-col items-center lg:items-start mx-auto lg:mx-0 w-full lg:w-1/2 lg:max-w-none lg:pr-16">
           {/* Eyebrow: Factual Tenure & Mission */}
           <motion.div {...rise(0)}>
             <span className="inline-flex items-center gap-2 rounded-full border border-gold-600/40 bg-surface-raised/85 px-3.5 py-1.5 backdrop-blur-md shadow-2xs">
@@ -143,23 +147,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </motion.div>
 
           {/* 1. Main Heading: Immediate, concise, authoritative */}
-          <motion.h1 {...rise(1)} className="mt-4 sm:mt-5 text-center sm:text-left w-full">
+          <motion.h1 {...rise(1)} className="mt-4 sm:mt-5 text-center lg:text-left w-full">
             <span className="block font-display text-[clamp(2.2rem,4.4vw+0.8rem,4.2rem)] font-bold leading-[1.08] tracking-[-0.01em] text-ink-heading">
               H.E. Zeenat Kureshi
             </span>
           </motion.h1>
 
           {/* 2. Professional Role & Portfolio Line */}
-          <motion.div {...rise(2)} className="mt-3.5 sm:mt-4 flex flex-col sm:flex-row items-center sm:items-start gap-2.5 sm:gap-3.5 w-full">
+          <motion.div {...rise(2)} className="mt-3.5 sm:mt-4 flex flex-col lg:flex-row items-center lg:items-start gap-2.5 lg:gap-3.5 w-full">
             <span
               aria-hidden
-              className="hidden sm:block mt-1 h-9 w-[3px] shrink-0 rounded-full bg-gradient-to-b from-gold-400 to-gold-700"
+              className="hidden lg:block mt-1 h-9 w-[3px] shrink-0 rounded-full bg-gradient-to-b from-gold-400 to-gold-700"
             />
-            <div className="text-center sm:text-left">
+            <div className="text-center lg:text-left">
               <p className="font-heading text-[clamp(1.12rem,1.3vw+0.65rem,1.5rem)] font-semibold leading-snug text-gold-700 dark:text-gold-300">
                 Trade Commissioner | India–GCC Relations
               </p>
-              <p className="mt-1 font-label text-[0.66rem] font-bold uppercase tracking-[0.16em] text-ink-soft sm:text-2xs">
+              <p className="mt-1 font-label text-3xs font-bold uppercase tracking-[0.16em] text-ink-soft text-balance sm:text-2xs">
                 Institutional Trade &bull; Cross-Border Investment &bull; Sovereign Diplomacy
               </p>
             </div>
@@ -168,7 +172,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           {/* 3. Supporting Description: Highly readable with generous spacing */}
           <motion.p
             {...rise(3)}
-            className="mt-5 max-w-xl font-sans text-[clamp(0.95rem,0.3vw+0.88rem,1.12rem)] leading-relaxed text-ink-soft text-center sm:text-left mx-auto sm:mx-0 sm:mt-5.5"
+            className="mt-5 max-w-xl font-sans text-[clamp(0.95rem,0.3vw+0.88rem,1.12rem)] leading-relaxed text-ink-soft text-center lg:text-left mx-auto lg:mx-0 sm:mt-5.5"
           >
             Advancing strategic bilateral commerce, institutional investment corridors, and high-level economic diplomacy between India and the GCC nations.
           </motion.p>
@@ -176,17 +180,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           {/* 4. Action CTAs */}
           <motion.div
             {...rise(4)}
-            className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-center sm:justify-start gap-3 sm:gap-4 w-full sm:w-auto sm:mt-7"
+            className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full sm:w-auto sm:mt-7"
           >
             <BannerButton
-              className="w-full sm:w-[190px] justify-center"
+              className="w-full sm:w-[200px] justify-center"
               onClick={fire(onOpenInvestmentModal, 'open-investment-modal')}
             >
               Invest With Us
             </BannerButton>
             <BannerButton
               variant="secondary"
-              className="w-full sm:w-[190px] justify-center"
+              className="w-full sm:w-[200px] justify-center"
               onClick={fire(onOpenCollaborateModal, 'open-collaborate-modal')}
             >
               Collaborate
@@ -241,16 +245,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <Credential value={siteConfig.collaborations.length} label="Sovereign Markets" delay={0.6} />
             </div>
             <div className="hidden border-l border-gold-600/25 pl-8 lg:block">
-              <ul className="flex flex-wrap items-center gap-x-3 gap-y-1 font-label text-2xs font-bold uppercase tracking-[0.16em] text-ink-soft">
-                {siteConfig.heroValues.map((value, i) => (
-                  <React.Fragment key={value}>
-                    {i > 0 && (
-                      <li aria-hidden className="text-gold-600">
-                        &middot;
-                      </li>
-                    )}
-                    <li>{value}</li>
-                  </React.Fragment>
+              <ul className="space-y-1.5 font-label text-2xs font-bold uppercase tracking-[0.16em] text-ink-soft">
+                {siteConfig.heroValues.map((value) => (
+                  <li key={value} className="flex items-center gap-2.5">
+                    <span aria-hidden className="h-1.5 w-1.5 shrink-0 rotate-45 bg-gold-500" />
+                    {value}
+                  </li>
                 ))}
               </ul>
             </div>

@@ -13,7 +13,7 @@ import { siteConfig } from '../data/siteConfig';
  *     desk and hand it to the visitor's mail app, and say so plainly.
  */
 
-export type EnquiryKind = 'investment' | 'collaborate' | 'media';
+export type EnquiryKind = 'investment' | 'collaborate' | 'media' | 'newsletter';
 
 export interface EnquiryPayload {
   kind: EnquiryKind;
@@ -35,6 +35,7 @@ const DESK: Record<EnquiryKind, { email: string; subject: string }> = {
   investment: { email: siteConfig.contact.tradeDeskEmail, subject: 'Investor enquiry' },
   collaborate: { email: siteConfig.contact.email, subject: 'Collaboration enquiry' },
   media: { email: siteConfig.contact.mediaEmail, subject: 'Media enquiry' },
+  newsletter: { email: siteConfig.contact.email, subject: 'Executive Dispatch subscription' },
 };
 
 const makeRef = (kind: EnquiryKind) => {

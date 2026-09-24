@@ -48,7 +48,7 @@ export const BannerButton: React.FC<BannerButtonProps> = ({
     'group inline-flex items-center justify-center gap-2.5 cursor-pointer select-none font-label font-bold uppercase transition-all duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-500';
 
   const pillBase =
-    'min-h-[46px] h-[46px] sm:h-12 whitespace-nowrap rounded-full px-6 sm:px-7 text-xs sm:text-[0.78rem] tracking-[0.13em]';
+    'min-h-[46px] h-[46px] sm:h-12 whitespace-nowrap rounded-full px-5 sm:px-6 text-xs sm:text-[0.78rem] tracking-[0.13em]';
 
   const primaryStyle =
     `${pillBase} border border-gold-300/60 bg-gradient-to-b from-gold-400 via-gold-500 to-gold-600 text-emerald-950 hover:from-gold-300 hover:to-gold-500 shadow-[0_4px_14px_rgba(199,154,61,0.28)]`;
@@ -129,8 +129,9 @@ export const BannerButton: React.FC<BannerButtonProps> = ({
 
   if (!isPill) return <>{node}</>;
 
-  const hasFullWidth = className.includes('w-full');
-  const wrapperClass = `inline-flex rounded-full ${className} ${hasFullWidth ? 'w-full sm:w-auto' : ''}`.trim();
+  const hasExplicitWidth = className.includes('w-') || className.includes('min-w-');
+  const defaultWidthClass = hasExplicitWidth ? '' : 'w-full sm:w-auto sm:min-w-[190px]';
+  const wrapperClass = `inline-flex rounded-full justify-center ${defaultWidthClass} ${className}`.trim();
 
   return (
     <motion.span

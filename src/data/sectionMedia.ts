@@ -58,9 +58,10 @@ const banner = (photo: (typeof eventPhotos)[keyof typeof eventPhotos], video?: V
 export const sectionMedia: Record<SectionKey, SectionMedia> = {
   home: banner(eventPhotos.udcStage),
   about: banner(eventPhotos.udcStage, v('about')),
-  trade: banner(eventPhotos.unitedEconomicA, v('trade')),
-  media: banner(eventPhotos.felicitation, v('media')),
-  women: banner(eventPhotos.womenPanel, v('women')),
-  insights: banner(eventPhotos.agrivoltaics, v('insights')),
-  contact: banner(eventPhotos.unitedEconomicB, v('contact')),
+  // She stands at the photo's far left; pin the crop to that edge so the banner's edge blend never reaches her.
+  trade: { ...banner(eventPhotos.tradeSummitAccord, v('trade')), focal: '0% 25%' },
+  media: banner(eventPhotos.gccNationsMedia, v('media')),
+  women: banner(eventPhotos.commonwealthLeadership, v('women')),
+  insights: banner(eventPhotos.insightsSummitDialogue, v('insights')),
+  contact: banner(eventPhotos.bricsSummitContact, v('contact')),
 };

@@ -159,7 +159,7 @@ export const MediaInquiryForm: React.FC = () => {
             <input
               {...register('phone')}
               type="tel"
-              placeholder="+971 50 123 4567 or +91 98200 00000"
+              placeholder="+91 99997 45023"
               className={`${inputClass} ${errors.phone ? 'border-red-500' : ''}`}
             />
             {errors.phone && (

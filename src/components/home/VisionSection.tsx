@@ -28,8 +28,10 @@ export const VisionSection: React.FC = () => {
       </div>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 banner-scrim-x"
+        className="pointer-events-none absolute inset-0 hidden banner-scrim-x lg:block"
       />
+      {/* Below lg the copy spans the full width, so the photo becomes an even texture behind it */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-surface/[0.86] lg:hidden" />
 
       {/* Paper grain background */}
       <div aria-hidden className="hero-grain-dark pointer-events-none absolute inset-0 z-0" />
@@ -78,7 +80,7 @@ export const VisionSection: React.FC = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: '-60px' }}
-            className="lg:col-span-7 lg:pl-10"
+            className="text-center lg:col-span-7 lg:pl-10 lg:text-left"
           >
             <span className="mb-2 block font-label text-2xs font-semibold uppercase tracking-[0.25em] text-gold-800 dark:text-gold-400 sm:text-xs">
               A Shared Vision
@@ -89,11 +91,11 @@ export const VisionSection: React.FC = () => {
                 Beyond Borders
               </span>
             </h2>
-            <p className="mb-6 max-w-xl font-sans text-[clamp(0.9rem,0.6vw+0.75rem,1.125rem)] leading-relaxed text-ink sm:mb-8">
+            <p className="mx-auto mb-6 max-w-xl font-sans text-[clamp(0.9rem,0.6vw+0.75rem,1.125rem)] leading-relaxed text-ink sm:mb-8 lg:mx-0">
               Together, we can unlock new opportunities, create lasting partnerships and build a
               future of inclusive and sustainable growth.
             </p>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center sm:justify-start gap-3.5 sm:gap-4 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3.5 sm:gap-4 w-full sm:w-auto">
               <BannerButton
                 to="/contact#form"
                 className="w-full sm:w-auto min-w-[200px] justify-center"
@@ -117,14 +119,14 @@ export const VisionSection: React.FC = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: '-60px' }}
-            className="border-t border-hairline pt-6 text-left lg:col-span-5 lg:border-t-0 lg:pr-8 lg:pt-0 lg:text-right"
+            className="border-t border-hairline pt-6 text-center lg:col-span-5 lg:border-t-0 lg:pr-8 lg:pt-0 lg:text-right"
           >
             <blockquote className="mb-3 font-cormorant text-[clamp(1.5rem,2.8vw+0.8rem,2.6rem)] italic leading-tight text-ink-heading">
               &quot;Different countries.
               <br />
               A common future.&quot;
             </blockquote>
-            <div className="h-[2px] w-14 bg-gold-600 sm:w-16 lg:ml-auto" />
+            <div className="mx-auto h-[2px] w-14 bg-gold-600 sm:w-16 lg:mr-0" />
           </motion.div>
         </div>
       </Container>

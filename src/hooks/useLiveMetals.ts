@@ -12,6 +12,15 @@ const ENDPOINTS = {
  *  rates rather than typed in by hand. */
 const FX_URL = 'https://open.er-api.com/v6/latest/USD';
 
+/** Daily gold reference (USD per oz, snapshot at the start of each UTC day) from
+ *  the open fawazahmed0 currency dataset -- keyless and CORS-open, so the card can
+ *  show a real day change. The second host is the dataset's documented mirror. */
+const REFERENCE_URLS = [
+  'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/xau.json',
+  'https://latest.currency-api.pages.dev/v1/currencies/xau.json',
+];
+const REFERENCE_REFRESH_MS = 60 * 60 * 1000;
+
 /** One troy ounce in grams -- the constant that turns a spot $/oz quote into
  *  the per-gram and per-10g figures the Gulf and Indian desks actually quote. */
 export const GRAMS_PER_TROY_OUNCE = 31.1034768;
@@ -36,9 +45,17 @@ export interface FxRates {
   INR: number | null;
 }
 
+export interface GoldReference {
+  /** USD per troy ounce at the start of `date` (UTC). */
+  price: number;
+  /** YYYY-MM-DD, as published by the dataset. */
+  date: string;
+}
+
 interface Store {
   metals: Record<MetalSymbol, MetalState>;
   fx: FxRates;
+  reference: GoldReference | null;
   status: FeedStatus;
 }
 
@@ -60,6 +77,7 @@ let store: Store = {
     XAG: { points: [], price: null, updatedAt: null },
   },
   fx: { AED: null, INR: null },
+  reference: null,
   status: 'loading',
 };
 
@@ -99,12 +117,40 @@ const pollFx = async (): Promise<FxRates> => {
   }
 };
 
+/** Next time the daily reference may be (re)fetched: hourly after a success, 5 min after a failure. */
+let referenceNextAt = 0;
+
+const pollReference = async () => {
+  for (const url of REFERENCE_URLS) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) continue;
+      const data = await res.json();
+      const price = Number(data?.xau?.usd);
+      const date = typeof data?.date === 'string' ? data.date : '';
+      if (Number.isFinite(price) && price > 0 && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
+        store = { ...store, reference: { price, date } };
+        referenceNextAt = Date.now() + REFERENCE_REFRESH_MS;
+        notify();
+        return;
+      }
+    } catch {
+      // try the mirror
+    }
+  }
+  // No reference: the card simply shows no day change rather than a made-up one.
+};
+
 const poll = async () => {
   try {
     const [xau, xag, fx] = await Promise.all([pollOne('XAU'), pollOne('XAG'), pollFx()]);
-    store = { metals: { XAU: xau, XAG: xag }, fx, status: 'live' };
+    store = { ...store, metals: { XAU: xau, XAG: xag }, fx, status: 'live' };
   } catch {
     store = { ...store, status: store.status === 'loading' ? 'error' : store.status };
+  }
+  if (Date.now() >= referenceNextAt) {
+    referenceNextAt = Date.now() + 5 * 60 * 1000;
+    pollReference();
   }
   notify();
 };

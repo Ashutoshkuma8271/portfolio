@@ -75,17 +75,19 @@ export const InsightsPage: React.FC = () => {
               to={`/insights/${lead.slug}`}
               className="group mb-8 grid overflow-hidden rounded-3xl border border-gold-500/40 bg-surface-raised shadow-luxury-lg transition-all duration-300 hover:-translate-y-1 hover:border-gold-400/70 lg:mb-10 lg:grid-cols-12"
             >
-              <div className="relative min-h-[240px] lg:col-span-6">
+              <div className="grain relative min-h-[260px] overflow-hidden lg:col-span-6">
                 <img
                   src={lead.featuredImage}
                   alt=""
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-surface/60 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-surface-raised/80" />
+                <span className="absolute left-5 top-5 z-[3] rounded-full border border-gold-400/50 bg-emerald-950/70 px-3.5 py-1.5 font-label text-2xs font-bold uppercase tracking-[0.16em] text-gold-200 backdrop-blur-md">
+                  Featured essay
+                </span>
               </div>
-              <div className="flex flex-col justify-center p-8 text-ink-heading sm:p-12 lg:col-span-6">
+              <div className="flex flex-col items-center justify-center p-8 text-center text-ink-heading sm:p-12 lg:col-span-6 lg:items-start lg:text-left">
                 <span className="font-label text-2xs font-bold uppercase tracking-[0.22em] text-gold-800 dark:text-gold-300">
-                  Featured essay &middot; {lead.category}
+                  {lead.category}
                 </span>
                 <h2 className="mt-4 font-display text-2xl font-semibold leading-snug text-ink-heading transition-colors group-hover:text-gold-700 dark:group-hover:text-gold-300 sm:text-3xl">
                   {lead.title}
@@ -93,7 +95,7 @@ export const InsightsPage: React.FC = () => {
                 <p className="mt-4 text-base leading-relaxed text-ink sm:text-lg">
                   {lead.excerpt}
                 </p>
-                <div className="mt-6 flex items-center gap-4 text-sm text-ink-soft">
+                <div className="mt-6 flex items-center justify-center gap-4 text-sm text-ink-soft lg:justify-start">
                   <span>{lead.date}</span>
                   <span aria-hidden>&bull;</span>
                   <span className="flex items-center gap-1.5 text-gold-800 dark:text-gold-300">
@@ -112,17 +114,22 @@ export const InsightsPage: React.FC = () => {
                 whileHover={{ y: -4, boxShadow: '0 28px 50px -18px rgba(12,43,34,0.30)' }}
                 transition={{ type: 'spring', stiffness: 320, damping: 26 }}
                 key={post.slug}
-                className="bg-surface-raised rounded-3xl border border-hairline shadow-luxury hover:shadow-luxury-lg hover:border-gold-600/40 transition-all duration-300 ease-out overflow-hidden flex flex-col justify-between group"
+                className="relative bg-surface-raised rounded-3xl border border-hairline shadow-luxury hover:shadow-luxury-lg hover:border-gold-600/40 transition-all duration-300 ease-out overflow-hidden flex flex-col justify-between group"
               >
+                <span
+                  aria-hidden
+                  className="absolute inset-x-0 top-0 z-10 h-[3px] origin-left scale-x-0 bg-gradient-to-r from-gold-700 via-gold-400 to-gold-700 transition-transform duration-500 ease-out group-hover:scale-x-100"
+                />
                 <div>
                   {/* Featured Image Frame */}
-                  <Link to={`/insights/${post.slug}`} className="block relative aspect-[16/9] overflow-hidden bg-emerald-950">
+                  <Link to={`/insights/${post.slug}`} className="grain block relative aspect-[16/9] lg:aspect-[2/1] overflow-hidden bg-emerald-950">
                     <img
                       src={post.featuredImage}
                       alt={post.title}
+                      style={{ objectPosition: '50% 30%' }}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 group-hover:opacity-100"
                     />
-                    <div className="absolute top-4 left-4">
+                    <div className="absolute top-4 left-4 z-[3]">
                       <Badge variant="emerald" size="sm">
                         {post.category}
                       </Badge>
@@ -130,8 +137,8 @@ export const InsightsPage: React.FC = () => {
                   </Link>
 
                   {/* Article Content */}
-                  <div className="p-8">
-                    <div className="flex items-center gap-3 text-xs text-ink-faint mb-3">
+                  <div className="p-7 text-center sm:p-8 sm:text-left">
+                    <div className="flex items-center justify-center gap-3 text-xs text-ink-faint mb-3 sm:justify-start">
                       <span>{post.date}</span>
                       <span>•</span>
                       <span className="flex items-center gap-1">
@@ -140,17 +147,17 @@ export const InsightsPage: React.FC = () => {
                       </span>
                     </div>
 
-                    <h2 className="font-display text-2xl font-bold text-ink-heading group-hover:text-gold-700 transition-colors leading-snug mb-3">
+                    <h2 className="font-heading text-xl sm:text-[1.4rem] font-semibold text-ink-heading group-hover:text-gold-700 dark:group-hover:text-gold-300 transition-colors leading-snug mb-3">
                       <Link to={`/insights/${post.slug}`}>
                         {post.title}
                       </Link>
                     </h2>
 
-                    <p className="text-base sm:text-lg text-ink-soft leading-relaxed mb-6">
+                    <p className="text-[0.95rem] sm:text-base text-ink-soft leading-relaxed mb-6 line-clamp-3">
                       {post.excerpt}
                     </p>
 
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap justify-center gap-1.5 sm:justify-start">
                       {post.tags.slice(0, 3).map((tag, tIdx) => (
                         <span
                           key={tIdx}
