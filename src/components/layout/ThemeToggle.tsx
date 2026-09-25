@@ -16,7 +16,7 @@ export const ThemeToggle: React.FC<{ className?: string }> = ({ className = '' }
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       aria-pressed={isDark}
       title={isDark ? 'Light mode' : 'Dark mode'}
-      className={`relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gold-600/30 bg-surface-raised/70 text-ink-heading shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-gold-600 hover:bg-gold-500/15 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600 cursor-pointer ${className}`}
+      className={`relative flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full border border-gold-600/30 bg-surface-raised/70 text-ink-heading shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-gold-600 hover:bg-gold-500/15 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600 cursor-pointer ${className}`}
     >
       <motion.span
         key={isDark ? 'moon' : 'sun'}
@@ -25,7 +25,7 @@ export const ThemeToggle: React.FC<{ className?: string }> = ({ className = '' }
         transition={{ duration: 0.25, ease: EASE_OUT }}
         className="flex items-center justify-center"
       >
-        {isDark ? <Moon className="h-[18px] w-[18px]" /> : <Sun className="h-[18px] w-[18px]" />}
+        {isDark ? <Moon className="h-4 w-4 sm:h-[18px] sm:w-[18px]" /> : <Sun className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />}
       </motion.span>
     </button>
   );

@@ -87,9 +87,9 @@ export const CinematicBanner: React.FC<CinematicBannerProps> = ({
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-surface/90 via-surface/45 to-transparent"
       />
 
-      {/* 2. Copy -- held to the left half on desktop so it never sits on the picture */}
+      {/* 2. Copy -- held to the left half on desktop, centered in middle when screen size reduces */}
       <Container
-        className={`relative z-10 flex flex-1 flex-col justify-end pb-8 pt-[34svh] sm:pb-10 sm:pt-[38svh] lg:justify-center lg:pb-12 lg:pt-28 ${
+        className={`relative z-10 flex flex-1 flex-col justify-center items-center lg:items-start pb-6 pt-[32svh] xs:pt-[36svh] sm:pb-8 sm:pt-[38svh] lg:justify-center lg:pb-12 lg:pt-28 ${
           hasRail ? 'lg:pb-16' : ''
         }`}
       >

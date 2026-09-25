@@ -293,44 +293,42 @@ export const NavbarBrandLogo: React.FC<NavbarBrandLogoProps> = ({
       title="H.E. Zeenat Kureshi — Trade Commissioner GCC & India"
       itemScope
       itemType="https://schema.org/Person"
-      className="relative flex items-center gap-2.5 sm:gap-3.5 select-none cursor-pointer py-1 min-w-0"
+      className="relative flex items-center gap-2 sm:gap-3 select-none cursor-pointer py-1 min-w-0"
     >
       <meta itemProp="name" content="H.E. Zeenat Kureshi" />
       <meta itemProp="jobTitle" content="Trade Commissioner — GCC & India" />
       <meta itemProp="honorificPrefix" content="Her Excellency" />
 
-      {/* High-Resolution Monogram Emblem: Unboxed, pure, seamless integration with rock-solid fixed dimensions to prevent layout jumps on scroll */}
-      <div className="relative shrink-0 flex items-center justify-center h-9 w-11 xs:h-10 xs:w-12 sm:h-11 sm:w-13">
+      {/* High-Resolution Monogram Emblem: Unboxed, pure, seamless integration */}
+      <div className="relative shrink-0 flex items-center justify-center h-8 w-10 sm:h-10 sm:w-12">
         <BrandMark
           theme={theme}
-          size={44}
-          className="h-full w-full drop-shadow-[0_2px_8px_rgba(12,43,34,0.1)] transition-transform duration-300 group-hover:scale-[1.04]"
+          size={42}
+          className="h-full w-full object-contain drop-shadow-[0_2px_8px_rgba(12,43,34,0.1)] transition-transform duration-300 group-hover:scale-[1.04]"
         />
       </div>
 
       {/* Official Typographic Brand Lockup in Classical Luxury Serif (Cinzel).
-          Sized with clamp() so the nameplate itself never needs to be hidden --
-          only the secondary tagline drops away on the very smallest screens --
-          keeping the navbar identity intact without crowding the hero below it. */}
+          Sized with clamp() so the nameplate stays proportional and never overflows into action buttons. */}
       <div className="flex flex-col justify-center min-w-0">
         {/* Primary Stately Nameplate */}
         <div className="flex items-baseline min-w-0">
           <span
             itemProp="alternateName"
-            className="font-cinzel font-bold uppercase tracking-[0.1em] xs:tracking-[0.14em] sm:tracking-[0.18em] text-ink-heading leading-none truncate transition-colors duration-200 group-hover:text-gold-800 text-[clamp(0.78rem,2.4vw+0.35rem,1.16rem)]"
+            className="font-cinzel font-bold uppercase tracking-[0.06em] xs:tracking-[0.1em] sm:tracking-[0.14em] text-ink-heading leading-none truncate transition-colors duration-200 group-hover:text-gold-800 text-[clamp(0.75rem,2.1vw+0.32rem,1.14rem)]"
           >
             H.E. Zeenat Kureshi
           </span>
         </div>
 
         {/* Diplomatic Subtitle with Delicate Gold Styling -- hidden below the
-            xs breakpoint (400px) so narrow phones show a clean single-line
-            logo instead of two competing lines of text. */}
-        <div className="mt-0.5 xs:mt-1 hidden xs:flex items-center gap-1.5 min-w-0">
+            sm breakpoint (640px) so mobile phones show a clean, dignified single-line
+            logo instead of stacked competing text that overlaps with navigation controls. */}
+        <div className="mt-0.5 sm:mt-1 hidden sm:flex items-center gap-1.5 min-w-0">
           <span className="h-1 w-1 rounded-full bg-gold-600/90 shrink-0" />
           <span
             itemProp="description"
-            className={`font-label font-semibold uppercase tracking-[0.18em] sm:tracking-[0.22em] leading-none truncate text-[0.58rem] sm:text-[0.66rem] lg:text-[0.7rem] ${onDark ? 'text-gold-300' : 'text-[#8A6920]'}`}
+            className={`font-label font-semibold uppercase tracking-[0.16em] sm:tracking-[0.2em] leading-none truncate text-[0.6rem] sm:text-[0.66rem] lg:text-[0.7rem] ${onDark ? 'text-gold-300' : 'text-[#8A6920]'}`}
           >
             {subtitle}
           </span>

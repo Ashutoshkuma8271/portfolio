@@ -278,12 +278,14 @@
      -- the visual cue that there's more is the edge-fade gradient, not a
      visible scrollbar, matching how professional "trusted by" logo
      strips behave on mobile. */
-  .scrollbar-hidden {
+  .scrollbar-hidden,
+  .no-scrollbar {
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
 
-  .scrollbar-hidden::-webkit-scrollbar {
+  .scrollbar-hidden::-webkit-scrollbar,
+  .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
 

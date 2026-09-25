@@ -4,7 +4,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { WhatsAppFloatingButton } from './components/ui/WhatsAppFloatingButton';
-import { BackToTopButton } from './components/ui/BackToTopButton';
 import { ScrollToTop } from './components/ui/ScrollToTop';
 import { FloatingInvestmentWidget } from './components/ui/FloatingInvestmentWidget';
 
@@ -48,7 +47,6 @@ export const App: React.FC = () => {
         </main>
 
         <Footer />
-        <BackToTopButton />
         <WhatsAppFloatingButton />
         <FloatingInvestmentWidget />
       </div>

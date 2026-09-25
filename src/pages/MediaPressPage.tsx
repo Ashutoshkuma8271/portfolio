@@ -329,32 +329,46 @@ export const MediaPressPage: React.FC = () => {
           subtitle="Photography cleared for publication and editorial circulation."
         />
 
-        <div className="mb-8 flex flex-wrap justify-center gap-2" role="group" aria-label="Filter photographs">
-          {galleryCats.map((c) => (
-            <button
-              key={c}
-              type="button"
-              onClick={() => { setGalleryCat(c); setGalleryIdx(null); }}
-              aria-pressed={galleryCat === c}
-              className={`rounded-full border px-5 py-2 font-label text-xs font-bold uppercase tracking-[0.14em] transition-all duration-300 ${
-                galleryCat === c
-                  ? 'border-gold-500 bg-gradient-to-b from-gold-400 to-gold-600 text-emerald-950'
-                  : 'border-hairline bg-surface-raised text-ink-soft hover:border-gold-500/60 hover:text-ink-heading'
-              }`}
-            >
-              {c}
-            </button>
-          ))}
-        </div>
+        {/* Category Navigation: Desktop centered row, Mobile/Tablet contained horizontal scroll track */}
+        <nav className="relative mb-8 w-full" aria-label="Filter photographs">
+          <div className="w-full max-w-full overflow-x-auto overflow-y-hidden no-scrollbar scrollbar-hidden scroll-smooth snap-x snap-proximity py-1 px-4 sm:px-0 -mx-4 sm:mx-0">
+            <div className="flex flex-nowrap items-center gap-2.5 sm:gap-3 w-max min-w-full justify-start lg:justify-center">
+              {galleryCats.map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={(e) => {
+                    setGalleryCat(c);
+                    setGalleryIdx(null);
+                    e.currentTarget.scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'nearest',
+                      inline: 'nearest',
+                    });
+                  }}
+                  aria-pressed={galleryCat === c}
+                  className={`shrink-0 flex-none whitespace-nowrap snap-start rounded-full border px-5 py-2 font-label text-xs font-bold uppercase tracking-[0.14em] transition-all duration-300 cursor-pointer ${
+                    galleryCat === c
+                      ? 'border-gold-500 bg-gradient-to-b from-gold-400 to-gold-600 text-emerald-950 shadow-md scale-[1.02]'
+                      : 'border-hairline bg-surface-raised text-ink-soft hover:border-gold-500/60 hover:text-ink-heading'
+                  }`}
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
+          </div>
+        </nav>
 
-        <div className="grid auto-rows-[180px] grid-cols-2 gap-4 sm:auto-rows-[220px] lg:grid-cols-4">
+        {/* Mobile: Smooth horizontal swipe carousel with scroll snap. Tablet & Desktop: Bento Grid */}
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 sm:pb-0 sm:grid sm:auto-rows-[220px] sm:grid-cols-2 lg:grid-cols-4 no-scrollbar">
           {visibleGallery.map((img, i) => (
             <button
               key={img.id}
               type="button"
               onClick={() => setGalleryIdx(i)}
               aria-label={`Open photo: ${img.title}`}
-              className={`grain group relative overflow-hidden rounded-2xl border border-gold-500/30 bg-emerald-950 text-left shadow-luxury focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600 ${
+              className={`grain group relative shrink-0 w-[80vw] max-w-[300px] h-[330px] snap-start overflow-hidden rounded-2xl border border-gold-500/30 bg-emerald-950 text-left shadow-luxury focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600 sm:w-auto sm:max-w-none sm:h-auto sm:shrink ${
                 GALLERY_SPANS[i] ?? ''
               }`}
             >
@@ -365,16 +379,16 @@ export const MediaPressPage: React.FC = () => {
                 style={i === 5 ? { objectPosition: '50% 20%' } : undefined}
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-emerald-950/90 via-emerald-950/20 to-transparent p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-emerald-950/90 via-emerald-950/30 to-transparent p-4 sm:p-5 opacity-100 sm:opacity-0 transition-opacity duration-300 sm:group-hover:opacity-100 sm:group-focus-visible:opacity-100">
                 <span className="font-label text-2xs font-bold uppercase tracking-[0.18em] text-gold-300">
                   {img.category}
                 </span>
-                <span className="mt-1 font-heading text-base font-semibold leading-snug text-white">
+                <span className="mt-1 font-heading text-sm sm:text-base font-semibold leading-snug text-white">
                   {img.title}
                 </span>
               </div>
-              <span className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-gold-500/40 bg-emerald-950/80 text-gold-300 opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
-                <Expand className="h-4 w-4" />
+              <span className="absolute right-3 top-3 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-gold-500/40 bg-emerald-950/80 text-gold-300 opacity-90 sm:opacity-0 backdrop-blur-sm transition-opacity sm:group-hover:opacity-100">
+                <Expand className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </span>
             </button>
           ))}

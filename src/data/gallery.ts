@@ -18,7 +18,7 @@ const toImage = (
 });
 
 export const galleryImages: GalleryImage[] = [
-  toImage(p.cinemaAwards, 'Cinema'),
+  toImage(p.mediaCinema, 'Cinema'),
   toImage(p.aaccArabDelegation, 'Trade'),
   toImage(p.aaccCredential, 'Global Events'),
   toImage(p.bilateralAccord, 'Trade'),

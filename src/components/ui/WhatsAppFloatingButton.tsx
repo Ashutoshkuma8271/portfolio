@@ -21,7 +21,7 @@ export const WhatsAppFloatingButton: React.FC = () => {
   )}`;
 
   return (
-    <div className="fixed bottom-4 right-3 xs:bottom-5 xs:right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end">
+    <div className="fixed bottom-4 right-3 xs:bottom-5 xs:right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end pointer-events-auto select-none">
       {/* Mini Tooltip Popover */}
       {isOpen && (
         <div className="mb-3 w-[calc(100vw-2.5rem)] max-w-[300px] sm:max-w-xs bg-surface-deep/95 border border-gold-500/30 rounded-2xl shadow-[0_16px_40px_rgba(0,0,0,0.5),0_0_24px_rgba(199,154,61,0.12)] p-4 text-ivory-500 backdrop-blur-xl animate-fade-in">

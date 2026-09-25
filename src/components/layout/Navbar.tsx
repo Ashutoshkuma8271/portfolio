@@ -84,11 +84,11 @@ export const Navbar: React.FC = () => {
           ? 'bg-transparent border-b border-transparent'
           : isScrolled
           ? 'bg-surface/95 backdrop-blur-md shadow-[0_4px_20px_-8px_rgba(12,43,34,0.12)] border-b border-gold-600/25'
-          : 'bg-surface/80 backdrop-blur-xs border-b border-gold-600/10'
+          : 'bg-surface border-b border-gold-600/15'
       }`}
     >
-      <Container size="full" className="px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <div className="flex h-16 sm:h-20 items-center justify-between">
+      <Container size="full" className="px-3 sm:px-6 lg:px-8 max-w-7xl">
+        <div className="flex h-16 sm:h-20 items-center justify-between gap-2 sm:gap-4">
           {/* =========================================================================
               OFFICIAL HIGH-RESOLUTION BRAND LOGO LOCKUP
               Clickable to scroll to top / home, proportional scaling with clamp(),
@@ -99,7 +99,7 @@ export const Navbar: React.FC = () => {
             onClick={() => {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="group block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600"
+            className="group block min-w-0 shrink rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600"
             aria-label="H.E. Zeenat Kureshi - Back to top"
           >
             <NavbarBrandLogo subtitle={currentSubtitle} onDark={onDark} />
@@ -138,7 +138,7 @@ export const Navbar: React.FC = () => {
           {/* =========================================================================
               ACTION CTA & MOBILE TOGGLE
               ========================================================================= */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <ThemeToggle />
             {/* Desktop Connect Button */}
             <div className="hidden items-center lg:flex">
@@ -164,7 +164,7 @@ export const Navbar: React.FC = () => {
             {/* Mobile hamburger button with smooth state feedback */}
             <button
               onClick={() => setMobileMenuOpen((v) => !v)}
-              className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-gold-600/30 bg-surface-raised/70 p-2 text-ink-heading backdrop-blur-sm transition-all duration-200 hover:bg-gold-500/15 hover:border-gold-600 active:scale-95 focus:outline-none lg:hidden cursor-pointer"
+              className="relative flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl border border-gold-600/30 bg-surface-raised/70 p-2 text-ink-heading backdrop-blur-sm transition-all duration-200 hover:bg-gold-500/15 hover:border-gold-600 active:scale-95 focus:outline-none lg:hidden cursor-pointer"
               aria-label="Toggle navigation menu"
               aria-expanded={mobileMenuOpen}
             >
@@ -177,9 +177,9 @@ export const Navbar: React.FC = () => {
                 className="flex items-center justify-center"
               >
                 {mobileMenuOpen ? (
-                  <X className="h-5 w-5 text-gold-700" />
+                  <X className="h-4.5 w-4.5 text-gold-700" />
                 ) : (
-                  <Menu className="h-5 w-5 text-ink-heading" />
+                  <Menu className="h-4.5 w-4.5 text-ink-heading" />
                 )}
               </motion.div>
             </button>

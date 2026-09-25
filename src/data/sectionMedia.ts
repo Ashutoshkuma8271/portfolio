@@ -57,7 +57,7 @@ const banner = (photo: (typeof eventPhotos)[keyof typeof eventPhotos], video?: V
 
 export const sectionMedia: Record<SectionKey, SectionMedia> = {
   home: banner(eventPhotos.udcStage),
-  about: banner(eventPhotos.udcStage, v('about')),
+  about: { ...banner(eventPhotos.aboutHeroBanner, v('about')), focal: '64% 35%' },
   // She stands at the photo's far left; pin the crop to that edge so the banner's edge blend never reaches her.
   trade: { ...banner(eventPhotos.tradeSummitAccord, v('trade')), focal: '0% 25%' },
   media: banner(eventPhotos.gccNationsMedia, v('media')),

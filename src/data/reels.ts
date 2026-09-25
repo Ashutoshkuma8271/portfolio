@@ -19,14 +19,18 @@ export interface Reel {
   url: string;
   title: string;
   topic?: 'trade' | 'women' | 'media' | 'events';
+  youtubeId?: string;
+  videoSrc: string;
 }
 
 const yt = (id: string): string => `https://www.youtube.com/shorts/${id}`;
 const fb = (id: string): string => `https://www.facebook.com/reel/${id}`;
 
-const RAW: Array<{ platform: ReelPlatform; url: string }> = [
-  { platform: 'youtube', url: yt('2O1f4gPi53I') },
-  { platform: 'youtube', url: yt('H23yY3GocJ4') },
+const RAW: Array<{ platform: ReelPlatform; url: string; youtubeId?: string }> = [
+  { platform: 'youtube', url: yt('2O1f4gPi53I'), youtubeId: '2O1f4gPi53I' },
+  { platform: 'youtube', url: yt('H23yY3GocJ4'), youtubeId: 'H23yY3GocJ4' },
+  { platform: 'youtube', url: 'https://www.youtube.com/watch?v=ndXivLGTZ6w', youtubeId: 'ndXivLGTZ6w' },
+  { platform: 'youtube', url: 'https://www.youtube.com/watch?v=uZmFW5_KYzM', youtubeId: 'uZmFW5_KYzM' },
   { platform: 'facebook', url: 'https://www.facebook.com/share/r/1CRZNm3Ucg/' },
   ...[
     '930054013500866',
@@ -52,7 +56,8 @@ const RAW: Array<{ platform: ReelPlatform; url: string }> = [
 const REEL_TITLES = [
   'BRICS Trade Conclave Address',
   'Global Leadership Keynote',
-  'Agrivoltaics Summit Insights',
+  'GCC Bilateral Trade & Investment Keynote',
+  'A Proud Moment! Return to India as GCC Commissioner',
   'Women in Diplomatic Governance',
   'Bilateral Economic Dialogue',
   'GCC Investment Corridor Briefing',
@@ -76,21 +81,27 @@ export const reels: Reel[] = RAW.map((r, i) => ({
   id: `reel-${String(i + 1).padStart(2, '0')}`,
   platform: r.platform,
   url: r.url,
+  youtubeId: r.youtubeId,
   title: REEL_TITLES[i] ?? `Summit Dispatch ${i + 1}`,
+  videoSrc: `/media/videos/reels/reel-${String(i + 1).padStart(2, '0')}.mp4`,
 }));
 
-/** Official embed URL for the modal player. */
-export const embedUrl = (r: Reel): string => {
+/** Official embed URL for player with continuous repeating autoplay support */
+export const embedUrl = (r: Reel, autoplay = true, muted = false, loop = true): string => {
   if (r.platform === 'youtube') {
-    const id = r.url.split('/shorts/')[1]?.split(/[?&]/)[0] ?? '';
-    return `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1`;
+    const id = r.youtubeId || r.url.split('/shorts/')[1]?.split(/[?&]/)[0] || r.url.split('v=')[1]?.split(/[?&]/)[0] || '';
+    const loopParam = loop && id ? `&loop=1&playlist=${id}` : '';
+    const muteParam = muted ? '&mute=1' : '';
+    const autoParam = autoplay ? '&autoplay=1' : '&autoplay=0';
+    return `https://www.youtube-nocookie.com/embed/${id}?${autoParam}${muteParam}${loopParam}&rel=0&playsinline=1&modestbranding=1&enablejsapi=1`;
   }
-  return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(r.url)}&show_text=false&autoplay=true`;
+  return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(r.url)}&show_text=false&autoplay=${autoplay ? 'true' : 'false'}`;
 };
 
-/** YouTube gives us a real still; Facebook does not (no thumbnail without their API). */
+/** YouTube gives us a real still; Facebook uses branded fallback */
 export const reelThumb = (r: Reel): string | null => {
   if (r.platform !== 'youtube') return null;
-  const id = r.url.split('/shorts/')[1]?.split(/[?&]/)[0] ?? '';
+  const id = r.youtubeId || r.url.split('/shorts/')[1]?.split(/[?&]/)[0] || r.url.split('v=')[1]?.split(/[?&]/)[0] || '';
+  if (!id) return null;
   return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 };

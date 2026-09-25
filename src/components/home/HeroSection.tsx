@@ -130,9 +130,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-surface/90 via-surface/45 to-transparent"
       />
 
-      {/* ── Copy -- held to the left half on desktop so it never sits on the photographs ── */}
-      <Container className="relative z-10 flex flex-1 flex-col justify-end pb-8 pt-[36svh] sm:justify-center sm:pb-10 sm:pt-[42svh] lg:justify-center lg:pb-12 lg:pt-32">
-        <div className="max-w-2xl text-center lg:text-left flex flex-col items-center lg:items-start mx-auto lg:mx-0 w-full lg:w-1/2 lg:max-w-none lg:pr-16">
+      {/* ── Copy -- held to the left half on desktop, gracefully centered in the middle when screen size reduces ── */}
+      <Container className="relative z-10 flex flex-1 flex-col justify-center items-center lg:items-start pb-6 pt-[34svh] xs:pt-[38svh] sm:pb-8 sm:pt-[40svh] lg:justify-center lg:pb-12 lg:pt-32">
+        <div className="mx-auto flex w-full max-w-2xl flex-col items-center text-center lg:mx-0 lg:w-1/2 lg:max-w-none lg:items-start lg:pr-16 lg:text-left">
           {/* Eyebrow: Factual Tenure & Mission */}
           <motion.div {...rise(0)}>
             <span className="inline-flex items-center gap-2 rounded-full border border-gold-600/40 bg-surface-raised/85 px-3.5 py-1.5 backdrop-blur-md shadow-2xs">
@@ -153,34 +153,39 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </span>
           </motion.h1>
 
-          {/* 2. Professional Role & Portfolio Line */}
-          <motion.div {...rise(2)} className="mt-3.5 sm:mt-4 flex flex-col lg:flex-row items-center lg:items-start gap-2.5 lg:gap-3.5 w-full">
-            <span
-              aria-hidden
-              className="hidden lg:block mt-1 h-9 w-[3px] shrink-0 rounded-full bg-gradient-to-b from-gold-400 to-gold-700"
-            />
-            <div className="text-center lg:text-left">
-              <p className="font-heading text-[clamp(1.12rem,1.3vw+0.65rem,1.5rem)] font-semibold leading-snug text-gold-700 dark:text-gold-300">
-                Trade Commissioner | India–GCC Relations
-              </p>
-              <p className="mt-1 font-label text-3xs font-bold uppercase tracking-[0.16em] text-ink-soft text-balance sm:text-2xs">
-                Institutional Trade &bull; Cross-Border Investment &bull; Sovereign Diplomacy
-              </p>
+          {/* 2. Professional Role & Portfolio Line with Gold Left Accent Bar */}
+          <motion.div
+            {...rise(2)}
+            className="mt-3.5 sm:mt-4 flex items-center justify-center lg:justify-start w-full"
+          >
+            <div className="inline-flex items-stretch gap-3 sm:gap-3.5 text-left">
+              <span
+                aria-hidden
+                className="w-[3px] sm:w-[3.5px] rounded-full bg-gradient-to-b from-gold-400 via-gold-500 to-gold-700 shrink-0 self-stretch my-0.5"
+              />
+              <div className="flex flex-col justify-center">
+                <p className="font-heading text-[clamp(1.15rem,1.4vw+0.75rem,1.55rem)] font-bold leading-tight text-ink-heading tracking-tight">
+                  GCC–India Trade Commissioner
+                </p>
+                <p className="mt-1 font-label text-3xs sm:text-2xs font-bold uppercase tracking-[0.14em] sm:tracking-[0.18em] text-gold-800 dark:text-gold-300">
+                  INVESTOR &bull; ENTREPRENEUR &bull; FILM PRODUCER
+                </p>
+              </div>
             </div>
           </motion.div>
 
-          {/* 3. Supporting Description: Highly readable with generous spacing */}
+          {/* 3. Supporting Description */}
           <motion.p
             {...rise(3)}
-            className="mt-5 max-w-xl font-sans text-[clamp(0.95rem,0.3vw+0.88rem,1.12rem)] leading-relaxed text-ink-soft text-center lg:text-left mx-auto lg:mx-0 sm:mt-5.5"
+            className="mt-4 sm:mt-5 max-w-xl font-sans text-[clamp(0.95rem,0.3vw+0.88rem,1.12rem)] leading-relaxed text-ink-soft text-center lg:text-left mx-auto lg:mx-0"
           >
-            Advancing strategic bilateral commerce, institutional investment corridors, and high-level economic diplomacy between India and the GCC nations.
+            Building commercial bridges between India and the GCC through trade, investment and strategic partnerships.
           </motion.p>
 
           {/* 4. Action CTAs */}
           <motion.div
             {...rise(4)}
-            className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full sm:w-auto sm:mt-7"
+            className="mt-6 flex w-full flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-4 sm:w-auto sm:mt-7"
           >
             <BannerButton
               className="w-full sm:w-[200px] justify-center"

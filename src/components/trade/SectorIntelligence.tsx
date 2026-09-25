@@ -47,26 +47,28 @@ const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
 const AUTHOR = 'H.E. Zeenat Kureshi';
 
-/** High-definition vector clock icon matching the modern clean circle clock design */
+/** Premium gold clock icon matching the clean circular design */
 const ClockIcon: React.FC<{ className?: string }> = ({ className = 'h-3.5 w-3.5' }) => (
   <svg
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className={className}
+    className={`${className} text-[#EAA015] dark:text-[#FBBF24] shrink-0`}
     aria-hidden="true"
   >
+    {/* Clean circular gold ring */}
     <circle
       cx="12"
       cy="12"
-      r="9.5"
+      r="9.3"
       stroke="currentColor"
-      strokeWidth="2.2"
+      strokeWidth="2.5"
     />
+    {/* Rounded clock hands matching exact reference geometry */}
     <path
-      d="M12 6.5V12L15.5 15.5"
+      d="M12 6.5V12.2L15.6 15.8"
       stroke="currentColor"
-      strokeWidth="2.2"
+      strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
@@ -396,7 +398,7 @@ export const SectorIntelligence: React.FC = () => {
               <div className="flex items-center justify-center gap-2 sm:gap-3 w-full sm:w-auto">
                 <span aria-hidden className="hidden xl:block h-7 w-[1px] bg-gold-600/30 mr-1" />
                 <div className="flex items-center justify-center gap-1.5 text-2xs sm:text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-ink-faint text-center">
-                  <ClockIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-gold-600 dark:text-gold-400 shrink-0" />
+                  <ClockIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
                   <span>
                     {fetchedAt
                       ? `UPDATED ${new Date(fetchedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
@@ -486,7 +488,7 @@ export const SectorIntelligence: React.FC = () => {
                         {item.publication || 'Sovereign Wire'}
                       </p>
                       <p className="mt-0.5 inline-flex items-center gap-1.5 font-label text-3xs sm:text-2xs text-ink-faint">
-                        <ClockIcon className="h-3 w-3 text-gold-600 dark:text-gold-400 shrink-0" />
+                        <ClockIcon className="h-3.5 w-3.5 shrink-0" />
                         <span>{dateLabel(item.pubDate)}</span>
                       </p>
                     </div>

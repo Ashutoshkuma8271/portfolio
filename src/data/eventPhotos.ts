@@ -2,22 +2,23 @@ import agrivoltaics from '../assets/images/events/agrivoltaics-conference.webp';
 import unitedEconomicA from '../assets/images/events/united-economic-brics-a.webp';
 import felicitation from '../assets/images/events/udc-brics-felicitation.webp';
 import womenPanel from '../assets/images/events/udc-brics-women-panel.webp';
-import udcStage from '../assets/images/events/udc-brics-stage.webp';
+import udcStage from '../assets/images/events/udc-stage-delegation-arrival.webp';
 import unitedEconomicB from '../assets/images/events/united-economic-brics-b.webp';
 
-// 5 High-Definition Official Press & Summit Photographs
+// High-Definition Official Press & Summit Photographs
 import cinemaAwards from '../assets/images/events/cultural-cinema-honor-hd.png';
-import mediaCinemaIndoArab from '../assets/images/events/media-cinema-indo-arab.png';
+import mediaCinemaIndoArab from '../assets/images/events/media-cinema-indo-arab.webp';
 import aaccCredential from '../assets/images/events/aacc-commissioner-credential-hd.jpg';
-import aaccArabDelegation from '../assets/images/events/aacc-arab-delegation-summit.png';
+import aaccArabDelegation from '../assets/images/events/aacc-arab-delegation-summit.webp';
 import bilateralAccord from '../assets/images/events/bilateral-accord-delegation.png';
-import globalTradeSummit from '../assets/images/events/global-trade-summit-leaders.png';
+import globalTradeSummit from '../assets/images/events/global-trade-summit-leaders.webp';
 import tradeSummitAccord from '../assets/images/events/trade-summit-accord-hd.jpg';
 import udcDiplomaticAward from '../assets/images/events/udc-diplomatic-award-hd.jpg';
 import commonwealthLeadership from '../assets/images/events/commonwealth-leadership-banner-hd.jpg';
 import gccNationsMedia from '../assets/images/events/gcc-nations-media-press-hd.jpg';
 import insightsSummitDialogue from '../assets/images/events/insights-summit-dialogue-hd.jpg';
 import bricsSummitContact from '../assets/images/events/brics-summit-contact-hd.jpg';
+import aboutHeroBanner from '../assets/images/events/about-hero-banner-hd.webp';
 
 export interface EventPhoto {
   id: string;
@@ -145,26 +146,26 @@ export const eventPhotos = {
   womenPanel: {
     id: 'women-panel',
     src: womenPanel,
-    title: 'UDC BRICS Summit 2026 — women leaders’ panel',
-    caption: 'A panel of women leaders on stage at the United Diplomatic Council BRICS Summit 2026.',
+    title: 'UDC BRICS Summit 2026 — Keynote Panel & Diplomatic Dialogue',
+    caption: 'H.E. Zeenat Kureshi addressing international delegates during the keynote panel discussion at the United Diplomatic Council Summit.',
     event: 'UDC BRICS Summit 2026',
     date: 'September 2026',
     location: 'New Delhi, India',
-    alt: 'Panel of ten women seated on stage under the UDC BRICS Summit 2026 backdrop',
-    focal: '60% 70%',
+    alt: 'H.E. Zeenat Kureshi speaking on stage during the diplomatic panel discussion at the UDC BRICS Summit 2026',
+    focal: '62% 35%',
     orientation: 'landscape',
   },
   udcStage: {
     id: 'udc-stage',
     src: udcStage,
-    title: 'UDC BRICS Summit 2026 — delegates on stage',
-    caption: 'Delegates on stage beneath the United Diplomatic Council BRICS Summit 2026 backdrop.',
-    event: 'UDC BRICS Summit 2026',
-    date: 'September 2026',
+    title: 'Official State & Diplomatic Reception Delegation',
+    caption: 'H.E. Zeenat Kureshi welcomed by state delegates and dignitaries with ceremonial floral honors upon arrival.',
+    event: 'State & Diplomatic Welcome Conclave',
+    date: '2026',
     location: 'New Delhi, India',
-    alt: 'H.E. Zeenat Kureshi with fellow delegates on stage at the UDC BRICS Summit 2026',
-    focal: '46% 40%',
-    orientation: 'landscape',
+    alt: 'H.E. Zeenat Kureshi received by state delegates with ceremonial flower garlands upon arrival',
+    focal: '50% 30%',
+    orientation: 'portrait',
   },
   unitedEconomicB: {
     id: 'united-economic-b',
@@ -248,6 +249,18 @@ export const eventPhotos = {
     location: 'New Delhi, India',
     alt: 'H.E. Zeenat Kureshi at the United Economic BRICS Summit representing diplomatic and investment mandates',
     focal: '50% 20%',
+    orientation: 'landscape',
+  },
+  aboutHeroBanner: {
+    id: 'about-hero-banner-hd',
+    src: aboutHeroBanner,
+    title: 'International Leadership & Economic Summit Panel Address',
+    caption: 'H.E. Zeenat Kureshi addressing distinguished international delegates and dignitaries during high-level summit proceedings.',
+    event: 'Global Leadership & Economic Summit',
+    date: '2025–2026',
+    location: 'Dubai & New Delhi',
+    alt: 'H.E. Zeenat Kureshi speaking on stage with microphone at the international leadership keynote panel',
+    focal: '64% 36%',
     orientation: 'landscape',
   },
 } satisfies Record<string, EventPhoto>;

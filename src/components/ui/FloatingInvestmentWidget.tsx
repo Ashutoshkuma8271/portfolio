@@ -1,47 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { InvestmentModal } from './InvestmentModal';
 import { CollaborateModal } from './CollaborateModal';
 import { MediaInquiryModal } from './MediaInquiryModal';
 import type { InvestSectorId } from '../../data/investSectors';
 
-
 export const FloatingInvestmentWidget: React.FC = () => {
   const [isInvestmentOpen, setIsInvestmentOpen] = useState(false);
   const [isCollaborateOpen, setIsCollaborateOpen] = useState(false);
   const [isMediaOpen, setIsMediaOpen] = useState(false);
-  // A sector tile on the page can open the enquiry with that sector pre-selected.
   const [investSector, setInvestSector] = useState<InvestSectorId | null>(null);
-  const { pathname } = useLocation();
+  const [isVisible, setIsVisible] = useState(false);
 
-  // Every page opens with a full-bleed banner whose lower edge carries key
-  // figures; a floating pill would sit right on top of them. It appears once
-  // the visitor has scrolled past the banner.
-  const [pastHero, setPastHero] = useState(false);
   useEffect(() => {
-    const onScroll = () => setPastHero(window.scrollY > window.innerHeight * 0.85);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-  const [investInView, setInvestInView] = useState(false);
-  useEffect(() => {
-    setInvestInView(false);
-    let io: IntersectionObserver | undefined;
-    // the page is lazy-loaded, so the section may appear a moment after the route changes
-    const timers = [0, 500, 1500].map((ms) =>
-      window.setTimeout(() => {
-        const el = document.getElementById('invest');
-        if (!el || io || typeof IntersectionObserver === 'undefined') return;
-        io = new IntersectionObserver(([e]) => setInvestInView(e.isIntersecting), { threshold: 0.12 });
-        io.observe(el);
-      }, ms),
-    );
-    return () => {
-      timers.forEach(window.clearTimeout);
-      io?.disconnect();
+    // Show after slight scroll (100px) or after 1.5 seconds so it is readily available
+    const handleScroll = () => {
+      if (window.scrollY > 80) {
+        setIsVisible(true);
+      }
     };
-  }, [pathname]);
+
+    const initialTimer = setTimeout(() => {
+      setIsVisible(true);
+    }, 1200);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      clearTimeout(initialTimer);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   // Manual event triggers across the entire application
   useEffect(() => {
@@ -67,38 +55,41 @@ export const FloatingInvestmentWidget: React.FC = () => {
     setIsInvestmentOpen(false);
   };
 
-  const isSuppressedPage = pathname === '/contact' || pathname === '/trade-investment';
-  const showFab = pastHero && !investInView && !isSuppressedPage;
-
   return (
     <>
       {/* Floating Action Button */}
-      <div
-        className={`fixed bottom-5 left-3.5 sm:bottom-8 sm:left-6 z-40 select-none transition-all duration-300 ${
-          showFab ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
-        }`}
-      >
-        <button
-          type="button"
-          onClick={() => {
-            setInvestSector(null);
-            setIsInvestmentOpen(true);
-          }}
-          className="group relative flex items-center gap-3 rounded-full border-2 border-gold-500/80 bg-gradient-to-r from-emerald-950 via-emerald-900 to-emerald-950 py-3 px-5 sm:py-3.5 sm:px-6 font-label text-xs sm:text-sm font-bold uppercase tracking-[0.16em] text-ivory-500 shadow-[0_10px_30px_rgba(7,21,17,0.7),0_0_24px_rgba(199,154,61,0.4)] backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-gold-400 hover:shadow-[0_14px_40px_rgba(7,21,17,0.9),0_0_32px_rgba(212,175,55,0.6)] active:scale-95 cursor-pointer"
-          aria-label="Invest with us — open investor enquiry"
-        >
-          <span className="relative flex h-2.5 w-2.5 shrink-0">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75" />
-            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-gold-500" />
-          </span>
+      <AnimatePresence>
+        {isVisible && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.85, y: 16 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed bottom-5 left-4 sm:bottom-6 sm:left-6 z-40 select-none pointer-events-auto"
+          >
+            <button
+              type="button"
+              onClick={() => {
+                setInvestSector(null);
+                setIsInvestmentOpen(true);
+              }}
+              className="group relative flex items-center gap-2.5 rounded-full border border-gold-500/70 bg-[#071E18]/95 px-4 py-2.5 sm:px-5 sm:py-3 font-sans text-xs font-bold uppercase tracking-[0.16em] text-white shadow-[0_8px_25px_rgba(0,0,0,0.5),0_0_20px_rgba(199,154,61,0.25)] backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-gold-400 hover:shadow-[0_12px_32px_rgba(0,0,0,0.7),0_0_28px_rgba(212,175,55,0.45)] active:scale-95 cursor-pointer"
+              aria-label="Invest with us — open investor enquiry"
+            >
+              <span className="relative flex h-2 w-2 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#E5C270]" />
+              </span>
 
-          <span className="font-bold text-white group-hover:text-gold-300 transition-colors whitespace-nowrap">
-            Invest With Us
-          </span>
-        </button>
-      </div>
+              <span className="font-bold text-white group-hover:text-gold-300 transition-colors whitespace-nowrap text-[0.72rem] sm:text-xs">
+                INVEST WITH US
+              </span>
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {/* Global Modals in Premium Luxury White Theme */}
+      {/* Global Modals */}
       <InvestmentModal isOpen={isInvestmentOpen} onClose={handleCloseInvestment} initialSector={investSector} />
       <CollaborateModal isOpen={isCollaborateOpen} onClose={() => setIsCollaborateOpen(false)} />
       <MediaInquiryModal isOpen={isMediaOpen} onClose={() => setIsMediaOpen(false)} />
